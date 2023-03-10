@@ -1,5 +1,10 @@
 import React from 'react'
+import { MantineUiProvider } from './hoc/MantineUiProvider'
 
 export const App = () => {
-  return <div>Client Application</div>
+  return (
+    <MantineUiProvider>
+      <div>Client Application</div>
+    </MantineUiProvider>
+  )
 }
