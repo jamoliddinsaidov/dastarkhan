@@ -7,10 +7,12 @@ import { useDisclosure } from '@mantine/hooks'
 import { useGeneralHeaderStyles, HEADER_HEIGHT } from './GeneralHeader.style'
 import { useGeneralHeaderLinks } from './generalHeaderLinks'
 import { getCurrentActiveLink } from '../../utils'
+import { useTranslation } from 'react-i18next'
 
 export const GeneralHeader = () => {
   const [opened, { toggle, close }] = useDisclosure(false)
   const { classes, cx } = useGeneralHeaderStyles()
+  const { t } = useTranslation()
 
   const { pathname } = useLocation()
   const [active, setActive] = useState(getCurrentActiveLink(pathname))
@@ -34,7 +36,7 @@ export const GeneralHeader = () => {
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
         <Title order={1} className={classes.title}>
-          dastarkhan
+          {t('brand_title')}
         </Title>
         <Group spacing={5} className={classes.hideOnMobile}>
           {items}
