@@ -1,10 +1,10 @@
 import { Title, Text, Container, Button, Overlay, rem } from '@mantine/core'
 import { IconSearch, IconWriting } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
-import { useHroWithBackgroundStyle } from './HeroWithBackground.style'
+import { useHeroWithBackgroundStyles } from './HeroWithBackground.style'
 
 export function HeroWithBackground() {
-  const { classes, cx } = useHroWithBackgroundStyle()
+  const { classes, cx } = useHeroWithBackgroundStyles()
   const { t } = useTranslation()
 
   return (

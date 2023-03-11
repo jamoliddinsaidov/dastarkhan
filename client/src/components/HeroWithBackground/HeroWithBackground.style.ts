@@ -1,6 +1,6 @@
 import { createStyles, rem } from '@mantine/core'
 
-export const useHroWithBackgroundStyle = createStyles((theme) => ({
+export const useHeroWithBackgroundStyles = createStyles((theme) => ({
   wrapper: {
     position: 'relative',
     paddingTop: rem(200),

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Header, Container, Group, Burger, Paper, Transition, Title, Text } from '@mantine/core'
 import { LanguageSelect } from '../LanguageSelect/LanguageSelect'
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle'
@@ -14,8 +14,11 @@ export const GeneralHeader = () => {
   const { classes, cx } = useGeneralHeaderStyles()
   const { t } = useTranslation()
 
-  const { pathname } = useLocation()
-  const [active, setActive] = useState(getCurrentActiveLink(pathname))
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // TODO: move active link to global state
+  const [active, setActive] = useState(getCurrentActiveLink(location.pathname))
 
   const links = useGeneralHeaderLinks()
   const items = links.map(({ link, label }) => (
@@ -32,10 +35,15 @@ export const GeneralHeader = () => {
     </Link>
   ))
 
+  const navigateToHome = () => {
+    navigate('home')
+    setActive('home')
+  }
+
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
-        <Title order={1} className={classes.title}>
+        <Title order={1} className={classes.title} onClick={navigateToHome}>
           {t('brand_title')}
         </Title>
         <Group spacing={5} className={classes.hideOnMobile}>

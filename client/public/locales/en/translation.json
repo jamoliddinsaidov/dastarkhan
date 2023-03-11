@@ -7,5 +7,11 @@
   "browse": "Browse",
   "hero_title_1": "Food reviews by people",
   "hero_title_2": "for people",
-  "hero_description": "Explore the flavors of your city with us. Share your favorite dishes and discover new ones rated by other food lovers like you."
+  "hero_description": "Explore the flavors of your city with us. Share your favorite dishes and discover new ones rated by other food lovers like you.",
+  "welcome_back": "Welcome back!",
+  "dont_have_account": "Don't have an account?",
+  "email_addess": "Email address",
+  "password": "Password",
+  "your_password": "Your password",
+  "forgot_passoword": "Forgot your password?"
 }
