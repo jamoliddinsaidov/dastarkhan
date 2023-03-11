@@ -8,10 +8,9 @@ export const useLanguageSelectStyles = createStyles((theme) => ({
   },
 
   input: {
-    width: '15%',
+    width: '50%',
 
     [theme.fn.smallerThan('sm')]: {
-      width: '50%',
       margin: `0 0 ${rem(16)} ${rem(16)}`,
     },
   },
