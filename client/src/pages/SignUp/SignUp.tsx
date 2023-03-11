@@ -6,7 +6,6 @@ import {
   Group,
   Button,
   Checkbox,
-  Anchor,
   Stack,
   Title,
   Text,
@@ -15,11 +14,11 @@ import {
 } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useSignUpStyles } from './SignUp.style'
-import { ChangeEvent } from 'react'
 import { DateInput, DateValue } from '@mantine/dates'
-import { upperFirst } from '@mantine/hooks'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
+import { useAppDispatch } from '../../store/hooks'
+import { changeLink } from '../../store/activeLink/activeLinkSlice'
 
 export const SignUp = () => {
   const { classes } = useSignUpStyles()
@@ -42,6 +41,12 @@ export const SignUp = () => {
       password: (val) => (val.length <= 6 ? 'Password should include at least 6 characters' : null),
     },
   })
+
+  const dispatch = useAppDispatch()
+
+  const onLinkClick = (link: string) => {
+    dispatch(changeLink(link))
+  }
 
   return (
     <Paper radius='md' p='xl' withBorder className={classes.wrapper}>
@@ -119,7 +124,7 @@ export const SignUp = () => {
         <Flex align='center' justify='space-between' className={classes.flexDiv}>
           <Text>
             {t('already_have_account')}
-            <Link to='/login' className={classes.link}>
+            <Link to='/login' className={classes.link} onClick={() => onLinkClick('login')}>
               {t('login')}
             </Link>
           </Text>
@@ -129,7 +134,11 @@ export const SignUp = () => {
           </Button>
         </Flex>
 
-        <Link to='/termsAndConditions' className={classes.termsAndConditionsLink}>
+        <Link
+          to='/termsAndConditions'
+          className={classes.termsAndConditionsLink}
+          onClick={() => onLinkClick('termsAndConditions')}
+        >
           {t('terms_conditions')}
         </Link>
       </form>

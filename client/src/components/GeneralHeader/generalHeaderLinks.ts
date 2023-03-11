@@ -12,10 +12,6 @@ export const useGeneralHeaderLinks = () => {
       label: t('write_a_review'),
     },
     {
-      link: 'about',
-      label: t('about'),
-    },
-    {
       link: 'login',
       label: t('login'),
     },

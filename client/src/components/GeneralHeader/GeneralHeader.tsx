@@ -1,33 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Header, Container, Group, Burger, Paper, Transition, Title, Text } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { LanguageSelect } from '../LanguageSelect/LanguageSelect'
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle'
-import { useDisclosure } from '@mantine/hooks'
 import { useGeneralHeaderStyles, HEADER_HEIGHT } from './GeneralHeader.style'
 import { useGeneralHeaderLinks } from './generalHeaderLinks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { getCurrentActiveLink } from '../../utils'
-import { useTranslation } from 'react-i18next'
 
 export const GeneralHeader = () => {
   const [opened, { toggle, close }] = useDisclosure(false)
   const { classes, cx } = useGeneralHeaderStyles()
-  const { t } = useTranslation()
 
   const navigate = useNavigate()
-  const location = useLocation()
+  const { pathname } = useLocation()
+  const dispatch = useAppDispatch()
 
-  // TODO: move active link to global state
-  const [active, setActive] = useState(getCurrentActiveLink(location.pathname))
-
+  const activeLink = useAppSelector((state) => state.activeLink.activeLink)
   const links = useGeneralHeaderLinks()
-  const items = links.map(({ link, label }) => (
+  const linkItems = links.map(({ link, label }) => (
     <Link
       to={link}
       key={label}
-      className={cx(classes.link, { [classes.linkActive]: active === link })}
+      className={cx(classes.link, { [classes.linkActive]: activeLink === link })}
       onClick={() => {
-        setActive(link)
+        dispatch(changeLink(link))
         close()
       }}
     >
@@ -37,8 +36,12 @@ export const GeneralHeader = () => {
 
   const navigateToHome = () => {
     navigate('home')
-    setActive('home')
+    dispatch(changeLink('home'))
   }
+
+  useEffect(() => {
+    dispatch(changeLink(getCurrentActiveLink(pathname)))
+  }, [])
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
@@ -47,7 +50,7 @@ export const GeneralHeader = () => {
           Dastarkhan
         </Title>
         <Group spacing={5} className={classes.hideOnMobile}>
-          {items}
+          {linkItems}
         </Group>
         <Group spacing={15} className={classes.hideOnMobile}>
           <LanguageSelect />
@@ -57,7 +60,7 @@ export const GeneralHeader = () => {
         <Transition transition='pop-top-right' duration={200} mounted={opened}>
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>
-              {items}
+              {linkItems}
               <Group spacing={1}>
                 <LanguageSelect show />
                 <ThemeToggle />
