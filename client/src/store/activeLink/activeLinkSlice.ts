@@ -14,7 +14,6 @@ const activeLinkSlice = createSlice({
   reducers: {
     changeLink: (state, action: PayloadAction<string>) => {
       state.activeLink = action.payload
-      console.log(action)
     },
   },
 })

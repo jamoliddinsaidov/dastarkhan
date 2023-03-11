@@ -25,5 +25,12 @@
   "terms_conditions": "Terms and Conditions",
   "enter_email_to_reset_password": "Enter your email to get a reset link",
   "back_to_login": "Back to the login page",
-  "reset_password": "Reset password"
+  "reset_password": "Reset password",
+  "404_title": "You have found a secret place.",
+  "404_description": "Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has been moved to another URL.",
+  "404_button": "Take me back to home page",
+  "name_error_message": "Name should include at least 3 characters",
+  "dob_error_message": "Please select a date",
+  "invalid_email": "Invalid email",
+  "invalid_password": "Password should include at least 6 characters"
 }

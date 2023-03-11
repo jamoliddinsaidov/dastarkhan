@@ -25,5 +25,12 @@
   "terms_conditions": "Foydalanish shartlari",
   "enter_email_to_reset_password": "Qayta tiklash havolasini olish uchun elektron pochtangizni kiriting",
   "back_to_login": "Kirish sahifasiga qaytish",
-  "reset_password": "Parolni tiklash"
+  "reset_password": "Parolni tiklash",
+  "404_title": "Siz maxfiy joy topdingiz.",
+  "404_description": "Afsuski, bu faqat 404 sahifa. Siz manzilni noto'g'ri kiritgan bo'lishingiz mumkin yoki sahifa boshqa URL manziliga ko'chirilgan.",
+  "404_button": "Bosh sahifaga qaytish",
+  "name_error_message": "Ism kamida 3 ta belgidan iborat bo'lishi kerak",
+  "dob_error_message": "Iltimos, sanani tanlang",
+  "invalid_email": "Yaroqsiz elektron pochta",
+  "invalid_password": "Parol kamida 6 ta belgidan iborat bo'lishi kerak"
 }

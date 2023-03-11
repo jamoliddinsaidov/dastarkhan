@@ -6,6 +6,7 @@ import { Home } from './pages/Home/Home'
 import { Login } from './pages/Login/Login'
 import { SignUp } from './pages/SignUp/SignUp'
 import { ForgotPassword } from './pages/ForgotPassword/ForgotPassword'
+import { NotFound } from './pages/NotFound/NotFound'
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/forgotPassword' element={<ForgotPassword />} />
         <Route path='/' element={<Navigate to='/home' />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </MantineUiProvider>
   )

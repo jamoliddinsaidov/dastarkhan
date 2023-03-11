@@ -1,6 +1,5 @@
 import { Paper, TextInput, PasswordInput, Flex, Button, Title, Text } from '@mantine/core'
 import { IconLock, IconMail } from '@tabler/icons-react'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useLoginStyles } from './Login.style'
@@ -20,8 +19,8 @@ export const Login = () => {
     },
 
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
-      password: (val) => (val.length <= 6 ? 'Password should include at least 6 characters' : null),
+      email: (val) => (/^\S+@\S+$/.test(val) ? null : t('invalid_email')),
+      password: (val) => (val.length <= 6 ? t('invalid_password') : null),
     },
   })
 
@@ -32,37 +31,42 @@ export const Login = () => {
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
-        <Title order={2} className={classes.title} ta='center' mt='md' mb={50}>
-          {t('welcome_back')}
-        </Title>
+        <form
+          onSubmit={form.onSubmit(() => {
+            console.log(form.values)
+          })}
+        >
+          <Title order={2} className={classes.title} ta='center' mt='md' mb={50}>
+            {t('welcome_back')}
+          </Title>
 
-        <TextInput
-          label={t('email_addess')}
-          placeholder='email@gmail.com'
-          size='md'
-          name='email'
-          radius='md'
-          value={form.values.email}
-          onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
-          error={form.errors?.email}
-          icon={<IconMail />}
-        />
-        <PasswordInput
-          label={t('password')}
-          placeholder={t('your_password')!}
-          mt='md'
-          size='md'
-          name='password'
-          radius='md'
-          value={form.values.password}
-          onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
-          error={form.errors?.password}
-          icon={<IconLock />}
-        />
-        <Button mt='xl' size='sm' fullWidth radius='md'>
-          {t('login')}
-        </Button>
-
+          <TextInput
+            label={t('email_addess')}
+            placeholder='email@gmail.com'
+            size='md'
+            name='email'
+            radius='md'
+            value={form.values.email}
+            onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
+            error={form.errors?.email}
+            icon={<IconMail />}
+          />
+          <PasswordInput
+            label={t('password')}
+            placeholder={t('your_password')!}
+            mt='md'
+            size='md'
+            name='password'
+            radius='md'
+            value={form.values.password}
+            onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
+            error={form.errors?.password}
+            icon={<IconLock />}
+          />
+          <Button mt='xl' size='sm' fullWidth radius='md' type='submit'>
+            {t('login')}
+          </Button>
+        </form>
         <Text ta='center' mt='md'>
           {t('dont_have_account')}
           <Link to='/signup' className={classes.link} onClick={() => onLinkClick('signup')}>

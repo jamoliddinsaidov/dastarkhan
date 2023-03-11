@@ -35,10 +35,10 @@ export const SignUp = () => {
     },
 
     validate: {
-      name: (val) => (val.length >= 3 ? null : 'Name should include at least 3 characters'),
-      dateOfBirth: (val) => (val.getFullYear() === new Date().getFullYear() ? 'Please select a date' : null),
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
-      password: (val) => (val.length <= 6 ? 'Password should include at least 6 characters' : null),
+      name: (val) => (val.length >= 3 ? null : t('name_error_message')),
+      dateOfBirth: (val) => (val.getFullYear() === new Date().getFullYear() ? t('dob_error_message') : null),
+      email: (val) => (/^\S+@\S+$/.test(val) ? null : t('invalid_email')),
+      password: (val) => (val.length <= 6 ? t('invalid_password') : null),
     },
   })
 
