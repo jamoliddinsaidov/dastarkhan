@@ -13,5 +13,14 @@
   "email_addess": "Маил адрес",
   "password": "Пароль",
   "your_password": "Ваш пароль",
-  "forgot_passoword": "Забыли пароль?"
+  "forgot_passoword": "Забыли пароль?",
+  "name": "Имя",
+  "your_name": "Ваше имя",
+  "date_of_birth": "Дата рождения",
+  "gender": "Пол",
+  "male": "Мужской",
+  "female": "Женский",
+  "accept_terms_conditions": "Я принимаю положения и условия",
+  "already_have_account": "Уже есть аккаунт?",
+  "terms_conditions": "Положения и Условия"
 }

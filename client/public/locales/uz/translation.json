@@ -13,5 +13,14 @@
   "email_addess": "Elektron pochta manzili",
   "password": "Parol",
   "your_password": "Parolingizni kiriting",
-  "forgot_passoword": "Parolingiz esdan chiqdimi?"
+  "forgot_passoword": "Parolingiz esdan chiqdimi?",
+  "name": "Ism",
+  "your_name": "Ismingiz",
+  "date_of_birth": "Tug'ilgan sana",
+  "gender": "Jins",
+  "male": "Erkak",
+  "female": "Ayol",
+  "accept_terms_conditions": "Men foydalanish shartlariga roziman",
+  "already_have_account": "Akkountingiz bormi?",
+  "terms_conditions": "Foydalanish shartlari"
 }

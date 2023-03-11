@@ -1,28 +1,22 @@
 import { createStyles, rem } from '@mantine/core'
 
-export const useLoginStyles = createStyles((theme) => ({
+export const useSignUpStyles = createStyles((theme) => ({
   wrapper: {
-    backgroundSize: 'contain',
-    backgroundPosition: 'right',
-    backgroundRepeat: 'no-repeat',
-    backgroundImage: 'url(./assets/login_background.jpg)',
-    minHeight: rem(660),
+    margin: `${rem(32)} auto`,
+    maxWidth: rem(520),
+    minHeight: rem(600),
     height: '100%',
     maxHeight: rem(700),
+  },
 
-    [theme.fn.smallerThan('md')]: {
-      backgroundImage: 'none',
-    },
+  title: {
+    color: theme.colorScheme === 'dark' ? theme.white : theme.colors.dark[4],
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    textAlign: 'center',
+    marginBottom: '1rem',
   },
 
   form: {
-    borderRight: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]}`,
-    maxWidth: rem(520),
-    paddingTop: rem(80),
-    minHeight: rem(660),
-    height: '100%',
-    maxHeight: rem(700),
-
     label: {
       marginBottom: `${rem(8)}`,
     },
@@ -38,9 +32,8 @@ export const useLoginStyles = createStyles((theme) => ({
     },
   },
 
-  title: {
-    color: theme.colorScheme === 'dark' ? theme.white : theme.colors.dark[4],
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  text: {
+    fontWeight: 500,
   },
 
   link: {
@@ -54,10 +47,13 @@ export const useLoginStyles = createStyles((theme) => ({
     },
   },
 
-  forgotPasswordLink: {
+  flexDiv: {
+    margin: `${rem(16)} auto`,
+  },
+
+  termsAndConditionsLink: {
     display: 'block',
     textAlign: 'center',
-    margin: '1rem auto',
     textDecoration: 'none',
     color: theme.colors[theme.primaryColor]?.[6],
     fontWeight: 400,

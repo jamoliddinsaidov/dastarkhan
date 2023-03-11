@@ -44,7 +44,7 @@ export const GeneralHeader = () => {
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
         <Title order={1} className={classes.title} onClick={navigateToHome}>
-          {t('brand_title')}
+          Dastarkhan
         </Title>
         <Group spacing={5} className={classes.hideOnMobile}>
           {items}

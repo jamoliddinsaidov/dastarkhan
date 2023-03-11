@@ -23,5 +23,9 @@ export const useLanguageSelectStyles = createStyles((theme) => ({
         color: theme.colorScheme === 'dark' ? theme.white : theme.colors.teal[9],
       },
     },
+
+    option: {
+      backgroundColor: theme.colors[theme.primaryColor]?.[1],
+    },
   },
 }))

@@ -13,7 +13,7 @@ export const useGeneralHeaderStyles = createStyles((theme) => ({
     fontWeight: 900,
     fontSize: rem(35),
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    color: theme.colors[theme.primaryColor]?.[6],
+    color: theme.colors.orange?.[6],
     cursor: 'pointer',
   },
 
