@@ -7,8 +7,19 @@ i18next.use(initReactI18next).use(LanguageDetector).use(Backend).init({
   fallbackLng: 'en',
 })
 
-export const languages = {
-  uz: { nativeName: "O'zbek" },
-  en: { nativeName: 'English' },
-  ru: { nativeName: 'Русский' },
+export type LongLanguagesType = "O'zbek" | 'English' | 'Русский'
+export type ShortLanguagesType = 'uz' | 'en' | 'ru'
+
+export const languagesShort = {
+  "O'zbek": 'uz',
+  English: 'en',
+  Русский: 'ru',
 }
+
+export const languagesLong = {
+  uz: "O'zbek",
+  en: 'English',
+  ru: 'Русский',
+}
+
+export const availableLanguages = ['English', "O'zbek", 'Русский']
