@@ -1,3 +1,6 @@
 {
-  "greeting": "hello"
+  "write_a_review": "Write a Review",
+  "about": "About",
+  "login": "Log In",
+  "signup": "Sign Up"
 }
