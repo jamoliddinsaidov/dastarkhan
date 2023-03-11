@@ -13,7 +13,7 @@
   "email_addess": "Маил адрес",
   "password": "Пароль",
   "your_password": "Ваш пароль",
-  "forgot_passoword": "Забыли пароль?",
+  "forgot_password": "Забыли пароль?",
   "name": "Имя",
   "your_name": "Ваше имя",
   "date_of_birth": "Дата рождения",
@@ -22,5 +22,8 @@
   "female": "Женский",
   "accept_terms_conditions": "Я принимаю положения и условия",
   "already_have_account": "Уже есть аккаунт?",
-  "terms_conditions": "Положения и Условия"
+  "terms_conditions": "Положения и Условия",
+  "enter_email_to_reset_password": "Введите адрес электронной почты, чтобы получить ссылку для сброса",
+  "back_to_login": "Вернуться на страницу входа",
+  "reset_password": "Сбросить пароль"
 }

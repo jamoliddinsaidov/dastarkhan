@@ -55,7 +55,7 @@ export const Login = () => {
         </Text>
 
         <Link to='/forgotPassword' className={classes.forgotPasswordLink}>
-          {t('forgot_passoword')}
+          {t('forgot_password')}
         </Link>
       </Paper>
     </div>

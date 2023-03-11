@@ -13,7 +13,7 @@
   "email_addess": "Email address",
   "password": "Password",
   "your_password": "Your password",
-  "forgot_passoword": "Forgot your password?",
+  "forgot_password": "Forgot your password?",
   "name": "Name",
   "your_name": "Your name",
   "date_of_birth": "Date of Birth",
@@ -22,5 +22,8 @@
   "female": "Female",
   "accept_terms_conditions": "I accept terms and conditions",
   "already_have_account": "Already have an account?",
-  "terms_conditions": "Terms and Conditions"
+  "terms_conditions": "Terms and Conditions",
+  "enter_email_to_reset_password": "Enter your email to get a reset link",
+  "back_to_login": "Back to the login page",
+  "reset_password": "Reset password"
 }

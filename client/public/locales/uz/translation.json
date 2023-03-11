@@ -13,7 +13,7 @@
   "email_addess": "Elektron pochta manzili",
   "password": "Parol",
   "your_password": "Parolingizni kiriting",
-  "forgot_passoword": "Parolingiz esdan chiqdimi?",
+  "forgot_password": "Parolingizni unutdingizmi?",
   "name": "Ism",
   "your_name": "Ismingiz",
   "date_of_birth": "Tug'ilgan sana",
@@ -22,5 +22,8 @@
   "female": "Ayol",
   "accept_terms_conditions": "Men foydalanish shartlariga roziman",
   "already_have_account": "Akkountingiz bormi?",
-  "terms_conditions": "Foydalanish shartlari"
+  "terms_conditions": "Foydalanish shartlari",
+  "enter_email_to_reset_password": "Qayta tiklash havolasini olish uchun elektron pochtangizni kiriting",
+  "back_to_login": "Kirish sahifasiga qaytish",
+  "reset_password": "Parolni tiklash"
 }
