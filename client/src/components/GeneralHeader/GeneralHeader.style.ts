@@ -5,7 +5,15 @@ export const HEADER_HEIGHT = rem(70)
 export const useGeneralHeaderStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
-    zIndex: 1,
+    zIndex: 100,
+    padding: `${rem(48)} 0`,
+  },
+
+  title: {
+    fontWeight: 900,
+    fontSize: rem(35),
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    color: theme.colors.orange[5],
   },
 
   dropdown: {
