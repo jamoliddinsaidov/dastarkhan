@@ -66,5 +66,7 @@
   "delivery": "Yetkazib berish",
   "most_reviewed": "Eng ko'p sharhlangan",
   "least_reviewed": "Eng kam sharhlangan",
-  "apply_filters": "Filterlarni qo'llash"
+  "apply_filters": "Filterlarni qo'llash",
+  "search": "Qidirish...",
+  "show_details": "Tafsilotlarni ko'rish"
 }

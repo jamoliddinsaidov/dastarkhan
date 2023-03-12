@@ -74,6 +74,7 @@ export const Filter = () => {
           nothingFound={t('no_options')}
           data={ratingFilters}
           onChange={(value) => onSelectChange(value, 'rating')}
+          dropdownPosition='top'
           searchable
         />
         <Select
@@ -82,6 +83,7 @@ export const Filter = () => {
           nothingFound={t('no_options')}
           data={priceFilters}
           onChange={(value) => onSelectChange(value, 'price')}
+          dropdownPosition='top'
           searchable
         />
         <Select
@@ -90,6 +92,7 @@ export const Filter = () => {
           nothingFound={t('no_options')}
           data={foodTypeFilters}
           onChange={(value) => onSelectChange(value, 'foodType')}
+          dropdownPosition='top'
           searchable
         />
         <Select
@@ -98,6 +101,7 @@ export const Filter = () => {
           nothingFound={t('no_options')}
           data={serviceTypeFilters}
           onChange={(value) => onSelectChange(value, 'serviceType')}
+          dropdownPosition='top'
           searchable
         />
         <Select
@@ -106,6 +110,7 @@ export const Filter = () => {
           nothingFound={t('no_options')}
           data={reviewedFilters}
           onChange={(value) => onSelectChange(value, 'reviewed')}
+          dropdownPosition='top'
           searchable
         />
       </Flex>

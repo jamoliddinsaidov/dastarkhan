@@ -1,11 +1,11 @@
-import { TextInput, ActionIcon, useMantineTheme, createStyles } from '@mantine/core'
+import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core'
 import { IconSearch, IconArrowRight } from '@tabler/icons-react'
 
 interface SearchInputProps {
-  value?: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onClick?: () => void
-  placeholder?: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onClick: () => void
+  placeholder: string
   width?: string
 }
 

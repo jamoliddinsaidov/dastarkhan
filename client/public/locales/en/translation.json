@@ -66,5 +66,7 @@
   "delivery": "Delivery",
   "most_reviewed": "Most Reviewed",
   "least_reviewed": "Least Reviewed",
-  "apply_filters": "Apply filters"
+  "apply_filters": "Apply filters",
+  "search": "Search...",
+  "show_details": "Show details"
 }

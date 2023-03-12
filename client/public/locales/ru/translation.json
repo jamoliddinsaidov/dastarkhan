@@ -66,5 +66,7 @@
   "delivery": "Доставка",
   "most_reviewed": "Самые просматриваемые",
   "least_reviewed": "Наименее просматриваемый",
-  "apply_filters": "Применить фильтры"
+  "apply_filters": "Применить фильтры",
+  "search": "Поиск...",
+  "show_details": "Показать детали"
 }
