@@ -1,13 +1,8 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { MantineUiProvider } from './hoc/MantineUiProvider'
-import { GeneralHeader } from './components/GeneralHeader/GeneralHeader'
-import { Home } from './pages/Home/Home'
-import { Login } from './pages/Login/Login'
-import { SignUp } from './pages/SignUp/SignUp'
-import { ForgotPassword } from './pages/ForgotPassword/ForgotPassword'
-import { NotFound } from './pages/NotFound/NotFound'
-import { Browse } from './pages/Browse/Browse'
+import { GeneralHeader } from './components'
+import { ForgotPassword, Home, Login, NotFound, SignUp, Browse } from './pages'
 
 export const App = () => {
   return (

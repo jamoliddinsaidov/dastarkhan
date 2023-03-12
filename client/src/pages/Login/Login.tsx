@@ -2,10 +2,10 @@ import { Paper, TextInput, PasswordInput, Flex, Button, Title, Text } from '@man
 import { IconLock, IconMail } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { useForm } from '@mantine/form'
 import { useLoginStyles } from './Login.style'
 import { useAppDispatch } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
-import { useForm } from '@mantine/form'
 
 export const Login = () => {
   const { classes } = useLoginStyles()

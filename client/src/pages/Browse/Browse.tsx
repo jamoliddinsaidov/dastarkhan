@@ -4,9 +4,7 @@ import { IconAdjustments } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useBrowseStyles } from './Browse.style'
-import { SearchInput } from '../../components/SearchInput/SearchInput'
-import { Filter } from '../../components/Filter/Filter'
-import { FoodCard } from '../../components/FoodCard/FoodCard'
+import { Filter, FoodCard, SearchInput } from '../../components'
 
 const mockCardContent = {
   image:

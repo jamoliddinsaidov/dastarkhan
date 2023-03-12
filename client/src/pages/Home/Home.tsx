@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeroWithBackground } from '../../components/HeroWithBackground/HeroWithBackground'
+import { HeroWithBackground } from '../../components'
 
 export const Home = () => {
   return (
