@@ -21,5 +21,11 @@ export const useGeneralHeaderLinks = () => {
     },
   ]
 
+  // TODO: update the following when the server is ready
+  const isUserLoggedIn = false
+  if (isUserLoggedIn) {
+    links.length = 2
+  }
+
   return links
 }

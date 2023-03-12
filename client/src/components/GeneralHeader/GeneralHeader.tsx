@@ -23,10 +23,7 @@ export const GeneralHeader = () => {
   const links = useGeneralHeaderLinks()
 
   // TODO: update the following when the server is ready
-  const isUserLoggedIn = true
-  if (isUserLoggedIn) {
-    links.length = 2
-  }
+  const isUserLoggedIn = false
 
   const linkItems = links.map(({ link, label }) => (
     <Link
