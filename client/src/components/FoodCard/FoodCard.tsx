@@ -24,7 +24,7 @@ export const FoodCard = ({ image, title, description, city, badges, stars, price
   ))
 
   return (
-    <Card withBorder radius='md' p='md' className={classes.card}>
+    <Card withBorder radius='md' p='md' className={classes.card} shadow='md'>
       <Card.Section>
         <Image src={image} alt={title} height={180} />
       </Card.Section>

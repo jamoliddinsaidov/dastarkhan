@@ -68,5 +68,10 @@
   "least_reviewed": "Least Reviewed",
   "apply_filters": "Apply filters",
   "search": "Search...",
-  "show_details": "Show details"
+  "show_details": "Show details",
+  "drop_files_here": "Drop files here",
+  "drop_file_error": "File's format is not JPEG/PNG or it is more than 5MB",
+  "upload_photo": "Upload a photo",
+  "dropzone_description": "Drag'n'drop files here to upload. We can accept only JPEG and PNG files that are less than 5MB in size.",
+  "select_files": "Select files"
 }

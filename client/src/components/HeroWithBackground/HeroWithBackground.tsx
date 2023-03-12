@@ -1,11 +1,22 @@
 import { Title, Text, Container, Button, Overlay, rem } from '@mantine/core'
 import { IconSearch, IconWriting } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { useHeroWithBackgroundStyles } from './HeroWithBackground.style'
+import { useAppDispatch } from '../../store/hooks'
+import { changeLink } from '../../store/activeLink/activeLinkSlice'
+import { getPathnameWithoutSlash } from '../../utils'
 
 export function HeroWithBackground() {
-  const { classes, cx } = useHeroWithBackgroundStyles()
   const { t } = useTranslation()
+  const { classes, cx } = useHeroWithBackgroundStyles()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const onNavigate = (pathname: string) => {
+    navigate(pathname)
+    dispatch(changeLink(getPathnameWithoutSlash(pathname)))
+  }
 
   return (
     <div className={classes.wrapper}>
@@ -30,15 +41,17 @@ export function HeroWithBackground() {
             className={classes.control}
             variant='gradient'
             gradient={{ to: '#FFE53B', from: '#FF2525' }}
-            size='lg'
             leftIcon={<IconSearch size={rem(16)} />}
+            onClick={() => onNavigate('/browse')}
+            size='lg'
           >
             {t('browse')}
           </Button>
           <Button
             className={cx(classes.control, classes.secondaryControl)}
-            size='lg'
             leftIcon={<IconWriting size={rem(16)} />}
+            onClick={() => onNavigate('/writeReview')}
+            size='lg'
           >
             {t('write_a_review')}
           </Button>

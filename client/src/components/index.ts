@@ -6,5 +6,16 @@ import { LanguageSelect } from './LanguageSelect/LanguageSelect'
 import { SearchInput } from './SearchInput/SearchInput'
 import { ThemeToggle } from './ThemeToggle/ThemeToggle'
 import { UserDropdown } from './UserDropdown/UserDropdown'
+import { CustomDropzone } from './Dropzone/Dropzone'
 
-export { Filter, FoodCard, GeneralHeader, HeroWithBackground, LanguageSelect, SearchInput, ThemeToggle, UserDropdown }
+export {
+  Filter,
+  FoodCard,
+  GeneralHeader,
+  HeroWithBackground,
+  LanguageSelect,
+  SearchInput,
+  ThemeToggle,
+  UserDropdown,
+  CustomDropzone,
+}

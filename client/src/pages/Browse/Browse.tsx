@@ -48,7 +48,7 @@ export const Browse = () => {
       </Flex>
       <Transition transition='slide-down' duration={200} mounted={opened}>
         {(styles) => (
-          <Paper withBorder style={styles} className={classes.filterBox}>
+          <Paper withBorder style={styles} shadow='md' className={classes.filterBox}>
             <Filter />
           </Paper>
         )}

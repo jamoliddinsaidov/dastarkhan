@@ -49,7 +49,7 @@ export const SignUp = () => {
   }
 
   return (
-    <Paper radius='md' p='xl' withBorder className={classes.wrapper}>
+    <Paper radius='md' p='xl' shadow='md' withBorder className={classes.wrapper}>
       <Title className={classes.title}>{t('signup')}</Title>
 
       <form

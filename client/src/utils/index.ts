@@ -1,3 +1,3 @@
-import { getCurrentActiveLink } from './getCurrentActiveLink'
+import { getPathnameWithoutSlash } from './getPathnameWithoutSlash'
 
-export { getCurrentActiveLink }
+export { getPathnameWithoutSlash }

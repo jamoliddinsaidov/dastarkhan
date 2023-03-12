@@ -2,14 +2,12 @@ import { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Header, Container, Group, Burger, Paper, Transition, Title, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { LanguageSelect } from '../LanguageSelect/LanguageSelect'
-import { ThemeToggle } from '../ThemeToggle/ThemeToggle'
 import { useGeneralHeaderStyles, HEADER_HEIGHT } from './GeneralHeader.style'
 import { useGeneralHeaderLinks } from './generalHeaderLinks'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
-import { getCurrentActiveLink } from '../../utils'
-import { UserDropdown } from '../UserDropdown/UserDropdown'
+import { getPathnameWithoutSlash } from '../../utils'
+import { LanguageSelect, ThemeToggle, UserDropdown } from '..'
 
 export const GeneralHeader = () => {
   const [opened, { toggle, close }] = useDisclosure(false)
@@ -50,7 +48,7 @@ export const GeneralHeader = () => {
   }
 
   useEffect(() => {
-    dispatch(changeLink(getCurrentActiveLink(pathname)))
+    dispatch(changeLink(getPathnameWithoutSlash(pathname)))
   }, [])
 
   return (
