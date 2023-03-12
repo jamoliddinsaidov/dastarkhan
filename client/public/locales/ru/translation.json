@@ -73,5 +73,13 @@
   "drop_file_error": "Формат файла не JPEG/PNG или его размер больше 5 МБ",
   "upload_photo": "Загрузить фото",
   "dropzone_description": "Перетащите сюда файлы для загрузки. Мы принимаем только файлы JPEG и PNG размером менее 5 МБ.",
-  "select_files": "Выбрать файлы"
+  "select_files": "Выбрать файлы",
+  "write_review_description": "Поделитесь своим опытом с другими, написав подробный обзор",
+  "food_name": "Название еды",
+  "food_place_name": "Название ресторана",
+  "your_review": "Ваш отзыв",
+  "your_opinion": "Ваше мнение о еде",
+  "city_town": "Город",
+  "city_town_placeholder": "Город, из которого вы делаете обзор",
+  "complete": "Завершить"
 }

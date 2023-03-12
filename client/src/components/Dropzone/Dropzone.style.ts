@@ -3,8 +3,12 @@ import { createStyles, rem } from '@mantine/core'
 export const useDropzoneStyles = createStyles((theme) => ({
   wrapper: {
     position: 'relative',
-    margin: `${rem(24)} auto`,
+    margin: `${rem(48)} auto`,
     width: '90%',
+
+    [theme.fn.smallerThan('sm')]: {
+      marginBottom: `${rem(48)}`,
+    },
   },
 
   dropzone: {

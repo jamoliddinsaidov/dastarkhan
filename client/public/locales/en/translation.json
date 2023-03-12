@@ -73,5 +73,13 @@
   "drop_file_error": "File's format is not JPEG/PNG or it is more than 5MB",
   "upload_photo": "Upload a photo",
   "dropzone_description": "Drag'n'drop files here to upload. We can accept only JPEG and PNG files that are less than 5MB in size.",
-  "select_files": "Select files"
+  "select_files": "Select files",
+  "write_review_description": "Share your experience with others by writing a detailed review",
+  "food_name": "Food's name",
+  "food_place_name": "Food place's name",
+  "your_review": "Your review",
+  "your_opinion": "Your opinions about the food",
+  "city_town": "City / Town",
+  "city_town_placeholder": "The city or town you are reviewing from",
+  "complete": "Complete"
 }
