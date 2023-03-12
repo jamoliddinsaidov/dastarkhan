@@ -9,6 +9,7 @@ import { useGeneralHeaderLinks } from './generalHeaderLinks'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { getCurrentActiveLink } from '../../utils'
+import { UserDropdown } from '../UserDropdown/UserDropdown'
 
 export const GeneralHeader = () => {
   const [opened, { toggle, close }] = useDisclosure(false)
@@ -20,6 +21,13 @@ export const GeneralHeader = () => {
 
   const activeLink = useAppSelector((state) => state.activeLink.activeLink)
   const links = useGeneralHeaderLinks()
+
+  // TODO: update the following when the server is ready
+  const isUserLoggedIn = true
+  if (isUserLoggedIn) {
+    links.length = 2
+  }
+
   const linkItems = links.map(({ link, label }) => (
     <Link
       to={link}
@@ -37,6 +45,11 @@ export const GeneralHeader = () => {
   const navigateToHome = () => {
     navigate('home')
     dispatch(changeLink('home'))
+
+    // mobile menu
+    if (opened) {
+      close()
+    }
   }
 
   useEffect(() => {
@@ -51,6 +64,7 @@ export const GeneralHeader = () => {
         </Title>
         <Group spacing={5} className={classes.hideOnMobile}>
           {linkItems}
+          {isUserLoggedIn && <UserDropdown />}
         </Group>
         <Group spacing={15} className={classes.hideOnMobile}>
           <LanguageSelect />
@@ -61,6 +75,7 @@ export const GeneralHeader = () => {
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>
               {linkItems}
+              {isUserLoggedIn && <UserDropdown closeBurgerMenuOnMobile={close} />}
               <Group spacing={1}>
                 <LanguageSelect show />
                 <ThemeToggle />

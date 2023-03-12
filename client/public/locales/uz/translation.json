@@ -32,5 +32,11 @@
   "name_error_message": "Ism kamida 3 ta belgidan iborat bo'lishi kerak",
   "dob_error_message": "Iltimos, sanani tanlang",
   "invalid_email": "Yaroqsiz elektron pochta",
-  "invalid_password": "Parol kamida 6 ta belgidan iborat bo'lishi kerak"
+  "invalid_password": "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
+  "liked_posts": "Yoqtirgan postlaringiz",
+  "saved_posts": "Saqlangan postlaringiz",
+  "your_friends": "Do'stlaringiz",
+  "settings": "Sozlamalar",
+  "account_settings": "Akkount sozlamalari",
+  "logout": "Chiqish"
 }

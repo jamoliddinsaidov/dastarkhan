@@ -27,6 +27,7 @@ export const useGeneralHeaderStyles = createStyles((theme) => ({
     borderTopLeftRadius: 0,
     borderTopWidth: 0,
     overflow: 'hidden',
+    height: '100vh',
 
     [theme.fn.largerThan('sm')]: {
       display: 'none',

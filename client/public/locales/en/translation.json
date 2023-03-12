@@ -32,5 +32,11 @@
   "name_error_message": "Name should include at least 3 characters",
   "dob_error_message": "Please select a date",
   "invalid_email": "Invalid email",
-  "invalid_password": "Password should include at least 6 characters"
+  "invalid_password": "Password should include at least 6 characters",
+  "liked_posts": "Liked posts",
+  "saved_posts": "Saved posts",
+  "your_friends": "Your friends",
+  "settings": "Settings",
+  "account_settings": "Account settings",
+  "logout": "Logout"
 }
