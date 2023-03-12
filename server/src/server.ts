@@ -1,10 +1,27 @@
 import express from 'express'
-const app = express()
+import helmet from 'helmet'
+import xss from 'xss-clean'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
+import dotenv from 'dotenv'
+import { rateLimiter, mongoSanitizer } from './middlewares/index.js'
+import { corsOptions } from './configs/index.js'
 
-// built-in middleware to handle urlencoded form and json data
+const app = express()
+dotenv.config()
+
+// middlewares
+app.use(rateLimiter())
+app.use(helmet())
+app.use(cors(corsOptions))
+app.use(xss())
+app.use(mongoSanitizer())
+
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(cookieParser())
 
+// routes
 app.get('/', (req, res) => {
   res.send('response from the server')
 })
