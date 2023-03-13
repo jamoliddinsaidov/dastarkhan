@@ -4,9 +4,10 @@ import xss from 'xss-clean'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
-import { rateLimiter, mongoSanitizer, logger } from './middlewares/index.js'
+import { rateLimiter, mongoSanitizer, logger, errorHandlerMiddleware, notFoundMiddleware } from './middlewares/index.js'
 import { corsOptions, connectDb } from './configs/index.js'
 import { DB_CONNECTED, DB_CONNECTION_FAILED, SERVER_IS_CLOSING, SERVER_IS_RUNNING } from './utils/constants.js'
+import { authRouter } from './routes/index.js'
 
 const app = express()
 dotenv.config()
@@ -21,6 +22,9 @@ app.use(mongoSanitizer())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
 const start = async () => {
   try {
