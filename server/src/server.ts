@@ -4,11 +4,18 @@ import xss from 'xss-clean'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
-import { rateLimiter, mongoSanitizer, logger, errorHandlerMiddleware, notFoundMiddleware } from './middlewares/index.js'
+import {
+  rateLimiter,
+  mongoSanitizer,
+  logger,
+  errorHandlerMiddleware,
+  notFoundMiddleware,
+  addCredentialsHeader,
+  logRequests,
+} from './middlewares/index.js'
 import { corsOptions, connectDb } from './configs/index.js'
-import { DB_CONNECTED, DB_CONNECTION_FAILED, SERVER_IS_CLOSING, SERVER_IS_RUNNING } from './utils/constants.js'
 import { authRouter } from './routes/index.js'
-import { logRequests } from './middlewares/logger.js'
+import { DB_CONNECTED, DB_CONNECTION_FAILED, SERVER_IS_CLOSING, SERVER_IS_RUNNING } from './utils/constants.js'
 
 const app = express()
 dotenv.config()
@@ -16,8 +23,9 @@ dotenv.config()
 // middlewares
 app.use(rateLimiter())
 app.use(helmet())
-app.use(cors(corsOptions))
 app.use(xss())
+app.use(addCredentialsHeader())
+app.use(cors(corsOptions))
 app.use(mongoSanitizer())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
