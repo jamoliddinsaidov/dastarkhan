@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from 'express'
 import { format, createLogger, transports } from 'winston'
 const { combine, timestamp, printf, colorize, errors, json } = format
 
@@ -25,3 +26,17 @@ const buildProdLogger = () => {
 }
 
 export const logger = process.env.NODE_ENV === 'production' ? buildProdLogger() : buildDevLogger()
+
+export const logRequests = () => (req: Request, res: Response, next: NextFunction) => {
+  const method = req.method
+  const url = req.originalUrl
+  const body = JSON.stringify(req.body)
+  const query = JSON.stringify(req.query)
+
+  logger.info(`Request 
+  method: ${method} 
+  url:${url} 
+  body:${body} 
+  query:${query}`)
+  next()
+}

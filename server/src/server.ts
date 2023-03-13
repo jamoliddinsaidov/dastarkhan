@@ -8,6 +8,7 @@ import { rateLimiter, mongoSanitizer, logger, errorHandlerMiddleware, notFoundMi
 import { corsOptions, connectDb } from './configs/index.js'
 import { DB_CONNECTED, DB_CONNECTION_FAILED, SERVER_IS_CLOSING, SERVER_IS_RUNNING } from './utils/constants.js'
 import { authRouter } from './routes/index.js'
+import { logRequests } from './middlewares/logger.js'
 
 const app = express()
 dotenv.config()
@@ -18,10 +19,13 @@ app.use(helmet())
 app.use(cors(corsOptions))
 app.use(xss())
 app.use(mongoSanitizer())
-
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(cookieParser())
+app.use(cookieParser(process.env.JWT_SECRET))
+app.use(logRequests())
+
+// routes
+app.use('/api/v1/auth', authRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

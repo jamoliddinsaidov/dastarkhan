@@ -24,6 +24,34 @@ const UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  refreshToken: {
+    type: String,
+    defaultValue: null,
+  },
+  likedPosts: {
+    type: Array,
+    defaultValue: [],
+  },
+  savedPosts: {
+    type: Array,
+    defaultValue: [],
+  },
+  followings: {
+    type: Array,
+    defaultValue: [],
+  },
+  followers: {
+    type: Array,
+    defaultValue: [],
+  },
 })
 
 export const User = mongoose.model('User', UserSchema)
+
+export interface UserRequestBody {
+  email: string
+  dateOfBirth?: Date
+  gender?: string
+  name?: string
+  password: string
+}

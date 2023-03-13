@@ -5,7 +5,7 @@ export const allowedOrigins = ['https://www.production_site.com', 'http://127.0.
 
 export const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin ?? '') || process.env.NODE_ENV === 'development') {
+    if (allowedOrigins.includes(origin!) || process.env.NODE_ENV === 'development') {
       callback(null, true)
     } else {
       callback(new Error(NOT_ALLOWED_BY_CORS))

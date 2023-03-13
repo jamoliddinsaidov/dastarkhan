@@ -9,5 +9,5 @@ export const errorHandlerMiddleware = (err: ErrorType, req: Request, res: Respon
   const message = err.message || SOMETHING_WENT_WRONG
 
   logger.error(message)
-  return res.status(statusCode).json({ message: message })
+  return res.status(statusCode).json({ message: message, success: false })
 }
