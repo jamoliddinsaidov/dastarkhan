@@ -5,7 +5,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import { rateLimiter, mongoSanitizer } from './middlewares/index.js'
-import { corsOptions } from './configs/index.js'
+import { corsOptions, connectDb } from './configs/index.js'
 
 const app = express()
 dotenv.config()
@@ -21,10 +21,16 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())
 
-// routes
-app.get('/', (req, res) => {
-  res.send('response from the server')
-})
+const start = async () => {
+  try {
+    await connectDb()
+    console.log('Connected to the DB')
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+    const PORT = process.env.PORT || 3000
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+start()
