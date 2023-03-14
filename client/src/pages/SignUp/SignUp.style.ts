@@ -7,6 +7,7 @@ export const useSignUpStyles = createStyles((theme) => ({
     minHeight: rem(600),
     height: '100%',
     maxHeight: rem(700),
+    position: 'relative',
   },
 
   title: {

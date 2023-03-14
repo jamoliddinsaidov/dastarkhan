@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { useForm } from '@mantine/form'
 import {
   TextInput,
@@ -11,18 +12,25 @@ import {
   Text,
   Radio,
   Flex,
+  Dialog,
+  LoadingOverlay,
 } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { useSignUpStyles } from './SignUp.style'
 import { DateInput, DateValue } from '@mantine/dates'
-import dayjs from 'dayjs'
-import { Link } from 'react-router-dom'
-import { useAppDispatch } from '../../store/hooks'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSignUpStyles } from './SignUp.style'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
+import { registerUser } from '../../store/user/userServices'
+import { getUser } from '../../store/user/userSelectors'
+import { changeUserSuccesStatus } from '../../store/user/userSlice'
 
 export const SignUp = () => {
   const { classes } = useSignUpStyles()
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const user = useAppSelector(getUser)
 
   const form = useForm({
     initialValues: {
@@ -42,24 +50,28 @@ export const SignUp = () => {
     },
   })
 
-  const dispatch = useAppDispatch()
-
   const onLinkClick = (link: string) => {
     dispatch(changeLink(link))
+  }
+
+  const navigateToLogin = () => {
+    navigate('/login')
+    dispatch(changeLink('login'))
+    dispatch(changeUserSuccesStatus())
+  }
+
+  const onSubmit = () => {
+    dispatch(registerUser(form.values))
   }
 
   return (
     <Paper radius='md' p='xl' shadow='md' withBorder className={classes.wrapper}>
       <Title className={classes.title}>{t('signup')}</Title>
 
-      <form
-        onSubmit={form.onSubmit(() => {
-          console.log(form.values)
-        })}
-        className={classes.form}
-      >
+      <form onSubmit={form.onSubmit(onSubmit)} className={classes.form}>
         <Stack>
           <TextInput
+            required
             label={t('name')}
             placeholder={t('your_name')!}
             value={form.values.name}
@@ -142,6 +154,27 @@ export const SignUp = () => {
           {t('terms_conditions')}
         </Link>
       </form>
+
+      <LoadingOverlay visible={user.loading} overlayBlur={1} />
+
+      <Dialog
+        opened={user.success}
+        size='lg'
+        radius='md'
+        shadow='xl'
+        withBorder
+        transition='slide-left'
+        transitionDuration={300}
+        transitionTimingFunction='ease'
+      >
+        <Flex align='center' justify='space-between'>
+          <Text size='sm' mb='xs' weight={500}>
+            ✔ Your account has been created
+          </Text>
+
+          <Button onClick={navigateToLogin}>Login Now</Button>
+        </Flex>
+      </Dialog>
     </Paper>
   )
 }
