@@ -6,6 +6,7 @@ import { useGeneralHeaderStyles, HEADER_HEIGHT } from './GeneralHeader.style'
 import { useGeneralHeaderLinks } from './generalHeaderLinks'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
+import { getIsUserLoggedIn } from '../../store/user/userSelectors'
 import { getPathnameWithoutSlash } from '../../utils'
 import { LanguageSelect, ThemeToggle, UserDropdown } from '..'
 
@@ -19,9 +20,7 @@ export const GeneralHeader = () => {
 
   const activeLink = useAppSelector((state) => state.activeLink.activeLink)
   const links = useGeneralHeaderLinks()
-
-  // TODO: update the following when the server is ready
-  const isUserLoggedIn = false
+  const isUserLoggedIn = useAppSelector(getIsUserLoggedIn)
 
   const linkItems = links.map(({ link, label }) => (
     <Link
@@ -41,7 +40,7 @@ export const GeneralHeader = () => {
     navigate('home')
     dispatch(changeLink('home'))
 
-    // mobile menu
+    // mobile menu closing
     if (opened) {
       close()
     }

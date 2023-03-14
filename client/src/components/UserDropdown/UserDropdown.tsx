@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUserDropdownStyles } from './UserDropdown.style'
 import { useAppDispatch } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
+import { logoutUser } from '../../store/user/userServices'
 
 interface UserdropdownProps {
   closeBurgerMenuOnMobile?: () => void
@@ -28,6 +29,11 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
     dispatch(changeLink(pathname))
     setUserMenuOpened(false)
     closeBurgerMenuOnMobile?.()
+  }
+
+  const onLogout = () => {
+    dispatch(logoutUser())
+    navigateToAPage('home')
   }
 
   return (
@@ -74,7 +80,9 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
         <Menu.Item icon={<IconSettings size='0.9rem' stroke={1.5} />} onClick={() => navigateToAPage('/user/settings')}>
           {t('account_settings')}
         </Menu.Item>
-        <Menu.Item icon={<IconLogout size='0.9rem' stroke={1.5} />}>{t('logout')}</Menu.Item>
+        <Menu.Item icon={<IconLogout size='0.9rem' stroke={1.5} />} onClick={onLogout}>
+          {t('logout')}
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   )

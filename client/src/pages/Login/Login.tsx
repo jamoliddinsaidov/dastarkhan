@@ -1,16 +1,19 @@
-import { Paper, TextInput, PasswordInput, Flex, Button, Title, Text } from '@mantine/core'
+import { Paper, TextInput, PasswordInput, Flex, Button, Title, Text, LoadingOverlay } from '@mantine/core'
 import { IconLock, IconMail } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useForm } from '@mantine/form'
 import { useLoginStyles } from './Login.style'
-import { useAppDispatch } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
+import { loginUser } from '../../store/user/userServices'
+import { getUser } from '../../store/user/userSelectors'
 
 export const Login = () => {
   const { classes } = useLoginStyles()
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const user = useAppSelector(getUser)
 
   const form = useForm({
     initialValues: {
@@ -28,14 +31,14 @@ export const Login = () => {
     dispatch(changeLink(link))
   }
 
+  const onSubmit = () => {
+    dispatch(loginUser(form.values))
+  }
+
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
-        <form
-          onSubmit={form.onSubmit(() => {
-            console.log(form.values)
-          })}
-        >
+        <form onSubmit={form.onSubmit(onSubmit)}>
           <Title order={2} className={classes.title} ta='center' mt='md' mb={50}>
             {t('welcome_back')}
           </Title>
@@ -78,6 +81,8 @@ export const Login = () => {
           {t('forgot_password')}
         </Link>
       </Paper>
+
+      <LoadingOverlay visible={user.loading} overlayBlur={1} />
     </div>
   )
 }

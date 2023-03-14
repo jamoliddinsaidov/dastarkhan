@@ -169,10 +169,10 @@ export const SignUp = () => {
       >
         <Flex align='center' justify='space-between'>
           <Text size='sm' mb='xs' weight={500}>
-            ✔ Your account has been created
+            {t('your_account_created')}
           </Text>
 
-          <Button onClick={navigateToLogin}>Login Now</Button>
+          <Button onClick={navigateToLogin}>{t('login')}</Button>
         </Flex>
       </Dialog>
     </Paper>

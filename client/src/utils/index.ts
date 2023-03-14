@@ -1,3 +1,4 @@
 import { getPathnameWithoutSlash } from './getPathnameWithoutSlash'
+import { getIsUserLoggedInFromLocalStorage, setIsUserLoggedInToLocalStorage } from './localStorage'
 
-export { getPathnameWithoutSlash }
+export { getPathnameWithoutSlash, getIsUserLoggedInFromLocalStorage, setIsUserLoggedInToLocalStorage }

@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '../../store/hooks'
+import { getIsUserLoggedIn } from '../../store/user/userSelectors'
 
 export const useGeneralHeaderLinks = () => {
   const { t } = useTranslation()
@@ -21,8 +23,7 @@ export const useGeneralHeaderLinks = () => {
     },
   ]
 
-  // TODO: update the following when the server is ready
-  const isUserLoggedIn = false
+  const isUserLoggedIn = useAppSelector(getIsUserLoggedIn)
   if (isUserLoggedIn) {
     links.length = 2
   }
