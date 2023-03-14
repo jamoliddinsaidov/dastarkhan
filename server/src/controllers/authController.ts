@@ -14,6 +14,7 @@ import {
   USER_LOGGED_IN,
 } from '../utils/constants.js'
 import { UnauthenticatedError } from '../errors/unauthenticated.js'
+import { getUserForResponse } from '../utils/index.js'
 
 export const register = asyncWrapper(async (req: Request, res: Response) => {
   const { email, password, name, dateOfBirth, gender } = req.body
@@ -67,7 +68,9 @@ export const login = asyncWrapper(async (req: Request, res: Response) => {
     expires: new Date(Date.now() + 259200000), // 3 days
   })
 
-  res.status(StatusCodes.OK).json({ succes: true, message: USER_LOGGED_IN })
+  const userData = getUserForResponse(user)
+
+  res.status(StatusCodes.OK).json({ succes: true, message: USER_LOGGED_IN, data: userData })
 })
 
 export const logout = asyncWrapper(async (req: Request, res: Response) => {

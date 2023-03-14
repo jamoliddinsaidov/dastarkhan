@@ -1,13 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getIsUserLoggedInFromLocalStorage, setIsUserLoggedInToLocalStorage } from '../../utils'
-import { registerUser, loginUser, logoutUser } from './userServices'
+import {
+  getIsUserLoggedInFromLocalStorage,
+  setIsUserLoggedInToLocalStorage,
+  clearUserInfoFromLocalStorage,
+  getUserInfoFromLocalStorage,
+} from '../../utils'
+import { registerUser, loginUser, logoutUser, IUser } from './userServices'
 
 const initialState = {
   loading: false,
   success: false,
-  isLoggedIn: getIsUserLoggedInFromLocalStorage(),
   isAdmin: false,
-  user: {}, // TODO: return user info when user loges in
+  isLoggedIn: getIsUserLoggedInFromLocalStorage(),
+  user: getUserInfoFromLocalStorage() as IUser,
   error: '',
 }
 
@@ -34,10 +39,13 @@ const userSlice = createSlice({
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true
     })
-    builder.addCase(loginUser.fulfilled, (state) => {
+    builder.addCase(loginUser.fulfilled, (state, action: any) => {
+      const user = action.payload?.data?.data
+      setIsUserLoggedInToLocalStorage(user)
+
+      state.user = user
       state.loading = false
       state.isLoggedIn = true
-      setIsUserLoggedInToLocalStorage()
     })
     builder.addCase(loginUser.rejected, (state, action) => {
       state.loading = false
@@ -49,7 +57,7 @@ const userSlice = createSlice({
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.loading = false
       state.isLoggedIn = false
-      localStorage.setItem('isLoggedIn', 'true')
+      clearUserInfoFromLocalStorage()
     })
     builder.addCase(logoutUser.rejected, (state, action) => {
       state.loading = false

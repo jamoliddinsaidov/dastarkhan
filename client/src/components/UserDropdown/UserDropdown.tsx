@@ -1,12 +1,21 @@
 import { useState } from 'react'
 import { Avatar, UnstyledButton, Group, Text, Menu, rem } from '@mantine/core'
-import { IconLogout, IconHeart, IconStar, IconFriends, IconSettings, IconChevronDown } from '@tabler/icons-react'
+import {
+  IconLogout,
+  IconHeart,
+  IconStar,
+  IconFriends,
+  IconSettings,
+  IconChevronDown,
+  IconUser,
+} from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useUserDropdownStyles } from './UserDropdown.style'
-import { useAppDispatch } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { logoutUser } from '../../store/user/userServices'
+import { getUserInfo } from '../../store/user/userSelectors'
 
 interface UserdropdownProps {
   closeBurgerMenuOnMobile?: () => void
@@ -18,11 +27,7 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
   const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
-  // TODO: use props to get the real user
-  const user = {
-    name: 'John Doe',
-  }
+  const user = useAppSelector(getUserInfo)
 
   const navigateToAPage = (pathname: string) => {
     navigate(pathname)
@@ -48,15 +53,21 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
       <Menu.Target>
         <UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
           <Group spacing={7}>
-            <Avatar alt={user.name} radius='xl' size={20} />
+            <Avatar alt={user?.name} radius='xl' size={20} />
             <Text weight={500} size='sm' sx={{ lineHeight: 1 }}>
-              {user.name}
+              {user?.name}
             </Text>
             <IconChevronDown size={rem(12)} stroke={1.5} />
           </Group>
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
+        <Menu.Item
+          icon={<IconUser size='0.9rem' color={theme.colors.blue[6]} stroke={1.5} />}
+          onClick={() => navigateToAPage('/user/profile')}
+        >
+          {t('profile')}
+        </Menu.Item>
         <Menu.Item
           icon={<IconHeart size='0.9rem' color={theme.colors.red[6]} stroke={1.5} />}
           onClick={() => navigateToAPage('/user/likedPosts')}

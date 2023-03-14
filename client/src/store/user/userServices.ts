@@ -2,6 +2,19 @@ import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { registerUrl, loginUrl, logoutUrl } from '../../api/auth'
 
+export interface IUser {
+  name: string
+  dateOfBirth: Date
+  gender: string
+  email: string
+  password: string
+  likedPosts: string[]
+  savedPosts: string[]
+  followings: string[]
+  followers: string[]
+  reviews: string[]
+}
+
 export interface UserRequestBody {
   email: string
   dateOfBirth?: Date

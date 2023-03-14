@@ -52,6 +52,20 @@ const UserSchema = new mongoose.Schema({
 
 export const User = mongoose.model('User', UserSchema)
 
+export interface IUser {
+  name: string
+  dateOfBirth: Date
+  gender: string
+  email: string
+  password: string
+  likedPosts: string[]
+  savedPosts: string[]
+  followings: string[]
+  followers: string[]
+  reviews: string[]
+  refreshToken?: string | undefined
+}
+
 export interface UserRequestBody {
   email: string
   dateOfBirth?: Date
