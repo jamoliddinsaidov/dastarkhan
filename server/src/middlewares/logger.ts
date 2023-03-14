@@ -35,8 +35,8 @@ export const logRequests = () => (req: Request, res: Response, next: NextFunctio
 
   logger.info(`Request 
   method: ${method} 
-  url:${url} 
-  body:${body} 
-  query:${query}`)
+  url: ${url} 
+  body: ${body} 
+  query: ${query}`)
   next()
 }

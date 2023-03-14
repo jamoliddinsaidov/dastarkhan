@@ -44,6 +44,10 @@ const UserSchema = new mongoose.Schema({
     type: Array,
     defaultValue: [],
   },
+  reviews: {
+    type: Array,
+    defaultValue: [],
+  },
 })
 
 export const User = mongoose.model('User', UserSchema)
