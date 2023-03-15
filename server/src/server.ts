@@ -14,7 +14,7 @@ import {
   logRequests,
 } from './middlewares/index.js'
 import { corsOptions, connectDb } from './configs/index.js'
-import { authRouter, userRouter } from './routes/index.js'
+import { authRouter, userRouter, foodRouter } from './routes/index.js'
 import { DB_CONNECTED, DB_CONNECTION_FAILED, SERVER_IS_CLOSING, SERVER_IS_RUNNING } from './utils/constants.js'
 
 const app = express()
@@ -35,6 +35,7 @@ app.use(logRequests())
 // routes
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/user', userRouter)
+app.use('/api/v1/food', foodRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

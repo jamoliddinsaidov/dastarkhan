@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Types } from 'mongoose'
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -53,6 +53,7 @@ const UserSchema = new mongoose.Schema({
 export const User = mongoose.model('User', UserSchema)
 
 export interface IUser {
+  _id: Types.ObjectId
   name: string
   dateOfBirth: Date
   gender: string

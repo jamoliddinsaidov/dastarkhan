@@ -1,6 +1,7 @@
 import { IUser } from '../models/User.js'
 
 export const getUserForResponse = ({
+  _id,
   name,
   dateOfBirth,
   gender,
@@ -12,6 +13,7 @@ export const getUserForResponse = ({
   reviews,
 }: IUser) => {
   return {
+    _id,
     name,
     dateOfBirth,
     gender,

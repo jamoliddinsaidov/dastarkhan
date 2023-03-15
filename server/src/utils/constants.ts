@@ -26,3 +26,6 @@ export const INVALID_CREDENTIALS = 'Invalid credentials'
 export const NO_EMAIL_PASSWORD = 'Please provide email and password'
 export const LOGGED_OUT = 'User is logged out'
 export const PROVIDE_EMAIL = 'Please provide an email'
+
+// food review constants
+export const REVIEW_ADDED = 'Food review is added successfully'

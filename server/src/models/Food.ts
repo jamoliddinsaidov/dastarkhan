@@ -13,12 +13,12 @@ const userSubSchema = new mongoose.Schema({
 })
 
 const FoodSchema = new mongoose.Schema({
-  name: {
+  foodName: {
     type: String,
     required: true,
     trim: true,
   },
-  place: {
+  foodPlaceName: {
     type: String,
     required: true,
     trim: true,
