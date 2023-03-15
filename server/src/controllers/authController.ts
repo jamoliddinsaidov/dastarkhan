@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import { StatusCodes } from 'http-status-codes'
 import { asyncWrapper } from '../middlewares/index.js'
 import { User } from '../models/User.js'
+import { LoggedInUserInfo } from '../models/LoggedInUserInfo.js'
 import { BadRequestError } from '../errors/badRequest.js'
 import {
   EMAIL_ALREADY_EXISTS,
@@ -70,6 +71,8 @@ export const login = asyncWrapper(async (req: Request, res: Response) => {
 
   const userData = getUserForResponse(user)
 
+  await LoggedInUserInfo.create(userData)
+
   res.status(StatusCodes.OK).json({ succes: true, message: USER_LOGGED_IN, data: userData })
 })
 
@@ -77,6 +80,7 @@ export const logout = asyncWrapper(async (req: Request, res: Response) => {
   const { email } = req.body
 
   await User.findOneAndUpdate({ email }, { refreshToken: null })
+  await LoggedInUserInfo.deleteOne({ email })
 
   res.clearCookie('accessToken', {
     httpOnly: true,

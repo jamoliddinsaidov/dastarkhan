@@ -25,3 +25,4 @@ export const NO_USERS_FOUND_MATCHING_EMAIL = 'No users found matching with the p
 export const INVALID_CREDENTIALS = 'Invalid credentials'
 export const NO_EMAIL_PASSWORD = 'Please provide email and password'
 export const LOGGED_OUT = 'User is logged out'
+export const PROVIDE_EMAIL = 'Please provide an email'
