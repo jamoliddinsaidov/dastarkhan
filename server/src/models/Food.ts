@@ -76,3 +76,11 @@ export interface FoodRequestBody {
     userId?: string
   }
 }
+
+export interface FoodFilterOptions {
+  rating?: string
+  price?: string,
+  foodType?: string,
+  serviceType?: string,
+  reviewed?: string
+}
