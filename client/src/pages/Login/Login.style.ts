@@ -1,40 +1,35 @@
 import { createStyles, rem } from '@mantine/core'
 
 export const useLoginStyles = createStyles((theme) => ({
-  wrapper: {
-    backgroundSize: 'contain',
-    backgroundPosition: 'right',
-    backgroundRepeat: 'no-repeat',
-    backgroundImage: 'url(./assets/login_background.jpg)',
-    minHeight: rem(660),
-    height: '100%',
-    maxHeight: rem(700),
-
-    [theme.fn.smallerThan('md')]: {
-      backgroundImage: 'none',
-    },
-  },
-
   form: {
-    borderRight: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]}`,
+    margin: `${rem(32)} auto`,
     maxWidth: rem(520),
-    paddingTop: rem(80),
-    minHeight: rem(660),
+    minHeight: rem(600),
     height: '100%',
     maxHeight: rem(700),
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
 
     label: {
       marginBottom: `${rem(8)}`,
     },
 
-    [theme.fn.smallerThan('md')]: {
-      maxWidth: '70%',
-      margin: 'auto',
-      borderRight: 'none',
+    form: {
+      width: '100%',
+      padding: `0 ${rem(32)}`,
     },
 
     [theme.fn.smallerThan('sm')]: {
       maxWidth: '100%',
+      marginLeft: rem(8),
+      marginRight: rem(8),
+
+      form: {
+        padding: 0,
+      },
     },
   },
 

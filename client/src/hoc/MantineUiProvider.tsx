@@ -21,7 +21,7 @@ export const MantineUiProvider = ({ children }: MantineUiProviderProps) => {
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme, primaryColor: 'orange' }}>
+      <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme, primaryColor: 'orange', breakpoints: {'xxl': '100em'} }}>
         <React.Suspense fallback={<LoadingOverlay visible overlayBlur={1} loaderProps={{ size: 'xl' }} />}>
           {children}
         </React.Suspense>

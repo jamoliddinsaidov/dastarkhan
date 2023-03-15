@@ -13,14 +13,17 @@ export const useHeroWithBackgroundStyles = createStyles((theme) => ({
       paddingBottom: rem(50),
     },
 
-    minHeight: rem(660),
-    height: '100%',
-    maxHeight: rem(700),
+    minHeight: '90vh',
+    maxHeight: '100vh',
   },
 
   inner: {
     position: 'relative',
     zIndex: 1,
+
+    [theme.fn.largerThan('xxl')]: {
+      marginTop: `calc(${theme.spacing.xl} * 4.5)`,
+    },
   },
 
   title: {
@@ -38,6 +41,10 @@ export const useHeroWithBackgroundStyles = createStyles((theme) => ({
       fontSize: rem(28),
       textAlign: 'left',
     },
+
+    [theme.fn.largerThan('xxl')]: {
+      fontSize: rem(70),
+    },
   },
 
   description: {
@@ -48,6 +55,10 @@ export const useHeroWithBackgroundStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('xs')]: {
       fontSize: theme.fontSizes.md,
       textAlign: 'left',
+    },
+
+    [theme.fn.largerThan('xxl')]: {
+      fontSize: rem(20),
     },
   },
 
