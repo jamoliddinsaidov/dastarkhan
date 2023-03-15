@@ -3,16 +3,15 @@ import {
   getIsUserLoggedInFromLocalStorage,
   setIsUserLoggedInToLocalStorage,
   clearUserInfoFromLocalStorage,
-  getUserInfoFromLocalStorage,
 } from '../../utils'
-import { registerUser, loginUser, logoutUser, IUser } from './userServices'
+import { registerUser, loginUser, logoutUser, getLoggedInUserInfo, IUser } from './userServices'
 
 const initialState = {
   loading: false,
   success: false,
   isAdmin: false,
   isLoggedIn: getIsUserLoggedInFromLocalStorage(),
-  user: getUserInfoFromLocalStorage() as IUser,
+  user: {} as IUser,
   error: '',
 }
 
@@ -41,7 +40,7 @@ const userSlice = createSlice({
     })
     builder.addCase(loginUser.fulfilled, (state, action: any) => {
       const user = action.payload?.data?.data
-      setIsUserLoggedInToLocalStorage(user)
+      setIsUserLoggedInToLocalStorage(user.email)
 
       state.user = user
       state.loading = false
@@ -60,6 +59,18 @@ const userSlice = createSlice({
       clearUserInfoFromLocalStorage()
     })
     builder.addCase(logoutUser.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+    builder.addCase(getLoggedInUserInfo.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getLoggedInUserInfo.fulfilled, (state, action: any) => {
+      const user = action.payload?.data?.data
+      state.user = user
+      state.loading = false
+    })
+    builder.addCase(getLoggedInUserInfo.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })

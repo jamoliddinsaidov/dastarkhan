@@ -15,4 +15,10 @@ export const useUserDropdownStyles = createStyles((theme) => ({
   userActive: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
   },
+
+  userText: {
+    lineHeight: 1,
+    marginLeft: '.3rem',
+    fontWeight: 500,
+  },
 }))

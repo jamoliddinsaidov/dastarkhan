@@ -2,7 +2,7 @@ import { getPathnameWithoutSlash } from './getPathnameWithoutSlash'
 import {
   getIsUserLoggedInFromLocalStorage,
   setIsUserLoggedInToLocalStorage,
-  getUserInfoFromLocalStorage,
+  getUserEmailFromLocalStorage,
   clearUserInfoFromLocalStorage,
 } from './localStorage'
 
@@ -10,6 +10,6 @@ export {
   getPathnameWithoutSlash,
   getIsUserLoggedInFromLocalStorage,
   setIsUserLoggedInToLocalStorage,
-  getUserInfoFromLocalStorage,
+  getUserEmailFromLocalStorage,
   clearUserInfoFromLocalStorage,
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
+import { ColorScheme, ColorSchemeProvider, LoadingOverlay, MantineProvider } from '@mantine/core'
 import { useLocalStorage } from '@mantine/hooks'
 
 const THEME_KEY = 'mantine-color-scheme'
@@ -22,7 +22,9 @@ export const MantineUiProvider = ({ children }: MantineUiProviderProps) => {
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme, primaryColor: 'orange' }}>
-        {children}
+        <React.Suspense fallback={<LoadingOverlay visible overlayBlur={1} loaderProps={{ size: 'xl' }} />}>
+          {children}
+        </React.Suspense>
       </MantineProvider>
     </ColorSchemeProvider>
   )

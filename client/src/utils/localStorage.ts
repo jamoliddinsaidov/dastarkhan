@@ -1,16 +1,14 @@
-import { IUser } from '../store/user/userServices'
-
 export const getIsUserLoggedInFromLocalStorage = () => {
-  return localStorage.getItem('isLoggedIn') ?? false
+  return localStorage.getItem('isLoggedIn') === 'true'
 }
 
-export const getUserInfoFromLocalStorage = () => {
-  return JSON.parse(localStorage.getItem('user')) ?? {}
+export const getUserEmailFromLocalStorage = () => {
+  return localStorage.getItem('userEmail') ?? ''
 }
 
-export const setIsUserLoggedInToLocalStorage = (user: IUser) => {
+export const setIsUserLoggedInToLocalStorage = (userEmail: 'string') => {
   localStorage.setItem('isLoggedIn', 'true')
-  localStorage.setItem('user', JSON.stringify(user))
+  localStorage.setItem('userEmail', userEmail)
 }
 
 export const clearUserInfoFromLocalStorage = () => {

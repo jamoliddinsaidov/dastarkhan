@@ -37,7 +37,7 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
   }
 
   const onLogout = () => {
-    dispatch(logoutUser())
+    dispatch(logoutUser(user.email))
     navigateToAPage('home')
   }
 
@@ -49,14 +49,12 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
       onClose={() => setUserMenuOpened(false)}
       onOpen={() => setUserMenuOpened(true)}
       withinPortal
+      shadow='lg'
     >
       <Menu.Target>
         <UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
           <Group spacing={7}>
-            <Avatar alt={user?.name} radius='xl' size={20} />
-            <Text weight={500} size='sm' sx={{ lineHeight: 1 }}>
-              {user?.name}
-            </Text>
+            <Text className={classes.userText}>{user?.name}</Text>
             <IconChevronDown size={rem(12)} stroke={1.5} />
           </Group>
         </UnstyledButton>
