@@ -56,6 +56,7 @@ const userSlice = createSlice({
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.loading = false
       state.isLoggedIn = false
+      state.user = {} as IUser
       clearUserInfoFromLocalStorage()
     })
     builder.addCase(logoutUser.rejected, (state, action) => {

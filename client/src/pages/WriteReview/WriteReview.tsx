@@ -10,17 +10,26 @@ import {
   Textarea,
   NumberInput,
   Select,
+  LoadingOverlay,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
+import { useWriteReviewStyles } from './WriteReview.style'
 import { CustomDropzone } from '../../components'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
-import { useWriteReviewStyles } from './WriteReview.style'
+import { addFoodReview } from '../../store/food/foodServices'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { getUserInfo } from '../../store/user/userSelectors'
+import { getFoodReviewIsLoading } from '../../store/food/foodSelectors'
 
 export const WriteReview = () => {
   const { t } = useTranslation()
   const { classes } = useWriteReviewStyles()
   const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(getUserInfo)
+  const isFoodReviewLoading = useAppSelector(getFoodReviewIsLoading)
+
   const form = useForm({
     initialValues: {
       rating: 0,
@@ -43,19 +52,33 @@ export const WriteReview = () => {
     },
   })
 
+  const onSubmit = () => {
+    const reviewedUser = user._id ? { name: user.name, userId: user._id } : { name: form.values.name, userId: '' }
+    const { rating, city, foodName, review, price, foodType, foodPlaceName, serviceType } = form.values
+    const foodReview = {
+      rating,
+      city,
+      foodName,
+      foodPlaceName,
+      review,
+      price,
+      foodType,
+      serviceType,
+      user: reviewedUser,
+    }
+
+    dispatch(addFoodReview(foodReview))
+  }
+
   return (
-    <Container size={900} my={30}>
+    <Container size={900} my={30} pos='relative'>
       <Title align='center'>{t('write_a_review')}</Title>
       <Text c='dimmed' fz='sm' ta='center' mt='md'>
         {t('write_review_description')}
       </Text>
 
       <Paper withBorder shadow='md' p={30} radius='md' mt='xl'>
-        <form
-          onSubmit={form.onSubmit(() => {
-            console.log(form.values)
-          })}
-        >
+        <form onSubmit={form.onSubmit(onSubmit)}>
           <TextInput
             label={t('food_name')}
             placeholder={t('food_name')!}
@@ -145,15 +168,17 @@ export const WriteReview = () => {
             />
           </Flex>
           <CustomDropzone />
-          <TextInput
-            label={t('name')}
-            placeholder={t('your_name')!}
-            className={classes.input}
-            radius='md'
-            required
-            value={form.values.name}
-            onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
-          />
+          {!user?._id && (
+            <TextInput
+              label={t('name')}
+              placeholder={t('your_name')!}
+              className={classes.input}
+              radius='md'
+              required
+              value={form.values.name}
+              onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
+            />
+          )}
           <Flex align='center' justify='center'>
             <Button radius='lg' className={classes.button} type='submit'>
               {t('complete')}
@@ -161,6 +186,8 @@ export const WriteReview = () => {
           </Flex>
         </form>
       </Paper>
+
+      <LoadingOverlay visible={isFoodReviewLoading} overlayBlur={1} />
     </Container>
   )
 }

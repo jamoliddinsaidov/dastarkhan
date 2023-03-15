@@ -4,6 +4,7 @@ import { registerUrl, loginUrl, logoutUrl } from '../../api/auth'
 import { getLoggedInUserInforUrl } from '../../api/user'
 
 export interface IUser {
+  _id: string
   name: string
   dateOfBirth: Date
   gender: string
