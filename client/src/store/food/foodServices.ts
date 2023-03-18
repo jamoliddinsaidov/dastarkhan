@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { addFoodReviewUrl, getAllFoodReviewsUrl, uploadImageUrl } from '../../api/foodReview'
 
 export interface IFood {
-  _id: string
+  _id?: string
   rating: number
   city: string
   foodName: string

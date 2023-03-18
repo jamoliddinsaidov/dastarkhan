@@ -11,9 +11,11 @@ import {
   NumberInput,
   Select,
   LoadingOverlay,
+  Dialog,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { useWriteReviewStyles } from './WriteReview.style'
 import { CustomDropzone } from '../../components'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
@@ -22,12 +24,15 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
 import { getFoodState } from '../../store/food/foodSelectors'
 import { noImageUrl } from '../../utils/constants'
+import { cleanUpInputValues } from '../../utils'
 
 export const WriteReview = () => {
   const { t } = useTranslation()
   const { classes } = useWriteReviewStyles()
   const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const user = useAppSelector(getUserInfo)
   const foodState = useAppSelector(getFoodState)
 
@@ -72,6 +77,7 @@ export const WriteReview = () => {
     }
 
     dispatch(addFoodReview(foodReview))
+    cleanUpInputValues(form)
   }
 
   return (
@@ -192,6 +198,22 @@ export const WriteReview = () => {
       </Paper>
 
       <LoadingOverlay visible={foodState.loading} overlayBlur={1} />
+      <Dialog
+        opened={foodState.success}
+        size='lg'
+        radius='md'
+        shadow='xl'
+        withBorder
+        transition='slide-left'
+        transitionDuration={300}
+        transitionTimingFunction='ease'
+      >
+        <Flex align='center' justify='space-between'>
+          <Text size='sm' mb='xs' weight={500}>
+            {t('review_created')}
+          </Text>
+        </Flex>
+      </Dialog>
     </Container>
   )
 }

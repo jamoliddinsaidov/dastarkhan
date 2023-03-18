@@ -2,6 +2,7 @@ import { IFood } from '../store/food/foodServices'
 import { FiltresType } from '../components/Filter/useFiltersList'
 import { FoodCardProps } from '../components/FoodCard/FoodCard'
 import { shortenString } from './shortenString'
+import { formatPrice } from './formatPrice'
 
 export const mapFoodsArrayToComponentProps = (
   foods: IFood[],
@@ -27,11 +28,11 @@ export const mapFoodsArrayToComponentProps = (
 
     return {
       id: _id,
-      title: foodName,
-      description: shortenString(review),
+      title: shortenString(foodName, 20),
       stars: rating,
+      description: shortenString(review, 90),
+      price: formatPrice(price),
       image,
-      price,
       city,
       badges,
     }

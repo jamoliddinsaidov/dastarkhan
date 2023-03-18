@@ -7,6 +7,8 @@ import {
 } from './localStorage'
 import { mapFoodsArrayToComponentProps } from './mapFoodsArrayToComponentProps'
 import { shortenString } from './shortenString'
+import { cleanUpInputValues } from './cleanUpInputValues'
+import { formatPrice } from './formatPrice'
 
 export {
   getPathnameWithoutSlash,
@@ -16,4 +18,6 @@ export {
   clearUserInfoFromLocalStorage,
   mapFoodsArrayToComponentProps,
   shortenString,
+  cleanUpInputValues,
+  formatPrice,
 }

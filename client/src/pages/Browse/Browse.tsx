@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { ActionIcon, Container, Flex, Grid, LoadingOverlay, Paper, Transition } from '@mantine/core'
 import { IconAdjustments } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
@@ -19,7 +19,7 @@ export const Browse = () => {
   const dispatch = useAppDispatch()
   const { foods, isLoading } = useAppSelector(getFoodsAndLoadingState)
   const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
-  const mappedFoods = mapFoodsArrayToComponentProps(foods, foodTypeFilters, serviceTypeFilters)
+  const mappedFoods = useMemo(() => mapFoodsArrayToComponentProps(foods, foodTypeFilters, serviceTypeFilters), [foods])
 
   const onSearchValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
@@ -32,8 +32,6 @@ export const Browse = () => {
   useEffect(() => {
     dispatch(getAllFoodReviews())
   }, [])
-
-  console.log(mappedFoods)
 
   return (
     <Container className={classes.wrapper}>

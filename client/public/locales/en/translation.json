@@ -83,5 +83,7 @@
   "city_town_placeholder": "The city or town you are reviewing from",
   "complete": "Complete",
   "your_account_created": "✔ Your account has been created",
-  "profile": "Profile"
+  "profile": "Profile",
+  "image_uploaded": "Image is uploaded",
+  "review_created": "✔ Your review has been created"
 }

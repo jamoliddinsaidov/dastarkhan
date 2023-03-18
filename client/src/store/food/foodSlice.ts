@@ -19,6 +19,7 @@ const foodSlice = createSlice({
     // addFoodReview
     builder.addCase(addFoodReview.pending, (state) => {
       state.loading = true
+      state.success = false
     })
     builder.addCase(addFoodReview.fulfilled, (state, action: any) => {
       state.loading = false
