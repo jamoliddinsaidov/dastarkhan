@@ -1,6 +1,9 @@
-// import { IconStar } from "@tabler/icons-react"
-
 import { useTranslation } from 'react-i18next'
+
+export interface FiltresType {
+  value: string
+  label: string
+}
 
 export const useFiltersList = () => {
   const { t } = useTranslation()

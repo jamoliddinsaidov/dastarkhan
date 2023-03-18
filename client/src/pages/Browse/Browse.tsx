@@ -1,28 +1,25 @@
-import React, { useState } from 'react'
-import { ActionIcon, Container, Flex, Grid, Paper, Transition } from '@mantine/core'
+import React, { useState, useEffect } from 'react'
+import { ActionIcon, Container, Flex, Grid, LoadingOverlay, Paper, Transition } from '@mantine/core'
 import { IconAdjustments } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useBrowseStyles } from './Browse.style'
 import { Filter, FoodCard, SearchInput } from '../../components'
-
-const mockCardContent = {
-  image:
-    'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
-  title: 'Verudela Beach',
-  city: 'Tashkent',
-  description:
-    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit, dignissimos maiores eaque qui eum incidunt!',
-  badges: ['National', 'Restaurant'],
-  stars: 4,
-  price: '36,500',
-}
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { getAllFoodReviews } from '../../store/food/foodServices'
+import { getFoodsAndLoadingState } from '../../store/food/foodSelectors'
+import { mapFoodsArrayToComponentProps } from '../../utils'
+import { useFiltersList } from '../../components/Filter/useFiltersList'
 
 export const Browse = () => {
   const { t } = useTranslation()
   const { classes } = useBrowseStyles()
   const [opened, handlers] = useDisclosure(false)
   const [searchValue, setSearchValue] = useState('')
+  const dispatch = useAppDispatch()
+  const { foods, isLoading } = useAppSelector(getFoodsAndLoadingState)
+  const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
+  const mappedFoods = mapFoodsArrayToComponentProps(foods, foodTypeFilters, serviceTypeFilters)
 
   const onSearchValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
@@ -31,6 +28,12 @@ export const Browse = () => {
   const onSearchClick = () => {
     console.log(searchValue)
   }
+
+  useEffect(() => {
+    dispatch(getAllFoodReviews())
+  }, [])
+
+  console.log(mappedFoods)
 
   return (
     <Container className={classes.wrapper}>
@@ -55,28 +58,22 @@ export const Browse = () => {
       </Transition>
 
       <Grid gutter='xl' grow className={classes.cards}>
-        <Grid.Col span={4}>
-          <FoodCard {...mockCardContent} />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <FoodCard {...mockCardContent} />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <FoodCard {...mockCardContent} />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <FoodCard {...mockCardContent} />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <FoodCard {...mockCardContent} />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <FoodCard {...mockCardContent} />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <FoodCard {...mockCardContent} />
-        </Grid.Col>
+        {!!mappedFoods.length ? (
+          <>
+            {mappedFoods.map((food) => (
+              <Grid.Col span={4} key={food.id}>
+                <FoodCard {...food} />
+              </Grid.Col>
+            ))}
+          </>
+        ) : (
+          <Grid.Col span={4}>
+            <>Nothing to show...</>
+          </Grid.Col>
+        )}
       </Grid>
+
+      <LoadingOverlay visible={isLoading} overlayBlur={1} />
     </Container>
   )
 }

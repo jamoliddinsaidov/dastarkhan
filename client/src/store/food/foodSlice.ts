@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { addFoodReview, uploadImage } from './foodServices'
+import { addFoodReview, getAllFoodReviews, IFood, uploadImage } from './foodServices'
 
 const initialState = {
   loading: false,
@@ -16,6 +16,7 @@ const foodSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // addFoodReview
     builder.addCase(addFoodReview.pending, (state) => {
       state.loading = true
     })
@@ -24,13 +25,13 @@ const foodSlice = createSlice({
       state.success = true
       state.food = action.payload.data.data
       state.uploadedImageUrl = ''
-
-      console.log(action)
     })
     builder.addCase(addFoodReview.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })
+
+    // uploadImage
     builder.addCase(uploadImage.pending, (state) => {
       state.isUploadingImage = true
     })
@@ -40,6 +41,19 @@ const foodSlice = createSlice({
     })
     builder.addCase(uploadImage.rejected, (state, action) => {
       state.isUploadingImage = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getAllFoodReviews
+    builder.addCase(getAllFoodReviews.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getAllFoodReviews.fulfilled, (state, action: any) => {
+      state.loading = false
+      state.foods = action.payload.data.data
+    })
+    builder.addCase(getAllFoodReviews.rejected, (state, action) => {
+      state.loading = false
       state.error = action.error.message ?? ''
     })
   },

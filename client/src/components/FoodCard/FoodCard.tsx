@@ -3,7 +3,8 @@ import { Card, Image, Text, Group, Badge, Button, ActionIcon, Flex } from '@mant
 import { useFoodCardStyles } from './FoodCard.style'
 import { useTranslation } from 'react-i18next'
 
-interface BadgeCardProps {
+export interface FoodCardProps {
+  id: string
   image: string
   title: string
   city: string
@@ -13,7 +14,7 @@ interface BadgeCardProps {
   price: string | number
 }
 
-export const FoodCard = ({ image, title, description, city, badges, stars, price }: BadgeCardProps) => {
+export const FoodCard = ({ image, title, description, city, badges, stars, price }: FoodCardProps) => {
   const { classes, theme } = useFoodCardStyles()
   const { t } = useTranslation()
 

@@ -4,6 +4,7 @@ export const useBrowseStyles = createStyles((theme) => ({
   wrapper: {
     maxWidth: `${rem(1150)}`,
     margin: `${rem(32)} auto`,
+    position: 'relative',
   },
 
   searchBox: {
