@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addFoodReviewUrl } from '../../api/foodReview'
+import { addFoodReviewUrl, uploadImageUrl } from '../../api/foodReview'
 
 export interface IFood {
   rating: number
@@ -20,4 +20,12 @@ export interface IFood {
 
 export const addFoodReview = createAsyncThunk('food/addFoodReview', async (foodReview: IFood) => {
   return await axios.post(addFoodReviewUrl.href, foodReview)
+})
+
+export const uploadImage = createAsyncThunk('food/uploadImage', async (formData: FormData) => {
+  return await axios.post(uploadImageUrl.href, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
 })

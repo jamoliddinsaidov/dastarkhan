@@ -20,7 +20,8 @@ import { useFiltersList } from '../../components/Filter/useFiltersList'
 import { addFoodReview } from '../../store/food/foodServices'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
-import { getFoodReviewIsLoading } from '../../store/food/foodSelectors'
+import { getFoodState } from '../../store/food/foodSelectors'
+import { noImageUrl } from '../../utils/constants'
 
 export const WriteReview = () => {
   const { t } = useTranslation()
@@ -28,7 +29,7 @@ export const WriteReview = () => {
   const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
   const dispatch = useAppDispatch()
   const user = useAppSelector(getUserInfo)
-  const isFoodReviewLoading = useAppSelector(getFoodReviewIsLoading)
+  const foodState = useAppSelector(getFoodState)
 
   const form = useForm({
     initialValues: {
@@ -55,6 +56,8 @@ export const WriteReview = () => {
   const onSubmit = () => {
     const reviewedUser = user._id ? { name: user.name, userId: user._id } : { name: form.values.name, userId: '' }
     const { rating, city, foodName, review, price, foodType, foodPlaceName, serviceType } = form.values
+    const image = foodState.uploadedImageUrl.length ? foodState.uploadedImageUrl : noImageUrl
+
     const foodReview = {
       rating,
       city,
@@ -64,6 +67,7 @@ export const WriteReview = () => {
       price,
       foodType,
       serviceType,
+      image,
       user: reviewedUser,
     }
 
@@ -180,14 +184,14 @@ export const WriteReview = () => {
             />
           )}
           <Flex align='center' justify='center'>
-            <Button radius='lg' className={classes.button} type='submit'>
+            <Button radius='lg' className={classes.button} type='submit' disabled={foodState.isUploadingImage}>
               {t('complete')}
             </Button>
           </Flex>
         </form>
       </Paper>
 
-      <LoadingOverlay visible={isFoodReviewLoading} overlayBlur={1} />
+      <LoadingOverlay visible={foodState.loading} overlayBlur={1} />
     </Container>
   )
 }
