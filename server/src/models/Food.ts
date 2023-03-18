@@ -52,9 +52,9 @@ const FoodSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  // image: {
-
-  // }
+  image: {
+    type: String,
+  },
   user: {
     type: userSubSchema,
   },
@@ -79,8 +79,8 @@ export interface FoodRequestBody {
 
 export interface FoodFilterOptions {
   rating?: string
-  price?: string,
-  foodType?: string,
-  serviceType?: string,
+  price?: string
+  foodType?: string
+  serviceType?: string
   reviewed?: string
 }

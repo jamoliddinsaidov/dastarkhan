@@ -8,6 +8,6 @@ export const errorHandlerMiddleware = (err: ErrorType, req: Request, res: Respon
   const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR
   const message = err.message || SOMETHING_WENT_WRONG
 
-  logger.error(message)
+  logger.error(err)
   return res.status(statusCode).json({ message: message, success: false })
 }

@@ -4,6 +4,8 @@ import xss from 'xss-clean'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
+import fileUpload from 'express-fileupload'
+import cloudinary from 'cloudinary'
 import {
   rateLimiter,
   mongoSanitizer,
@@ -13,12 +15,13 @@ import {
   addCredentialsHeader,
   logRequests,
 } from './middlewares/index.js'
-import { corsOptions, connectDb } from './configs/index.js'
+import { corsOptions, connectDb, cloudinaryConfig, fileUploadConfigs } from './configs/index.js'
 import { authRouter, userRouter, foodRouter } from './routes/index.js'
 import { DB_CONNECTED, DB_CONNECTION_FAILED, SERVER_IS_CLOSING, SERVER_IS_RUNNING } from './utils/constants.js'
 
 const app = express()
 dotenv.config()
+cloudinary.v2.config(cloudinaryConfig)
 
 // middlewares
 app.use(rateLimiter())
@@ -29,6 +32,7 @@ app.use(cors(corsOptions))
 app.use(mongoSanitizer())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(fileUpload(fileUploadConfigs))
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(logRequests())
 
