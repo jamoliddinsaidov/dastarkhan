@@ -6,6 +6,7 @@ import { UploadedFile } from 'express-fileupload'
 import { asyncWrapper } from '../middlewares/index.js'
 import { Food, FoodFilterOptions, FoodRequestBody } from '../models/Food.js'
 import { REVIEW_ADDED } from '../utils/constants.js'
+import { parseRatingFilter } from '../utils/index.js'
 
 export const addFoodReview = asyncWrapper(async (req: Request, res: Response) => {
   const foodReview: FoodRequestBody = req.body
@@ -21,14 +22,49 @@ export const getAllFoods = asyncWrapper(async (req: Request, res: Response) => {
 
 export const filterFoods = asyncWrapper(async (req: Request, res: Response) => {
   const query: FoodFilterOptions = req.body
-  const filter: FoodFilterOptions = {}
+
+  const queryForDb: FoodFilterOptions = {}
+  const queryForDbFilterKeys = ['foodType', 'serviceType']
 
   for (const [k, value] of Object.entries(query)) {
-    const key = k as keyof typeof filter
-    filter[key] = value
+    const key = k as keyof typeof queryForDb
+    if (value && queryForDbFilterKeys.includes(key)) {
+      queryForDb[key] = value
+    }
   }
 
-  const filteredFoods = await Food.find(filter)
+  let filteredFoods = await Food.find(queryForDb)
+
+  const customFilters: FoodFilterOptions = {}
+  const customFilterKeys = ['rating', 'price', 'reviewed']
+
+  for (const [k, value] of Object.entries(query)) {
+    const key = k as keyof typeof customFilters
+    if (value && customFilterKeys.includes(key)) {
+      customFilters[key] = value
+    }
+  }
+
+  if (customFilters?.rating) {
+    filteredFoods = filteredFoods
+      .filter((food) => {
+        const foodRating = Number(food.rating)
+        const filterRating = parseRatingFilter(customFilters.rating!)
+        return foodRating <= filterRating && foodRating >= filterRating - 1
+      })
+      .sort((a, b) => Number(b.rating) - Number(a.rating))
+  }
+
+  if (customFilters?.price) {
+    const cheapToExpensive = 'cheap_to_expensive'
+    filteredFoods = filteredFoods.sort((a, b) => {
+      if (customFilters.price === cheapToExpensive) {
+        return a.price - b.price
+      }
+
+      return b.price - a.price
+    })
+  }
 
   res.status(StatusCodes.OK).json({ success: true, data: filteredFoods })
 })

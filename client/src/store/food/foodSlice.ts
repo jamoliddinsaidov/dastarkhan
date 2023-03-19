@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { addFoodReview, getAllFoodReviews, IFood, uploadImage } from './foodServices'
+import { addFoodReview, getAllFoodReviews, uploadImage, filterFoods } from './foodServices'
 
 const initialState = {
   loading: false,
@@ -54,6 +54,19 @@ const foodSlice = createSlice({
       state.foods = action.payload.data.data
     })
     builder.addCase(getAllFoodReviews.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // filterFoods
+    builder.addCase(filterFoods.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(filterFoods.fulfilled, (state, action: any) => {
+      state.loading = false
+      state.foods = action.payload.data.data
+    })
+    builder.addCase(filterFoods.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })

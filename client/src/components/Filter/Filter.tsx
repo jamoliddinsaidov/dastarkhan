@@ -4,12 +4,15 @@ import { useFilterStyles } from './Filter.style'
 import { useFiltersList } from './useFiltersList'
 import { IconAdjustments } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
+import { useAppDispatch } from '../../store/hooks'
+import { filterFoods } from '../../store/food/foodServices'
 
 export const Filter = () => {
   const { classes } = useFilterStyles()
   const { t } = useTranslation()
   const { allFilters, priceFilters, ratingFilters, foodTypeFilters, serviceTypeFilters, reviewedFilters } =
     useFiltersList()
+  const dispatch = useAppDispatch()
 
   const [multiSelectValues, setMultiSelectValues] = useState<string[]>([])
   const [selectedValues, setSelectedValues] = useState({
@@ -37,6 +40,10 @@ export const Filter = () => {
     }
   }
 
+  const onClickFilter = () => {
+    dispatch(filterFoods(selectedValues))
+  }
+
   return (
     <div className={classes.wrapper}>
       <Flex direction='column'>
@@ -47,7 +54,7 @@ export const Filter = () => {
           value={multiSelectValues}
           readOnly
         />
-        <Button variant='outline' className={classes.applyBtn}>
+        <Button variant='outline' className={classes.applyBtn} onClick={onClickFilter}>
           {t('apply_filters')}
         </Button>
       </Flex>
