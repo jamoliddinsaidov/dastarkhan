@@ -12,6 +12,12 @@ interface SearchInputProps {
 export function SearchInput({ value, onChange, onClick, placeholder, width }: SearchInputProps) {
   const theme = useMantineTheme()
 
+  const onKeyDown = (event: any) => {
+    if (event.keyCode === 13) {
+      onClick()
+    }
+  }
+
   return (
     <TextInput
       icon={<IconSearch size={18} stroke={1.5} />}
@@ -27,6 +33,7 @@ export function SearchInput({ value, onChange, onClick, placeholder, width }: Se
       rightSectionWidth={42}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
     />
   )
 }

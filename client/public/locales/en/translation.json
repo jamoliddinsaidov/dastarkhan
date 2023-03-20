@@ -85,5 +85,7 @@
   "your_account_created": "✔ Your account has been created",
   "profile": "Profile",
   "image_uploaded": "Image is uploaded",
-  "review_created": "✔ Your review has been created"
+  "review_created": "✔ Your review has been created",
+  "nothing_found_search": "Nothing found based on your search...",
+  "try_adding_review": "Try adding a review about it yourself"
 }

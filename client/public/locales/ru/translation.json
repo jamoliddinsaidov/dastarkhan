@@ -85,5 +85,7 @@
   "your_account_created": "✔ Ваш аккаунт создан",
   "profile": "Профиль",
   "image_uploaded": "Изображение загружено",
-  "review_created": "✔ Ваш отзыв создан"
+  "review_created": "✔ Ваш отзыв создан",
+  "nothing_found_search": "По вашему запросу ничего не найдено...",
+  "try_adding_review": "Попробуйте добавить отзыв об этом самостоятельно"
 }

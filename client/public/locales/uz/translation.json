@@ -85,5 +85,7 @@
   "your_account_created": "✔ Sizning akkauntingiz yaratildi",
   "profile": "Profil",
   "image_uploaded": "Rasm yuklandi",
-  "review_created": "✔ Sizning sharhingiz yuklandi"
+  "review_created": "✔ Sizning sharhingiz yuklandi",
+  "nothing_found_search": "Sizning qidiruvingiz asosida hech narsa topilmadi...",
+  "try_adding_review": "O'zingiz bu haqida sharh yozib ko'ring"
 }

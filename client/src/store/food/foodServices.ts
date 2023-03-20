@@ -1,6 +1,12 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addFoodReviewUrl, getAllFoodReviewsUrl, uploadImageUrl, getFilterFoodsUrl } from '../../api/foodReview'
+import {
+  addFoodReviewUrl,
+  getAllFoodReviewsUrl,
+  uploadImageUrl,
+  getFilterFoodsUrl,
+  searchFoodsUrl,
+} from '../../api/foodReview'
 
 export interface IFood {
   _id?: string
@@ -45,4 +51,8 @@ export const getAllFoodReviews = createAsyncThunk('food/getAllFoodReviews', asyn
 
 export const filterFoods = createAsyncThunk('food/filterFoods', async (query: FoodFilterOptions) => {
   return await axios.post(getFilterFoodsUrl.href, query)
+})
+
+export const searchFoods = createAsyncThunk('food/searchFoods', async (searchValue: string) => {
+  return await axios.post(searchFoodsUrl.href, { search: searchValue })
 })
