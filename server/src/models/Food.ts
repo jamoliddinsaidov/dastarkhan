@@ -60,6 +60,8 @@ const FoodSchema = new mongoose.Schema({
   },
 })
 
+FoodSchema.index({ '$**': 'text' })
+
 export const Food = mongoose.model('Food', FoodSchema)
 
 export interface FoodRequestBody {

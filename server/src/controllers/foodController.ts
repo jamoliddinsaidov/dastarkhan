@@ -69,6 +69,14 @@ export const filterFoods = asyncWrapper(async (req: Request, res: Response) => {
   res.status(StatusCodes.OK).json({ success: true, data: filteredFoods })
 })
 
+export const searchFoods = asyncWrapper(async (req: Request, res: Response) => {
+  const searchValue = req.body.search
+
+  const searchedFoods = await Food.find({ $text: { $search: searchValue } })
+
+  res.status(StatusCodes.OK).json({ success: true, data: searchedFoods })
+})
+
 export const uploadImage = asyncWrapper(async (req: Request, res: Response) => {
   const cloudinaryV2 = cloudinary.v2
   const image = req.files?.image as UploadedFile
