@@ -14,6 +14,11 @@ export const useFoodCardStyles = createStyles((theme) => ({
 
   like: {
     color: theme.colors.red[6],
+    transition: 'all 200ms ease-in-out',
+  },
+
+  liked: {
+    fill: theme.colors.red[6],
   },
 
   comment: {

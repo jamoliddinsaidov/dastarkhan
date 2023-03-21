@@ -4,10 +4,10 @@ import { IconCopy, IconHeart, IconMessage, IconStar } from '@tabler/icons-react'
 import { Card, Image, Text, Group, Badge, Button, ActionIcon, Flex, Skeleton, Tooltip } from '@mantine/core'
 import { useFoodCardStyles } from './FoodCard.style'
 import { useTranslation } from 'react-i18next'
-import { useAppSelector } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
-import { useDisclosure } from '@mantine/hooks'
 import { Toaster } from '../Toaster/Toaster'
+import { likePost } from '../../store/user/userServices'
 
 export interface FoodCardProps {
   id: string
@@ -21,12 +21,13 @@ export interface FoodCardProps {
 }
 
 export const FoodCard = ({ id, image, title, description, city, badges, stars, price }: FoodCardProps) => {
-  const { classes, theme } = useFoodCardStyles()
+  const { classes, theme, cx } = useFoodCardStyles()
   const { t } = useTranslation()
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [toasterText, setToasterText] = useState('')
   const [isToasterOpened, setIsToasterOpened] = useState(false)
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const user = useAppSelector(getUserInfo)
 
   const onShowDetailsClick = () => {
@@ -43,6 +44,10 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
 
     setToasterText(t('food_link_copied')!)
     handleToasterState()
+  }
+
+  const onLike = () => {
+    dispatch(likePost({ userId: user._id, foodId: id }))
   }
 
   const handleToasterState = () => {
@@ -112,8 +117,12 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
           <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
         </ActionIcon>
         {!!user._id && (
-          <ActionIcon variant='default' radius='md' size={36}>
-            <IconHeart size='1.1rem' className={classes.like} stroke={1.5} />
+          <ActionIcon variant='default' radius='md' size={36} onClick={onLike}>
+            <IconHeart
+              size='1.1rem'
+              className={cx(classes.like, { [classes.liked]: user.likedPosts.includes(id) })}
+              stroke={1.5}
+            />
           </ActionIcon>
         )}
       </Group>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { registerUrl, loginUrl, logoutUrl } from '../../api/auth'
-import { getLoggedInUserInforUrl } from '../../api/user'
+import { likePostUrl, getLoggedInUserInforUrl } from '../../api/user'
 
 export interface IUser {
   _id: string
@@ -25,6 +25,11 @@ export interface UserRequestBody {
   password: string
 }
 
+export interface LikePostInfoProps {
+  userId: string
+  foodId: string
+}
+
 export const registerUser = createAsyncThunk('user/registerUser', async (user: UserRequestBody) => {
   return await axios.post(registerUrl.href, user)
 })
@@ -39,4 +44,8 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async (userEmail: 
 
 export const getLoggedInUserInfo = createAsyncThunk('user/getLoggedInUserInfo', async (userEmail: string) => {
   return await axios.get(getLoggedInUserInforUrl.href, { params: { userEmail } })
+})
+
+export const likePost = createAsyncThunk('user/likePost', async (likePostInfo: LikePostInfoProps) => {
+  return await axios.post(likePostUrl.href, likePostInfo)
 })
