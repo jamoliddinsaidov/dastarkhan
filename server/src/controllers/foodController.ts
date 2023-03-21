@@ -91,3 +91,9 @@ export const uploadImage = asyncWrapper(async (req: Request, res: Response) => {
 
   res.status(StatusCodes.OK).json({ success: true, data: result.secure_url })
 })
+
+export const getFoodById = asyncWrapper(async (req: Request, res: Response) => {
+  const { foodId } = req.query
+  const food = await Food.find({ _id: foodId })
+  res.status(StatusCodes.OK).json({ success: true, data: food?.[0] })
+})
