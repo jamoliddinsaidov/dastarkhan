@@ -1,11 +1,13 @@
-import { IconCopy, IconHeart, IconMessage, IconStar, IconStarFilled } from '@tabler/icons-react'
-import { Card, Image, Text, Group, Badge, Button, ActionIcon, Flex, Skeleton } from '@mantine/core'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { IconCopy, IconHeart, IconMessage, IconStar } from '@tabler/icons-react'
+import { Card, Image, Text, Group, Badge, Button, ActionIcon, Flex, Skeleton, Tooltip } from '@mantine/core'
 import { useFoodCardStyles } from './FoodCard.style'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useDisclosure } from '@mantine/hooks'
+import { Toaster } from '../Toaster/Toaster'
 
 export interface FoodCardProps {
   id: string
@@ -22,14 +24,10 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
   const { classes, theme } = useFoodCardStyles()
   const { t } = useTranslation()
   const [isImageLoading, setIsImageLoading] = useState(true)
+  const [toasterText, setToasterText] = useState('')
+  const [isToasterOpened, setIsToasterOpened] = useState(false)
   const navigate = useNavigate()
   const user = useAppSelector(getUserInfo)
-
-  const features = badges.map((badge) => (
-    <Badge color={theme.colorScheme === 'dark' ? 'dark' : 'gray'} key={badge}>
-      {badge}
-    </Badge>
-  ))
 
   const onShowDetailsClick = () => {
     navigate(`food/${id}`)
@@ -38,6 +36,27 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
   const onLoad = () => {
     setIsImageLoading(false)
   }
+
+  const onCopy = () => {
+    const foodLink = `${window.location.origin}/browse/food/${id}`
+    navigator.clipboard.writeText(foodLink)
+
+    setToasterText(t('food_link_copied')!)
+    handleToasterState()
+  }
+
+  const handleToasterState = () => {
+    setIsToasterOpened(true)
+    setTimeout(() => {
+      setIsToasterOpened(false)
+    }, 1500)
+  }
+
+  const features = badges.map((badge) => (
+    <Badge color={theme.colorScheme === 'dark' ? 'dark' : 'gray'} key={badge}>
+      {badge}
+    </Badge>
+  ))
 
   return (
     <Card withBorder radius='md' p='md' className={classes.card} shadow='md'>
@@ -84,9 +103,11 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
         <Button radius='md' style={{ flex: 1 }} onClick={onShowDetailsClick}>
           {t('show_details')}
         </Button>
-        <ActionIcon variant='default' radius='md' size={36}>
-          <IconCopy size='1.1rem' className={classes.comment} stroke={1.5} />
-        </ActionIcon>
+        <Tooltip label={t('copy_food_link')}>
+          <ActionIcon variant='default' radius='md' size={36} onClick={onCopy}>
+            <IconCopy size='1.1rem' className={classes.comment} stroke={1.5} />
+          </ActionIcon>
+        </Tooltip>
         <ActionIcon variant='default' radius='md' size={36}>
           <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
         </ActionIcon>
@@ -96,6 +117,8 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
           </ActionIcon>
         )}
       </Group>
+
+      <Toaster opened={isToasterOpened} text={toasterText} />
     </Card>
   )
 }

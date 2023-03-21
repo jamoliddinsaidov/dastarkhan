@@ -87,5 +87,10 @@
   "image_uploaded": "Rasm yuklandi",
   "review_created": "✔ Sizning sharhingiz yuklandi",
   "nothing_found_search": "Sizning qidiruvingiz asosida hech narsa topilmadi...",
-  "try_adding_review": "O'zingiz bu haqida sharh yozib ko'ring"
+  "try_adding_review": "O'zingiz bu haqida sharh yozib ko'ring",
+  "food_place": "Taomlanish joy nomi",
+  "review": "Sharh",
+  "created_by": "Sharhlagan foydalanuvchi",
+  "copy_food_link": "Taom havolasini nusxalash",
+  "food_link_copied": "✔ Taom havolasi ko'chirildi"
 }

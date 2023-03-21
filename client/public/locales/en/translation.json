@@ -90,5 +90,7 @@
   "try_adding_review": "Try adding a review about it yourself",
   "food_place": "Food place",
   "review": "Review",
-  "created_by": "Created by"
+  "created_by": "Created by",
+  "copy_food_link": "Copy food link",
+  "food_link_copied": "✔ Food link is copied to clipboard"
 }
