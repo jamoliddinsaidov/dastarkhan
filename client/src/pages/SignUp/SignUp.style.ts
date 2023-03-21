@@ -58,6 +58,7 @@ export const useSignUpStyles = createStyles((theme) => ({
     textDecoration: 'none',
     color: theme.colors[theme.primaryColor]?.[6],
     fontWeight: 400,
+    transition: 'textDecoration 200ms ease',
 
     '&:hover': {
       textDecoration: 'underline',

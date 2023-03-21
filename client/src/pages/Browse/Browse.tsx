@@ -19,7 +19,7 @@ export const Browse = () => {
   const [opened, handlers] = useDisclosure(false)
   const [searchValue, setSearchValue] = useState('')
   const dispatch = useAppDispatch()
-  const { foods, isLoading } = useAppSelector(getFoodsAndLoadingState)
+  const { foods, isLoading, success } = useAppSelector(getFoodsAndLoadingState)
   const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
   const mappedFoods = useMemo(() => mapFoodsArrayToComponentProps(foods, foodTypeFilters, serviceTypeFilters), [foods])
 
@@ -74,10 +74,14 @@ export const Browse = () => {
           </>
         ) : (
           <Grid.Col span={4}>
-            <Title align='center'>{t('nothing_found_search')}</Title>
-            <Link to='/writeReview' className={classes.link} onClick={() => onChangeLink('writeReview')}>
-              {t('try_adding_review')}
-            </Link>
+            {success && (
+              <>
+                <Title align='center'>{t('nothing_found_search')}</Title>
+                <Link to='/writeReview' className={classes.link} onClick={() => onChangeLink('writeReview')}>
+                  {t('try_adding_review')}
+                </Link>
+              </>
+            )}
           </Grid.Col>
         )}
       </Grid>

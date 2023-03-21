@@ -87,5 +87,8 @@
   "image_uploaded": "Image is uploaded",
   "review_created": "✔ Your review has been created",
   "nothing_found_search": "Nothing found based on your search...",
-  "try_adding_review": "Try adding a review about it yourself"
+  "try_adding_review": "Try adding a review about it yourself",
+  "food_place": "Food place",
+  "review": "Review",
+  "created_by": "Created by"
 }

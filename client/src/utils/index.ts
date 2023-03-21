@@ -5,7 +5,7 @@ import {
   getUserEmailFromLocalStorage,
   clearUserInfoFromLocalStorage,
 } from './localStorage'
-import { mapFoodsArrayToComponentProps } from './mapFoodsArrayToComponentProps'
+import { mapFoodsArrayToComponentProps, getFoodType, getServiceType } from './mapFoodsArrayToComponentProps'
 import { shortenString } from './shortenString'
 import { cleanUpInputValues } from './cleanUpInputValues'
 import { formatPrice } from './formatPrice'
@@ -20,4 +20,6 @@ export {
   shortenString,
   cleanUpInputValues,
   formatPrice,
+  getServiceType,
+  getFoodType,
 }

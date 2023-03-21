@@ -43,6 +43,7 @@ export const useLoginStyles = createStyles((theme) => ({
     textDecoration: 'none',
     color: theme.colors[theme.primaryColor]?.[5],
     fontWeight: 700,
+    transition: 'color 200ms ease',
 
     '&:hover': {
       color: theme.colors[theme.primaryColor]?.[8],

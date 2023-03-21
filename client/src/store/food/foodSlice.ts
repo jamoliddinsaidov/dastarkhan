@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { addFoodReview, getAllFoodReviews, uploadImage, filterFoods, searchFoods } from './foodServices'
+import {
+  addFoodReview,
+  getAllFoodReviews,
+  uploadImage,
+  filterFoods,
+  searchFoods,
+  getFoodById,
+  IFood,
+} from './foodServices'
 
 const initialState = {
   loading: false,
@@ -7,7 +15,7 @@ const initialState = {
   isUploadingImage: false,
   uploadedImageUrl: '',
   foods: [],
-  food: {},
+  food: {} as IFood,
   error: '',
 }
 
@@ -29,6 +37,7 @@ const foodSlice = createSlice({
     })
     builder.addCase(addFoodReview.rejected, (state, action) => {
       state.loading = false
+      state.success = false
       state.error = action.error.message ?? ''
     })
 
@@ -74,12 +83,28 @@ const foodSlice = createSlice({
     // searchFoods
     builder.addCase(searchFoods.pending, (state) => {
       state.loading = true
+      state.success = false
     })
     builder.addCase(searchFoods.fulfilled, (state, action: any) => {
       state.loading = false
+      state.success = true
       state.foods = action.payload.data.data
     })
     builder.addCase(searchFoods.rejected, (state, action) => {
+      state.loading = false
+      state.success = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getFoodById
+    builder.addCase(getFoodById.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getFoodById.fulfilled, (state, action: any) => {
+      state.loading = false
+      state.food = action.payload.data.data
+    })
+    builder.addCase(getFoodById.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })

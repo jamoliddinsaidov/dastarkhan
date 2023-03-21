@@ -1,7 +1,11 @@
 import { IconCopy, IconHeart, IconMessage, IconStar, IconStarFilled } from '@tabler/icons-react'
-import { Card, Image, Text, Group, Badge, Button, ActionIcon, Flex } from '@mantine/core'
+import { Card, Image, Text, Group, Badge, Button, ActionIcon, Flex, Skeleton } from '@mantine/core'
 import { useFoodCardStyles } from './FoodCard.style'
 import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '../../store/hooks'
+import { getUserInfo } from '../../store/user/userSelectors'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export interface FoodCardProps {
   id: string
@@ -14,9 +18,12 @@ export interface FoodCardProps {
   price: string | number
 }
 
-export const FoodCard = ({ image, title, description, city, badges, stars, price }: FoodCardProps) => {
+export const FoodCard = ({ id, image, title, description, city, badges, stars, price }: FoodCardProps) => {
   const { classes, theme } = useFoodCardStyles()
   const { t } = useTranslation()
+  const [isImageLoading, setIsImageLoading] = useState(true)
+  const navigate = useNavigate()
+  const user = useAppSelector(getUserInfo)
 
   const features = badges.map((badge) => (
     <Badge color={theme.colorScheme === 'dark' ? 'dark' : 'gray'} key={badge}>
@@ -24,10 +31,20 @@ export const FoodCard = ({ image, title, description, city, badges, stars, price
     </Badge>
   ))
 
+  const onShowDetailsClick = () => {
+    navigate(`food/${id}`)
+  }
+
+  const onLoad = () => {
+    setIsImageLoading(false)
+  }
+
   return (
     <Card withBorder radius='md' p='md' className={classes.card} shadow='md'>
       <Card.Section>
-        <Image src={image} alt={title} height={180} />
+        <Skeleton visible={isImageLoading}>
+          <Image src={image} alt={title} height={180} withPlaceholder onLoad={onLoad} />
+        </Skeleton>
       </Card.Section>
 
       <Card.Section className={classes.section} mt='md'>
@@ -50,10 +67,10 @@ export const FoodCard = ({ image, title, description, city, badges, stars, price
         <Flex align='center' justify='space-between' mt={15}>
           <Badge color={theme.colorScheme === 'dark' ? 'dark' : 'gray'}>
             <Flex align='center' justify='space-between'>
-              <Text mr='xs' mb='0.1rem' size='lg'>
+              <IconStar size='1.2rem' fill='orange' strokeOpacity={0} />
+              <Text ml='xs' mb='0.1rem' size='lg'>
                 {stars}
               </Text>
-              <IconStar size='1.2rem' fill='orange' strokeOpacity={0} />
             </Flex>
           </Badge>
 
@@ -64,7 +81,7 @@ export const FoodCard = ({ image, title, description, city, badges, stars, price
       </Card.Section>
 
       <Group mt='xs'>
-        <Button radius='md' style={{ flex: 1 }}>
+        <Button radius='md' style={{ flex: 1 }} onClick={onShowDetailsClick}>
           {t('show_details')}
         </Button>
         <ActionIcon variant='default' radius='md' size={36}>
@@ -73,9 +90,11 @@ export const FoodCard = ({ image, title, description, city, badges, stars, price
         <ActionIcon variant='default' radius='md' size={36}>
           <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
         </ActionIcon>
-        <ActionIcon variant='default' radius='md' size={36}>
-          <IconHeart size='1.1rem' className={classes.like} stroke={1.5} />
-        </ActionIcon>
+        {!!user._id && (
+          <ActionIcon variant='default' radius='md' size={36}>
+            <IconHeart size='1.1rem' className={classes.like} stroke={1.5} />
+          </ActionIcon>
+        )}
       </Group>
     </Card>
   )
