@@ -12,6 +12,17 @@ const userSubSchema = new mongoose.Schema({
   },
 })
 
+const commentSubSchema = new mongoose.Schema({
+  comment: {
+    type: String,
+    trim: true,
+  },
+  user: {
+    userSubSchema,
+  },
+})
+commentSubSchema.set('timestamps', true)
+
 const FoodSchema = new mongoose.Schema({
   foodName: {
     type: String,
@@ -58,9 +69,18 @@ const FoodSchema = new mongoose.Schema({
   user: {
     type: userSubSchema,
   },
+  comments: {
+    type: Array<typeof commentSubSchema>,
+    defaultValue: [],
+  },
+  likes: {
+    type: Array,
+    defaultValue: [],
+  },
 })
 
 FoodSchema.index({ '$**': 'text' })
+FoodSchema.set('timestamps', true)
 
 export const Food = mongoose.model('Food', FoodSchema)
 
