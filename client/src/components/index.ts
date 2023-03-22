@@ -7,6 +7,7 @@ import { SearchInput } from './SearchInput/SearchInput'
 import { ThemeToggle } from './ThemeToggle/ThemeToggle'
 import { UserDropdown } from './UserDropdown/UserDropdown'
 import { CustomDropzone } from './Dropzone/Dropzone'
+import { Sidebar } from './Sidebar/Sidebar'
 
 export {
   Filter,
@@ -18,4 +19,5 @@ export {
   ThemeToggle,
   UserDropdown,
   CustomDropzone,
+  Sidebar,
 }

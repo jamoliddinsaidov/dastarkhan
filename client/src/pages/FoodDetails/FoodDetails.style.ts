@@ -35,7 +35,6 @@ export const useFoodDetailsStyles = createStyles((theme) => ({
     width: '50%',
     [theme.fn.smallerThan('sm')]: {
       width: '100%',
-      textAlign: 'center',
     },
   },
 
