@@ -35,7 +35,6 @@
   "invalid_password": "Пароль должен содержать не менее 6 символов",
   "liked_posts": "Понравившиеся посты",
   "saved_posts": "Сохраненные посты",
-  "your_friends": "Ваши друзья",
   "settings": "Настройки",
   "account_settings": "Настройки аккаунта",
   "logout": "Выйти",
@@ -68,7 +67,7 @@
   "least_reviewed": "Наименее просматриваемый",
   "apply_filters": "Применить фильтры",
   "search": "Поиск...",
-  "show_details": "Показать детали",
+  "show_details": "Детали",
   "drop_files_here": "Перетащите файлы сюда",
   "drop_file_error": "Формат файла не JPEG/PNG или его размер больше 5 МБ",
   "upload_photo": "Загрузить фото",
@@ -92,5 +91,9 @@
   "обзор": "Обзор",
   "created_by": "Cоздал",
   "copy_food_link": "Скопировать ссылку на еду",
-  "food_link_copied": "✔ Ссылка на еду скопирована в буфер обмена"
+  "food_link_copied": "✔ Ссылка на еду скопирована в буфер обмена",
+  "notifications": "Уведомления",
+  "followers": "Подписчики",
+  "followings": "Подписки",
+  "reviews": "Отзывы"
 }

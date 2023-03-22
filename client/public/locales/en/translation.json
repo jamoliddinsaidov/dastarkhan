@@ -35,7 +35,6 @@
   "invalid_password": "Password should include at least 6 characters",
   "liked_posts": "Liked posts",
   "saved_posts": "Saved posts",
-  "your_friends": "Your friends",
   "settings": "Settings",
   "account_settings": "Account settings",
   "logout": "Logout",
@@ -92,5 +91,9 @@
   "review": "Review",
   "created_by": "Created by",
   "copy_food_link": "Copy food link",
-  "food_link_copied": "✔ Food link is copied to clipboard"
+  "food_link_copied": "✔ Food link is copied to clipboard",
+  "notifications": "Notifications",
+  "followers": "Followers",
+  "followings": "Followings",
+  "reviews": "Reviews"
 }

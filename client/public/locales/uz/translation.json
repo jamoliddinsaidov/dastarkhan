@@ -35,7 +35,6 @@
   "invalid_password": "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
   "liked_posts": "Yoqtirgan postlaringiz",
   "saved_posts": "Saqlangan postlaringiz",
-  "your_friends": "Do'stlaringiz",
   "settings": "Sozlamalar",
   "account_settings": "Akkaunt sozlamalari",
   "logout": "Chiqish",
@@ -68,7 +67,7 @@
   "least_reviewed": "Eng kam sharhlangan",
   "apply_filters": "Filterlarni qo'llash",
   "search": "Qidirish...",
-  "show_details": "Tafsilotlarni ko'rish",
+  "show_details": "To'liq tafsilotlar",
   "drop_files_here": "Faylni bu yerga tashlang",
   "drop_file_error": "Fayl formati JPEG/PNG emas yoki 5MB dan ortiq",
   "upload_photo": "Rasm yuklash",
@@ -92,5 +91,9 @@
   "review": "Sharh",
   "created_by": "Sharhlagan foydalanuvchi",
   "copy_food_link": "Taom havolasini nusxalash",
-  "food_link_copied": "✔ Taom havolasi ko'chirildi"
+  "food_link_copied": "✔ Taom havolasi ko'chirildi",
+  "notifications": "Ogohlantirishlar",
+  "followers": "Kuzatuvchilaringiz",
+  "followings": "Do'stlaringiz",
+  "reviews": "Sharhlaringiz"
 }

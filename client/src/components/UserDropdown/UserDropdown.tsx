@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { Avatar, UnstyledButton, Group, Text, Menu, rem } from '@mantine/core'
+import { UnstyledButton, Group, Text, Menu, rem } from '@mantine/core'
 import {
   IconLogout,
   IconHeart,
-  IconStar,
-  IconFriends,
   IconSettings,
   IconChevronDown,
-  IconUser,
+  IconBookmark,
+  IconUsers,
+  IconUserHeart,
+  IconWriting,
+  IconBell,
 } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -61,32 +63,46 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item
-          icon={<IconUser size='0.9rem' color={theme.colors.blue[6]} stroke={1.5} />}
-          onClick={() => navigateToAPage('/user/profile')}
+          icon={<IconBell size='0.9rem' color={theme.colors.cyan[6]} stroke={1.5} />}
+          onClick={() => navigateToAPage('/user/profile/notifications')}
         >
           {t('profile')}
         </Menu.Item>
         <Menu.Item
           icon={<IconHeart size='0.9rem' color={theme.colors.red[6]} stroke={1.5} />}
-          onClick={() => navigateToAPage('/user/likedPosts')}
+          onClick={() => navigateToAPage('/user/profile/likedPosts')}
         >
           {t('liked_posts')}
         </Menu.Item>
         <Menu.Item
-          icon={<IconStar size='0.9rem' color={theme.colors.yellow[6]} stroke={1.5} />}
-          onClick={() => navigateToAPage('/user/savedPosts')}
+          icon={<IconBookmark size='0.9rem' color={theme.colors.yellow[6]} stroke={1.5} />}
+          onClick={() => navigateToAPage('/user/profile/savedPosts')}
         >
           {t('saved_posts')}
         </Menu.Item>
         <Menu.Item
-          icon={<IconFriends size='0.9rem' color={theme.colors.blue[6]} stroke={1.5} />}
-          onClick={() => navigateToAPage('/user/friends')}
+          icon={<IconUsers size='0.9rem' color={theme.colors.indigo[6]} stroke={1.5} />}
+          onClick={() => navigateToAPage('/user/profile/followers')}
         >
-          {t('your_friends')}
+          {t('followers')}
         </Menu.Item>
-
+        <Menu.Item
+          icon={<IconUserHeart size='0.9rem' color={theme.colors.blue[6]} stroke={1.5} />}
+          onClick={() => navigateToAPage('/user/profile/followings')}
+        >
+          {t('followings')}
+        </Menu.Item>
+        <Menu.Item
+          icon={<IconWriting size='0.9rem' color={theme.colors.orange[6]} stroke={1.5} />}
+          onClick={() => navigateToAPage('/user/profile/reviews')}
+        >
+          {t('reviews')}
+        </Menu.Item>
         <Menu.Label>{t('settings')}</Menu.Label>
-        <Menu.Item icon={<IconSettings size='0.9rem' stroke={1.5} />} onClick={() => navigateToAPage('/user/settings')}>
+        <Menu.Item
+          icon={<IconSettings size='0.9rem' stroke={1.5} />}
+          onClick={() => navigateToAPage('/user/profile/settings')}
+        >
           {t('account_settings')}
         </Menu.Item>
         <Menu.Item icon={<IconLogout size='0.9rem' stroke={1.5} />} onClick={onLogout}>
