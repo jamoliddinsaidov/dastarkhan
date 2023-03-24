@@ -9,6 +9,7 @@ import { mapFoodsArrayToComponentProps, getFoodType, getServiceType } from './ma
 import { shortenString } from './shortenString'
 import { cleanUpInputValues } from './cleanUpInputValues'
 import { formatPrice } from './formatPrice'
+import { formatDate } from './formatDate'
 
 export {
   getPathnameWithoutSlash,
@@ -22,4 +23,5 @@ export {
   formatPrice,
   getServiceType,
   getFoodType,
+  formatDate,
 }
