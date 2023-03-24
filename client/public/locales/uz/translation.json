@@ -97,5 +97,7 @@
   "followings": "Do'stlaringiz",
   "reviews": "Sharhlaringiz",
   "your_comment": "Sizning izohingiz",
-  "add_comment": "Izoh qo'shish"
+  "add_comment": "Izoh qo'shish",
+  "write_comment": "Izoh yozing",
+  "add_to_likes": "Yoqtirilganlar qatoriga qo'shing"
 }

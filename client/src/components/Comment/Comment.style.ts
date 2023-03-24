@@ -10,6 +10,10 @@ export const useCommentStyles = createStyles((theme) => ({
     paddingLeft: rem(32),
     paddingTop: theme.spacing.sm,
     fontSize: theme.fontSizes.sm,
+
+    [theme.fn.smallerThan('sm')]: {
+      paddingLeft: rem(16),
+    },
   },
 
   userName: {

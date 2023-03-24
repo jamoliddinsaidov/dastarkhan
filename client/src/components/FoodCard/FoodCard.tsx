@@ -113,17 +113,21 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
             <IconCopy size='1.1rem' className={classes.comment} stroke={1.5} />
           </ActionIcon>
         </Tooltip>
-        <ActionIcon variant='default' radius='md' size={36}>
-          <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
-        </ActionIcon>
-        {!!user._id && (
-          <ActionIcon variant='default' radius='md' size={36} onClick={onLike}>
-            <IconHeart
-              size='1.1rem'
-              className={cx(classes.like, { [classes.liked]: user.likedPosts.includes(id) })}
-              stroke={1.5}
-            />
+        <Tooltip label={t('write_comment')}>
+          <ActionIcon variant='default' radius='md' size={36}>
+            <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
           </ActionIcon>
+        </Tooltip>
+        {!!user._id && (
+          <Tooltip label={t('add_to_likes')}>
+            <ActionIcon variant='default' radius='md' size={36} onClick={onLike}>
+              <IconHeart
+                size='1.1rem'
+                className={cx(classes.like, { [classes.liked]: user.likedPosts.includes(id) })}
+                stroke={1.5}
+              />
+            </ActionIcon>
+          </Tooltip>
         )}
       </Group>
 

@@ -97,5 +97,7 @@
   "followings": "Followings",
   "reviews": "Reviews",
   "your_comment": "Your comment",
-  "add_comment": "Add comment"
+  "add_comment": "Add comment",
+  "write_comment": "Write a comment",
+  "add_to_likes": "Add to liked ones"
 }
