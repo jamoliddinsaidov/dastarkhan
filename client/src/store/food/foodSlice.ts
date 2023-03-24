@@ -6,6 +6,7 @@ import {
   filterFoods,
   searchFoods,
   getFoodById,
+  addComment,
   IFood,
 } from './foodServices'
 
@@ -13,6 +14,7 @@ const initialState = {
   loading: false,
   success: false,
   isUploadingImage: false,
+  isAddingComment: false,
   uploadedImageUrl: '',
   foods: [],
   food: {} as IFood,
@@ -113,6 +115,21 @@ const foodSlice = createSlice({
     })
     builder.addCase(getFoodById.rejected, (state, action) => {
       state.loading = false
+      state.success = false
+      state.error = action.error.message ?? ''
+    })
+
+    // addComment
+    builder.addCase(addComment.pending, (state) => {
+      state.isAddingComment = true
+      state.success = false
+    })
+    builder.addCase(addComment.fulfilled, (state, action: any) => {
+      state.isAddingComment = false
+      state.food = action.payload.data.data
+    })
+    builder.addCase(addComment.rejected, (state, action) => {
+      state.isAddingComment = false
       state.success = false
       state.error = action.error.message ?? ''
     })

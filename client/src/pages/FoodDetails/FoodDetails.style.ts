@@ -4,6 +4,10 @@ export const useFoodDetailsStyles = createStyles((theme) => ({
   wrapper: {
     margin: `${rem(32)} auto`,
     color: theme.colorScheme === 'dark' ? theme.white : theme.colors.dark[8],
+
+    label: {
+      marginBottom: rem(8),
+    },
   },
 
   title: {
@@ -28,6 +32,7 @@ export const useFoodDetailsStyles = createStyles((theme) => ({
     marginRight: rem(16),
     [theme.fn.smallerThan('sm')]: {
       marginBottom: rem(16),
+      marginRight: 0,
     },
   },
 
@@ -55,5 +60,13 @@ export const useFoodDetailsStyles = createStyles((theme) => ({
     '&:hover': {
       color: theme.colors[theme.primaryColor]?.[5],
     },
+  },
+
+  divider: {
+    margin: `${rem(48)} 0 ${rem(32)} 0`,
+  },
+
+  relativePosition: {
+    position: 'relative',
   },
 }))

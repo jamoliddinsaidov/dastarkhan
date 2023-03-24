@@ -1,29 +1,57 @@
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { IconBread, IconHome, IconMoneybag, IconStar, IconUser } from '@tabler/icons-react'
-import { Container, Flex, Image, LoadingOverlay, Skeleton, Text, Title } from '@mantine/core'
+import {
+  Button,
+  Container,
+  Divider,
+  Flex,
+  Image,
+  LoadingOverlay,
+  Skeleton,
+  Text,
+  Textarea,
+  TextInput,
+  Title,
+} from '@mantine/core'
 import { getFoodState } from '../../store/food/foodSelectors'
-import { getFoodById } from '../../store/food/foodServices'
+import { addComment, getFoodById } from '../../store/food/foodServices'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { useFoodDetailsStyles } from './FoodDetails.style'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
 import { getServiceType, formatPrice, getFoodType } from '../../utils'
+import { getUserInfo } from '../../store/user/userSelectors'
 
 export const FoodDetails = () => {
-  const dispatch = useAppDispatch()
-  const foodState = useAppSelector(getFoodState)
   const { t } = useTranslation()
-  const { loading, food } = foodState
-  const { foodId } = useParams()
   const { classes, cx } = useFoodDetailsStyles()
-  const [isImageLoading, setIsImageLoading] = useState(true)
+  const dispatch = useAppDispatch()
+
+  const foodState = useAppSelector(getFoodState)
+  const { loading, food, isAddingComment } = foodState
+  const { foodId } = useParams()
   const { serviceTypeFilters, foodTypeFilters } = useFiltersList()
   const serviceType = getServiceType(serviceTypeFilters, food.serviceType)
   const foodType = getFoodType(foodTypeFilters, food.foodType)
 
+  const user = useAppSelector(getUserInfo)
+  const [isImageLoading, setIsImageLoading] = useState(true)
+  const [comment, setComment] = useState('')
+  const [userName, setUserName] = useState(user.name ?? '')
+
   const onImageLoad = () => {
     setIsImageLoading(false)
+  }
+
+  const onAddComment = (event: FormEvent) => {
+    event.preventDefault()
+    const newComment = { foodId, userId: user?._id ?? null, userName, comment }
+
+    dispatch(addComment(newComment))
+
+    setComment('')
+    setUserName('')
   }
 
   useEffect(() => {
@@ -31,7 +59,7 @@ export const FoodDetails = () => {
   }, [])
 
   return (
-    <Container className={classes.wrapper}>
+    <Container className={cx(classes.wrapper, classes.relativePosition)}>
       {food._id && (
         <>
           <Title className={classes.title}>{food.foodName}</Title>
@@ -79,6 +107,37 @@ export const FoodDetails = () => {
             <Text className={classes.label}>{t('review')}:</Text>
             <Text>{food.review}</Text>
           </section>
+
+          <Divider className={classes.divider} size='sm' />
+
+          <form onSubmit={onAddComment} className={classes.relativePosition}>
+            <Textarea
+              label={t('your_comment')}
+              placeholder={t('your_opinion')!}
+              minRows={4}
+              value={comment}
+              onChange={(event) => setComment(event.currentTarget.value)}
+              withAsterisk
+              autosize
+            />
+            {!user?._id && (
+              <TextInput
+                label={t('your_name')}
+                placeholder={t('your_name')!}
+                value={userName}
+                onChange={(event) => setUserName(event.currentTarget.value)}
+                radius='sm'
+                mt='md'
+                required
+              />
+            )}
+            <Flex align='center' justify='flex-end'>
+              <Button radius='sm' type='submit' mt='lg' disabled={!(comment.length && userName.length)}>
+                {t('add_comment')}
+              </Button>
+            </Flex>
+            <LoadingOverlay visible={isAddingComment} />
+          </form>
         </>
       )}
       <LoadingOverlay visible={loading} />

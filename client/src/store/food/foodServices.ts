@@ -7,6 +7,7 @@ import {
   getFilterFoodsUrl,
   searchFoodsUrl,
   getFoodReviewByIdUrl,
+  addCommentUrl,
 } from '../../api/foodReview'
 
 export interface IFood {
@@ -32,6 +33,13 @@ export interface FoodFilterOptions {
   foodType?: string
   serviceType?: string
   reviewed?: string
+}
+
+export interface CommentProps {
+  foodId: string | undefined
+  userId: string
+  userName: string
+  comment: string
 }
 
 export const addFoodReview = createAsyncThunk('food/addFoodReview', async (foodReview: IFood) => {
@@ -60,4 +68,8 @@ export const searchFoods = createAsyncThunk('food/searchFoods', async (searchVal
 
 export const getFoodById = createAsyncThunk('food/getFoodById', async (foodId: string) => {
   return await axios.get(getFoodReviewByIdUrl.href, { params: { foodId } })
+})
+
+export const addComment = createAsyncThunk('food/addComment', async (comment: CommentProps) => {
+  return await axios.post(addCommentUrl.href, comment)
 })
