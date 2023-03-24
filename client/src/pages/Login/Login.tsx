@@ -1,18 +1,20 @@
 import { Paper, TextInput, PasswordInput, Flex, Button, Title, Text, LoadingOverlay } from '@mantine/core'
 import { IconLock, IconMail } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from '@mantine/form'
 import { useLoginStyles } from './Login.style'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { loginUser } from '../../store/user/userServices'
 import { getUser } from '../../store/user/userSelectors'
+import { useEffect } from 'react'
 
 export const Login = () => {
   const { classes } = useLoginStyles()
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const user = useAppSelector(getUser)
 
   const form = useForm({
@@ -34,6 +36,13 @@ export const Login = () => {
   const onSubmit = () => {
     dispatch(loginUser(form.values))
   }
+
+  useEffect(() => {
+    if (user.success) {
+      navigate('/browse')
+      onLinkClick('browse')
+    }
+  }, [user.success])
 
   return (
     <Paper className={classes.form} shadow='md' withBorder radius='md' p='xl'>

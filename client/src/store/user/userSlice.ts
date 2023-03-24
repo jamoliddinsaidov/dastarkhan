@@ -27,6 +27,7 @@ const userSlice = createSlice({
     // registerUser
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true
+      state.success = false
     })
     builder.addCase(registerUser.fulfilled, (state) => {
       state.loading = false
@@ -34,12 +35,14 @@ const userSlice = createSlice({
     })
     builder.addCase(registerUser.rejected, (state, action) => {
       state.loading = false
+      state.success = false
       state.error = action.error.message ?? ''
     })
 
     // loginUser
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true
+      state.success = false
     })
     builder.addCase(loginUser.fulfilled, (state, action: any) => {
       const user = action.payload?.data?.data
@@ -48,15 +51,18 @@ const userSlice = createSlice({
       state.user = user
       state.loading = false
       state.isLoggedIn = true
+      state.success = true
     })
     builder.addCase(loginUser.rejected, (state, action) => {
       state.loading = false
+      state.success = false
       state.error = action.error.message ?? ''
     })
 
     // logoutUser
     builder.addCase(logoutUser.pending, (state) => {
       state.loading = true
+      state.success = false
     })
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.loading = false
@@ -67,11 +73,13 @@ const userSlice = createSlice({
     builder.addCase(logoutUser.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
+      state.success = false
     })
 
     // getLoggedInUserInfo
     builder.addCase(getLoggedInUserInfo.pending, (state) => {
       state.loading = true
+      state.success = false
     })
     builder.addCase(getLoggedInUserInfo.fulfilled, (state, action: any) => {
       state.user = action.payload?.data?.data
@@ -79,6 +87,7 @@ const userSlice = createSlice({
     })
     builder.addCase(getLoggedInUserInfo.rejected, (state, action) => {
       state.loading = false
+      state.success = false
       state.error = action.error.message ?? ''
     })
 
