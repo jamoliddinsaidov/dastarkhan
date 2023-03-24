@@ -8,3 +8,4 @@ export const getFoodsAndLoadingState = (state: RootState) => ({
   isLoading: state.food.loading,
   success: state.food.success,
 })
+export const getIsAddingComment = (state: RootState) => state.food.isAddingComment

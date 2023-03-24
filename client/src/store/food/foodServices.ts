@@ -25,6 +25,18 @@ export interface IFood {
     name: string
   }
   image: string
+  comments: Comment[]
+  likes: string[]
+}
+
+export interface Comment {
+  _id: string
+  createdAt: string
+  comment: string
+  user: {
+    name: string
+    userId: string | null
+  }
 }
 
 export interface FoodFilterOptions {
