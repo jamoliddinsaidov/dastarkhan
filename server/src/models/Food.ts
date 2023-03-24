@@ -17,9 +17,7 @@ const commentSubSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  user: {
-    userSubSchema,
-  },
+  user: userSubSchema,
 })
 commentSubSchema.set('timestamps', true)
 
@@ -70,7 +68,7 @@ const FoodSchema = new mongoose.Schema({
     type: userSubSchema,
   },
   comments: {
-    type: Array<typeof commentSubSchema>,
+    type: [commentSubSchema],
     defaultValue: [],
   },
   likes: {
@@ -105,4 +103,17 @@ export interface FoodFilterOptions {
   foodType?: string
   serviceType?: string
   reviewed?: string
+}
+
+export interface IFood extends FoodRequestBody {
+  comments: CommentProps[]
+  likes: string[]
+}
+
+export interface CommentProps {
+  user: {
+    name: string
+    userId: string | undefined | null
+  }
+  comment: string
 }

@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { UploadedFile } from 'express-fileupload'
 import { asyncWrapper } from '../middlewares/index.js'
-import { Food, FoodFilterOptions, FoodRequestBody } from '../models/Food.js'
+import { CommentProps, Food, FoodFilterOptions, FoodRequestBody, IFood } from '../models/Food.js'
 import { REVIEW_ADDED } from '../utils/constants.js'
 import { parseRatingFilter } from '../utils/index.js'
 
@@ -96,4 +96,25 @@ export const getFoodById = asyncWrapper(async (req: Request, res: Response) => {
   const { foodId } = req.query
   const food = await Food.find({ _id: foodId })
   res.status(StatusCodes.OK).json({ success: true, data: food?.[0] })
+})
+
+export const addComment = asyncWrapper(async (req: Request, res: Response) => {
+  const { foodId, userId, userName, comment } = req.body
+  const newComment: CommentProps = {
+    user: {
+      name: userName,
+      userId,
+    },
+    comment,
+  }
+
+  const food = (await Food.findOne({ _id: foodId })) as IFood
+
+  const comments = food.comments
+  comments.push(newComment)
+
+  const updatedFood = (await Food.findOneAndUpdate({ _id: foodId }, { comments })) as IFood
+  updatedFood.comments = comments
+
+  res.status(StatusCodes.OK).json({ success: true, data: updatedFood })
 })

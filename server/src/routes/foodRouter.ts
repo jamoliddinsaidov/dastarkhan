@@ -6,6 +6,7 @@ import {
   searchFoods,
   uploadImage,
   getFoodById,
+  addComment,
 } from '../controllers/foodController.js'
 
 export const foodRouter = Router()
@@ -16,3 +17,4 @@ foodRouter.post('/filterFoods', filterFoods)
 foodRouter.post('/uploadImage', uploadImage)
 foodRouter.post('/searchFoods', searchFoods)
 foodRouter.get('/getFoodById', getFoodById)
+foodRouter.post('/addComment', addComment)
