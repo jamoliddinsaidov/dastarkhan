@@ -4,7 +4,16 @@ import {
   setIsUserLoggedInToLocalStorage,
   clearUserInfoFromLocalStorage,
 } from '../../utils'
-import { registerUser, loginUser, logoutUser, getLoggedInUserInfo, IUser, likePost } from './userServices'
+import { IFood } from '../food/foodServices'
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getLoggedInUserInfo,
+  IUser,
+  likePost,
+  getLikedPosts,
+} from './userServices'
 
 const initialState = {
   loading: false,
@@ -13,6 +22,7 @@ const initialState = {
   isLoggedIn: getIsUserLoggedInFromLocalStorage(),
   user: {} as IUser,
   error: '',
+  userFoods: [] as IFood[],
 }
 
 const userSlice = createSlice({
@@ -100,6 +110,19 @@ const userSlice = createSlice({
       state.loading = false
     })
     builder.addCase(likePost.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getLikedPosts
+    builder.addCase(getLikedPosts.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getLikedPosts.fulfilled, (state, action: any) => {
+      state.userFoods = action.payload?.data?.data
+      state.loading = false
+    })
+    builder.addCase(getLikedPosts.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })

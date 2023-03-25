@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { registerUrl, loginUrl, logoutUrl } from '../../api/auth'
-import { likePostUrl, getLoggedInUserInforUrl } from '../../api/user'
+import { likePostUrl, getLoggedInUserInforUrl, getLikedPostsUrl } from '../../api/user'
 
 export interface IUser {
   _id: string
@@ -48,4 +48,8 @@ export const getLoggedInUserInfo = createAsyncThunk('user/getLoggedInUserInfo', 
 
 export const likePost = createAsyncThunk('user/likePost', async (likePostInfo: LikePostInfoProps) => {
   return await axios.post(likePostUrl.href, likePostInfo)
+})
+
+export const getLikedPosts = createAsyncThunk('user/getLikedPosts', async (likedPostsId: string[]) => {
+  return await axios.post(getLikedPostsUrl.href, likedPostsId)
 })

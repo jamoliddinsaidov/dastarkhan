@@ -8,7 +8,7 @@ export const Profile = () => {
   const user = useAppSelector(getUserInfo)
 
   return (
-    <Flex align={'flex-start'}>
+    <Flex align='flex-start'>
       <Sidebar userName={user.name} />
       <Outlet />
     </Flex>

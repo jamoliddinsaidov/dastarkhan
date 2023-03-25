@@ -5,6 +5,7 @@ import { asyncWrapper } from '../middlewares/index.js'
 import { PROVIDE_EMAIL } from '../utils/constants.js'
 import { LoggedInUserInfo } from '../models/LoggedInUserInfo.js'
 import { IUser, User } from '../models/User.js'
+import { Food } from '../models/Food.js'
 
 export const getLoggedInUserInfo = asyncWrapper(async (req: Request, res: Response) => {
   const email = req.query?.userEmail
@@ -36,4 +37,11 @@ export const likePost = asyncWrapper(async (req: Request, res: Response) => {
   updatedUser.likedPosts = likedPosts
 
   res.status(StatusCodes.OK).json({ success: true, data: updatedUser })
+})
+
+export const getLikedPosts = asyncWrapper(async (req: Request, res: Response) => {
+  const likedPostIds = req.body
+  const likedPosts = await Food.find({ _id: { $in: likedPostIds } })
+
+  res.status(StatusCodes.OK).json({ success: true, data: likedPosts })
 })
