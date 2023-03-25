@@ -29,7 +29,7 @@ export const useGeneralHeaderStyles = createStyles((theme) => ({
     overflow: 'hidden',
     height: '100vh',
 
-    [theme.fn.largerThan('sm')]: {
+    [theme.fn.largerThan('md')]: {
       display: 'none',
     },
   },
@@ -43,13 +43,13 @@ export const useGeneralHeaderStyles = createStyles((theme) => ({
   },
 
   hideOnMobile: {
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       display: 'none',
     },
   },
 
   burger: {
-    [theme.fn.largerThan('sm')]: {
+    [theme.fn.largerThan('md')]: {
       display: 'none',
     },
   },
@@ -69,7 +69,7 @@ export const useGeneralHeaderStyles = createStyles((theme) => ({
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
     },
 
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       borderRadius: 0,
       padding: theme.spacing.md,
     },

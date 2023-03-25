@@ -1,10 +1,17 @@
 import { createStyles, rem, getStylesRef } from '@mantine/core'
 
 export const useSidebarStyles = createStyles((theme) => ({
+  navbar: {
+    [theme.fn.smallerThan('md')]: {
+      display: 'none',
+    },
+  },
+
   header: {
     paddingBottom: theme.spacing.md,
     marginBottom: `calc(${theme.spacing.md} * 1.5)`,
     borderBottom: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
+    justifyContent: 'center',
   },
 
   footer: {
@@ -53,7 +60,6 @@ export const useSidebarStyles = createStyles((theme) => ({
   userName: {
     fontWeight: 700,
     fontSize: rem(18),
-    textAlign: 'start',
     color: theme.colorScheme === 'dark' ? theme.white : theme.colors.dark[7],
   },
 }))
