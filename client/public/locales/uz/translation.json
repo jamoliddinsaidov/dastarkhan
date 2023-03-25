@@ -99,5 +99,8 @@
   "your_comment": "Sizning izohingiz",
   "add_comment": "Izoh qo'shish",
   "write_comment": "Izoh yozing",
-  "add_to_likes": "Yoqtirilganlar qatoriga qo'shing"
+  "add_to_likes": "Yoqtirilganlar qatoriga qo'shing",
+  "no_liked_posts": "Sizda hali yoqtirilgan postlar yo'q...",
+  "your_reviews": "Siz yaratgan sharhlaringiz",
+  "no_your_reviews": "Sizda hali hech qanday sharh yozmagansiz..."
 }

@@ -13,6 +13,7 @@ import {
   IUser,
   likePost,
   getLikedPosts,
+  getReviewedPosts,
 } from './userServices'
 
 const initialState = {
@@ -123,6 +124,19 @@ const userSlice = createSlice({
       state.loading = false
     })
     builder.addCase(getLikedPosts.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getReviewedPosts
+    builder.addCase(getReviewedPosts.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getReviewedPosts.fulfilled, (state, action: any) => {
+      state.userFoods = action.payload?.data?.data
+      state.loading = false
+    })
+    builder.addCase(getReviewedPosts.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })

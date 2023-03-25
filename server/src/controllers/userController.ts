@@ -45,3 +45,10 @@ export const getLikedPosts = asyncWrapper(async (req: Request, res: Response) =>
 
   res.status(StatusCodes.OK).json({ success: true, data: likedPosts })
 })
+
+export const getReviewedPosts = asyncWrapper(async (req: Request, res: Response) => {
+  const { userId } = req.query
+  const reviewedPosts = await Food.find({ 'user.userId': userId })
+
+  res.status(StatusCodes.OK).json({ success: true, data: reviewedPosts })
+})

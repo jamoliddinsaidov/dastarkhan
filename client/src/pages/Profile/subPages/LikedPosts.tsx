@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react'
-import { Flex, Title } from '@mantine/core'
+import { Flex, LoadingOverlay, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useSubPagesStyles } from './SubPages.style'
 import { FoodsList } from '../../../components'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
-import { getUserFoods, getUserInfo } from '../../../store/user/userSelectors'
+import { getIsUserLoading, getUserFoods, getUserInfo } from '../../../store/user/userSelectors'
 import { getLikedPosts } from '../../../store/user/userServices'
 import { useFiltersList } from '../../../components/Filter/useFiltersList'
 import { mapFoodsArrayToComponentProps } from '../../../utils'
@@ -14,6 +14,7 @@ export const LikedPosts = () => {
   const { classes } = useSubPagesStyles()
   const dispatch = useAppDispatch()
 
+  const isLoading = useAppSelector(getIsUserLoading)
   const user = useAppSelector(getUserInfo)
   const likedFoods = useAppSelector(getUserFoods)
   const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
@@ -36,6 +37,7 @@ export const LikedPosts = () => {
       <div className={classes.containerMargin}>
         <FoodsList foods={mappedFoods} onLikeCallback={handleGetLikedPosts} />
       </div>
+      <LoadingOverlay visible={isLoading} overlayBlur={1} />
     </Flex>
   )
 }
