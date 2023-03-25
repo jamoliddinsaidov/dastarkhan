@@ -41,12 +41,12 @@ export const FoodCard = ({
   const dispatch = useAppDispatch()
   const user = useAppSelector(getUserInfo)
 
-  const onShowDetailsClick = () => {
-    navigate(`food/${id}`)
-  }
-
   const onLoad = () => {
     setIsImageLoading(false)
+  }
+
+  const onShowDetailsClick = () => {
+    navigate(`food/${id}`)
   }
 
   const onCopy = () => {
@@ -70,6 +70,19 @@ export const FoodCard = ({
 
       onLikeCallback(likedPosts)
     }
+  }
+
+  const onComment = () => {
+    navigate(`food/${id}`)
+    const intervalId = setInterval(() => {
+      const commentSection = document.querySelector('#comment_section')
+      const bottomRect = commentSection?.getBoundingClientRect().bottom
+      window.scrollTo({ top: bottomRect, behavior: 'smooth' })
+
+      if (bottomRect) {
+        clearInterval(intervalId)
+      }
+    }, 200)
   }
 
   const handleToasterState = () => {
@@ -136,7 +149,7 @@ export const FoodCard = ({
           </ActionIcon>
         </Tooltip>
         <Tooltip label={t('write_comment')}>
-          <ActionIcon variant='default' radius='md' size={36}>
+          <ActionIcon variant='default' radius='md' size={36} onClick={onComment}>
             <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
           </ActionIcon>
         </Tooltip>

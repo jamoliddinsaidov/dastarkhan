@@ -29,7 +29,7 @@ export const AddComment = ({ foodId }: AddCommentProps) => {
     dispatch(addComment(newComment))
 
     setComment('')
-    setUserName('')
+    !user.name && setUserName('')
   }
 
   return (

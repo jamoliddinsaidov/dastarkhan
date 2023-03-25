@@ -83,7 +83,7 @@ export const FoodDetails = () => {
             <Text>{food.review}</Text>
           </section>
 
-          <Divider className={classes.divider} size='sm' />
+          <Divider className={classes.divider} size='sm' id='comment_section' />
           <AddComment foodId={foodId ?? ''} />
 
           {!!food.comments.length && (
