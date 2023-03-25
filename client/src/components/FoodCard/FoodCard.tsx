@@ -18,9 +18,20 @@ export interface FoodCardProps {
   badges: string[]
   stars: number
   price: string | number
+  onLikeCallback?: (likedPosts: string[]) => void
 }
 
-export const FoodCard = ({ id, image, title, description, city, badges, stars, price }: FoodCardProps) => {
+export const FoodCard = ({
+  id,
+  image,
+  title,
+  description,
+  city,
+  badges,
+  stars,
+  price,
+  onLikeCallback,
+}: FoodCardProps) => {
   const { classes, theme, cx } = useFoodCardStyles()
   const { t } = useTranslation()
   const [isImageLoading, setIsImageLoading] = useState(true)
@@ -48,6 +59,17 @@ export const FoodCard = ({ id, image, title, description, city, badges, stars, p
 
   const onLike = () => {
     dispatch(likePost({ userId: user._id, foodId: id }))
+
+    if (onLikeCallback) {
+      const likedPosts = [...user.likedPosts]
+
+      if (likedPosts?.includes(id)) {
+        const likedPostIndex = likedPosts.findIndex((post) => post === id)
+        likedPosts.splice(likedPostIndex, 1)
+      }
+
+      onLikeCallback(likedPosts)
+    }
   }
 
   const handleToasterState = () => {
