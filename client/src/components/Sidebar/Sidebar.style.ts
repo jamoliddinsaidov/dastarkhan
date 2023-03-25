@@ -2,6 +2,8 @@ import { createStyles, rem, getStylesRef } from '@mantine/core'
 
 export const useSidebarStyles = createStyles((theme) => ({
   navbar: {
+    top: 97,
+    height: '85vh',
     [theme.fn.smallerThan('md')]: {
       display: 'none',
     },

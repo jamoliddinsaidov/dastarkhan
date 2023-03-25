@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { ActionIcon, Container, Flex, LoadingOverlay, Paper, Transition } from '@mantine/core'
+import { ActionIcon, Collapse, Container, Flex, LoadingOverlay, Paper, Transition } from '@mantine/core'
 import { IconAdjustments } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -49,13 +49,11 @@ export const Browse = () => {
           <IconAdjustments />
         </ActionIcon>
       </Flex>
-      <Transition transition='slide-down' duration={200} mounted={opened}>
-        {(styles) => (
-          <Paper withBorder style={styles} shadow='md' className={classes.filterBox}>
-            <Filter />
-          </Paper>
-        )}
-      </Transition>
+      <Collapse in={opened}>
+        <Paper withBorder shadow='md' className={classes.filterBox}>
+          <Filter />
+        </Paper>
+      </Collapse>
       <FoodsList foods={mappedFoods} success={success} />
       <LoadingOverlay visible={isLoading} overlayBlur={1} />
     </Container>

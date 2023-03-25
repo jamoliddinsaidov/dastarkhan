@@ -25,7 +25,7 @@ export const Sidebar = ({ userName }: SidebarProps) => {
   ))
 
   return (
-    <Navbar width={{ sm: 300 }} p='md' className={classes.navbar}>
+    <Navbar width={{ sm: 300 }} p='md' className={classes.navbar} pos='sticky'>
       <Group className={classes.header}>
         <Text className={classes.userName}>{userName}</Text>
       </Group>

@@ -51,7 +51,7 @@ export const GeneralHeader = () => {
   }, [])
 
   return (
-    <Header height={HEADER_HEIGHT} className={classes.root}>
+    <Header height={HEADER_HEIGHT} className={classes.root} pos='sticky'>
       <Container className={classes.header}>
         <Title order={1} className={classes.title} onClick={navigateToHome}>
           Dastarkhan
