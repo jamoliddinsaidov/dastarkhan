@@ -1,7 +1,8 @@
-import { Paper, Title, Text, TextInput, Button, Container, Group, Anchor, Center, Box, rem } from '@mantine/core'
+import { Paper, Title, Text, TextInput, Button, Container, Group, Center, Box, rem } from '@mantine/core'
 import { IconArrowLeft } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { UnderMaintenance } from '../../components'
 import { useForgotPasswordStyles } from './ForgotPassword.style'
 
 export const ForgotPassword = () => {
@@ -28,9 +29,13 @@ export const ForgotPassword = () => {
               </Center>
             </Text>
           </Link>
-          <Button className={classes.control}>{t('reset_password')}</Button>
+          <Button className={classes.control} disabled>
+            {t('reset_password')}
+          </Button>
         </Group>
       </Paper>
+
+      <UnderMaintenance />
     </Container>
   )
 }
