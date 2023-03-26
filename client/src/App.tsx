@@ -2,16 +2,19 @@ import React, { useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { MantineUiProvider } from './hoc/MantineUiProvider'
 import { GeneralHeader } from './components'
-import { ForgotPassword, Home, Login, NotFound, SignUp, Browse, WriteReview, FoodDetails, Profile } from './pages'
 import {
-  LikedPosts,
-  SavedPosts,
-  Settings,
-  Notifications,
-  Reviews,
-  Followings,
-  Followers,
-} from './pages/Profile/subPages'
+  ForgotPassword,
+  Home,
+  Login,
+  NotFound,
+  SignUp,
+  Browse,
+  WriteReview,
+  FoodDetails,
+  Profile,
+  Friends,
+} from './pages'
+import { LikedPosts, SavedPosts, Settings, Notifications, Reviews } from './pages/Profile/subPages'
 import { getIsUserLoggedInFromLocalStorage, getUserEmailFromLocalStorage } from './utils'
 import { getLoggedInUserInfo } from './store/user/userServices'
 import { useAppDispatch } from './store/hooks'
@@ -43,8 +46,7 @@ export const App = () => {
           <Route path='savedPosts' element={<SavedPosts />} />
           <Route path='reviews' element={<Reviews />} />
           <Route path='notifications' element={<Notifications />} />
-          <Route path='followers' element={<Followers />} />
-          <Route path='followings' element={<Followings />} />
+          <Route path='friends' element={<Friends />} />
           <Route path='settings' element={<Settings />} />
         </Route>
         <Route path='/' element={<Navigate to='/home' />} />

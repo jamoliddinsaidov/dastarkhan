@@ -7,5 +7,6 @@ import { SignUp } from './SignUp/SignUp'
 import { WriteReview } from './WriteReview/WriteReview'
 import { FoodDetails } from './FoodDetails/FoodDetails'
 import { Profile } from './Profile/Profile'
+import { Friends } from './Friends/Friends'
 
-export { ForgotPassword, Home, Login, NotFound, SignUp, Browse, WriteReview, FoodDetails, Profile }
+export { ForgotPassword, Home, Login, NotFound, SignUp, Browse, WriteReview, FoodDetails, Profile, Friends }
