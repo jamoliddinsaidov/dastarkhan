@@ -102,5 +102,15 @@
   "add_to_likes": "Add to liked ones",
   "no_liked_posts": "You don't have any liked posts yet...",
   "your_reviews": "Your reviews",
-  "no_your_reviews": "You don't have any reviews yet..."
+  "no_your_reviews": "You don't have any reviews yet...",
+  "no_followings": "You are not following anyone...",
+  "no_followers": "You don't have any followers yet...",
+  "search_people": "Search People",
+  "reviews_text": "reviews",
+  "review_text": "review",
+  "follow": "Follow",
+  "unfollow": "Unfollow",
+  "followers_text": "followers",
+  "follower_text": "follower",
+  "friends": "Friends"
 }

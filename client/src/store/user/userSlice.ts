@@ -14,6 +14,10 @@ import {
   likePost,
   getLikedPosts,
   getReviewedPosts,
+  getAllUsers,
+  followToUser,
+  getFollowings,
+  getFollowers,
 } from './userServices'
 
 const initialState = {
@@ -24,6 +28,7 @@ const initialState = {
   user: {} as IUser,
   error: '',
   userFoods: [] as IFood[],
+  people: [] as IUser[],
 }
 
 const userSlice = createSlice({
@@ -137,6 +142,58 @@ const userSlice = createSlice({
       state.loading = false
     })
     builder.addCase(getReviewedPosts.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getAllUsers
+    builder.addCase(getAllUsers.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getAllUsers.fulfilled, (state, action: any) => {
+      state.people = action.payload?.data?.data
+      state.loading = false
+    })
+    builder.addCase(getAllUsers.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // followToUser
+    builder.addCase(followToUser.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(followToUser.fulfilled, (state, action: any) => {
+      state.user = action.payload?.data?.data
+      state.loading = false
+    })
+    builder.addCase(followToUser.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getFollowings
+    builder.addCase(getFollowings.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getFollowings.fulfilled, (state, action: any) => {
+      state.people = action.payload?.data?.data
+      state.loading = false
+    })
+    builder.addCase(getFollowings.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getFollowers
+    builder.addCase(getFollowers.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getFollowers.fulfilled, (state, action: any) => {
+      state.people = action.payload?.data?.data
+      state.loading = false
+    })
+    builder.addCase(getFollowers.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })

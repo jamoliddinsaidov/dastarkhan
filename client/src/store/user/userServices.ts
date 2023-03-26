@@ -1,7 +1,16 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { registerUrl, loginUrl, logoutUrl } from '../../api/auth'
-import { likePostUrl, getLoggedInUserInforUrl, getLikedPostsUrl, getReviewedPostsUrl } from '../../api/user'
+import {
+  likePostUrl,
+  getLoggedInUserInforUrl,
+  getLikedPostsUrl,
+  getReviewedPostsUrl,
+  getAllUsersUrl,
+  followToUserUrl,
+  getFollowingsUrl,
+  getFollowersUrl,
+} from '../../api/user'
 
 export interface IUser {
   _id: string
@@ -30,6 +39,11 @@ export interface LikePostInfoProps {
   foodId: string
 }
 
+export interface FollowToUserProps {
+  userId: string
+  followingUserId: string
+}
+
 export const registerUser = createAsyncThunk('user/registerUser', async (user: UserRequestBody) => {
   return await axios.post(registerUrl.href, user)
 })
@@ -56,4 +70,20 @@ export const getLikedPosts = createAsyncThunk('user/getLikedPosts', async (liked
 
 export const getReviewedPosts = createAsyncThunk('user/getReviewedPosts', async (userId: string) => {
   return await axios.get(getReviewedPostsUrl.href, { params: { userId } })
+})
+
+export const getAllUsers = createAsyncThunk('user/getAllUsers', async () => {
+  return await axios.get(getAllUsersUrl.href)
+})
+
+export const followToUser = createAsyncThunk('user/followToUser', async (followToUserInfo: FollowToUserProps) => {
+  return await axios.post(followToUserUrl.href, followToUserInfo)
+})
+
+export const getFollowings = createAsyncThunk('user/getFollowings', async (userIds: string[]) => {
+  return await axios.post(getFollowingsUrl.href, userIds)
+})
+
+export const getFollowers = createAsyncThunk('user/getFollwers', async (userEmail: string) => {
+  return await axios.get(getFollowersUrl.href, { params: { email: userEmail } })
 })

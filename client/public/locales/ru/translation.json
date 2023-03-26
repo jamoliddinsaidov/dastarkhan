@@ -102,5 +102,15 @@
   "add_to_likes": "Добавить в понравившиеся",
   "no_liked_posts": "У вас пока нет понравившихся записей...",
   "your_reviews": "Ваши отзывы",
-  "no_your_reviews": "У вас еще нет отзывов..."
+  "no_your_reviews": "У вас еще нет отзывов...",
+  "no_followings": "Вы ни на кого не подписаны...",
+  "no_followers": "У вас пока нет подписчиков...",
+  "search_people": "Искать людей",
+  "reviews_text": "отзывы",
+  "review_text": "обзор",
+  "follow": "Следовать",
+  "unfollow": "Отписаться",
+  "followers_text": "подписчики",
+  "follower_text": "последователь",
+  "friends": "Друзья"
 }

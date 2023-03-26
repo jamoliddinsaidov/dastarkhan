@@ -102,5 +102,15 @@
   "add_to_likes": "Yoqtirilganlar qatoriga qo'shing",
   "no_liked_posts": "Sizda hali yoqtirilgan postlar yo'q...",
   "your_reviews": "Siz yaratgan sharhlaringiz",
-  "no_your_reviews": "Sizda hali hech qanday sharh yozmagansiz..."
+  "no_your_reviews": "Sizda hali hech qanday sharh yozmagansiz...",
+  "no_followings": "Siz hech kimni kuzatmayapsiz...",
+  "no_followers": "Sizda hali kuzatuvchilar yo'q...",
+  "search_people": "Platformadagilarni qidirish",
+  "reviews_text": "sharhlar",
+  "review_text": "sharh",
+  "follow": "Kuzatish",
+  "unfollow": "Kuzatishni to'xtatish",
+  "followers_text": "kuzatuvchilar",
+  "follower_text": "kuzatuvchi",
+  "friends": "Do'stlar"
 }
