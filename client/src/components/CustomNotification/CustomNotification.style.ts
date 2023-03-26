@@ -2,7 +2,7 @@ import { createStyles, rem } from '@mantine/core'
 
 export const useCustomNotificationStyles = createStyles((theme) => ({
   wrapper: {
-    margin: `${rem(16)} 0`,
+    margin: `${rem(10)} 0`,
     width: '100%',
 
     a: {

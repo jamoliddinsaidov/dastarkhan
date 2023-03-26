@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { BadRequestError } from '../errors/index.js'
 import { asyncWrapper } from '../middlewares/index.js'
-import { PROVIDE_EMAIL } from '../utils/constants.js'
+import { NO_USER_FOUND, PROVIDE_EMAIL } from '../utils/constants.js'
 import { LoggedInUserInfo } from '../models/LoggedInUserInfo.js'
 import { IUser, NotificationType, User } from '../models/User.js'
 import { Food } from '../models/Food.js'
@@ -71,30 +71,41 @@ export const followToUser = asyncWrapper(async (req: Request, res: Response) => 
   const { userId, followingUserId } = req.body
 
   // update followingUser's followings list
-  const followingUser = (await User.findOne({ _id: userId })) as IUser
-  const followings = followingUser?.followings
+  const followingUser = await User.findOne({ _id: userId })
+  if (!followingUser) {
+    throw new BadRequestError(NO_USER_FOUND)
+  }
 
-  if (followings?.includes(followingUserId)) {
+  const followings = [...followingUser.followings]
+  if (followings.includes(followingUserId)) {
     const followingUserIndex = followings.findIndex((personId) => personId === followingUserId)
     followings.splice(followingUserIndex, 1)
   } else {
-    followings?.push(followingUserId)
+    followings.push(followingUserId)
   }
 
-  await User.findOneAndUpdate({ _id: followingUser._id }, { followings })
+  followingUser.followings = followings
+  await followingUser.save()
 
   // update followedUser's followers list
-  const followedUser = (await User.findOne({ _id: followingUserId })) as IUser
-  const followers = followedUser.followers
+  const followedUser = await User.findOne({ _id: followingUserId })!
+  if (!followedUser) {
+    throw new BadRequestError(NO_USER_FOUND)
+  }
 
-  if (followers?.includes(userId)) {
+  const followers = [...followedUser.followers]
+  if (followers.includes(userId)) {
     const followeredUserIndex = followers.findIndex((personId) => personId === userId)
     followers.splice(followeredUserIndex, 1)
   } else {
-    followers?.push(userId)
+    followers.push(userId)
   }
+  followedUser.followers = followers
 
-  await User.findOneAndUpdate({ _id: followedUser._id }, { followers })
+  const followedNotification = getFollowedNotification(followingUser.name, String(followingUser._id))
+  followedUser.notifications.unshift(followedNotification)
+
+  await followedUser.save()
   await LoggedInUserInfo.findOneAndUpdate({ _id: followedUser._id }, { followers })
 
   // update the followingUser for response
@@ -164,4 +175,21 @@ const setLikePostNotification = async (foodId: string, user: IUser) => {
   } catch (error: any) {
     throw new Error(error.message)
   }
+}
+
+const getFollowedNotification = (followingUserName: string, followingUserId: string) => {
+  const notification = {
+    age: 'new',
+    type: NotificationType.FOLLOWED,
+    what: {
+      name: 'follower',
+      whatId: followingUserId,
+    },
+    user: {
+      name: followingUserName,
+      userId: followingUserId,
+    },
+  }
+
+  return notification
 }

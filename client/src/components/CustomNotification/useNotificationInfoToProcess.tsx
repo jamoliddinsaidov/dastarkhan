@@ -42,7 +42,11 @@ export const useNotificationInfoToProcess = (
       const title = t('someone_followed_you')
       const color = 'blue'
       const icon = <IconUserHeart size='1rem' />
-      const body = ''
+      const body = (
+        <>
+          <Link to={userLink}>{userName}</Link> started following you
+        </>
+      )
       return { title, color, icon, body }
     }
     case 'commented': {
