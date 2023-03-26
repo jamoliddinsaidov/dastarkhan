@@ -2,9 +2,19 @@ export const formatDate = (date: string | null) => {
   if (!date) {
     return 'Now'
   }
+  const { timeZone, locale } = Intl.DateTimeFormat().resolvedOptions()
+  const dateObj = new Date(date)
 
-  let [fullDate, time] = date.split('T')
-  time = time?.split('.')[0]
+  const fullDate = new Intl.DateTimeFormat(locale, {
+    dateStyle: 'short',
+    timeZone: timeZone,
+  }).format(dateObj)
 
-  return `at ${time} on ${fullDate}`
+  let hours: number | string = dateObj.getHours()
+  hours = hours < 10 ? `0${hours}` : hours
+
+  let minutes: number | string = dateObj.getMinutes()
+  minutes = minutes < 10 ? `0${minutes}` : minutes
+
+  return `at ${hours}:${minutes} on ${fullDate}`
 }

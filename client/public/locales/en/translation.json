@@ -114,5 +114,10 @@
   "follower_text": "follower",
   "friends": "Friends",
   "following": "Following",
-  "follow_back": "Follow Back"
+  "follow_back": "Follow Back",
+  "someone_liked_your_review": "Your review has been liked!",
+  "someone_followed_you": "Somenone followed you!",
+  "someone_commented_on_your_review": "Someone commented on your review!",
+  "someone_posted": "New review!",
+  "someone_rated_your_review": "Someone rated your review!"
 }

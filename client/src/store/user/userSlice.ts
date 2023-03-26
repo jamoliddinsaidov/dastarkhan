@@ -18,6 +18,8 @@ import {
   followToUser,
   getFollowings,
   getFollowers,
+  getUserNotifications,
+  NotificationProps,
 } from './userServices'
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
   error: '',
   userFoods: [] as IFood[],
   people: [] as IUser[],
+  notifications: [] as NotificationProps[],
 }
 
 const userSlice = createSlice({
@@ -194,6 +197,19 @@ const userSlice = createSlice({
       state.loading = false
     })
     builder.addCase(getFollowers.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message ?? ''
+    })
+
+    // getUserNotifications
+    builder.addCase(getUserNotifications.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getUserNotifications.fulfilled, (state, action: any) => {
+      state.notifications = action.payload?.data?.data
+      state.loading = false
+    })
+    builder.addCase(getUserNotifications.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message ?? ''
     })

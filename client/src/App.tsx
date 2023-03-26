@@ -18,10 +18,15 @@ import { LikedPosts, SavedPosts, Settings, Notifications, Reviews } from './page
 import { getIsUserLoggedInFromLocalStorage, getUserEmailFromLocalStorage } from './utils'
 import { getLoggedInUserInfo } from './store/user/userServices'
 import { useAppDispatch } from './store/hooks'
+import { getAllFoodReviews } from './store/food/foodServices'
 
 export const App = () => {
   const dispatch = useAppDispatch()
   const isUserLoggedIn = getIsUserLoggedInFromLocalStorage()
+
+  useEffect(() => {
+    dispatch(getAllFoodReviews())
+  }, [])
 
   useEffect(() => {
     if (isUserLoggedIn) {

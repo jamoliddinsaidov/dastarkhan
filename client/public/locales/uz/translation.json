@@ -112,5 +112,11 @@
   "unfollow": "Kuzatishni to'xtatish",
   "followers_text": "kuzatuvchilar",
   "follower_text": "kuzatuvchi",
-  "friends": "Do'stlar"
+  "friends": "Do'stlar",
+  "follow_back": "Do'stlarga qo'shish",
+  "someone_liked_your_review": "Sizning sharhingizni kimdir yoqtirdi!",
+  "someone_followed_siz": "Kimdir sizni kuzatishni boshladi!",
+  "someone_commented_on_your_review": "Kimdir sizning sharhingizga fikr bildirdi!",
+  "someone_posted": "Yangi sharh!",
+  "someone_rated_your_review": "Kimdir sizning sharhingizni baholadi!"
 }

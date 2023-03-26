@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { ActionIcon, Collapse, Container, Flex, LoadingOverlay, Paper, Transition } from '@mantine/core'
 import { IconAdjustments } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useBrowseStyles } from './Browse.style'
 import { Filter, FoodsList, SearchInput } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { getAllFoodReviews, searchFoods } from '../../store/food/foodServices'
+import { searchFoods } from '../../store/food/foodServices'
 import { getFoodsAndLoadingState } from '../../store/food/foodSelectors'
 import { mapFoodsArrayToComponentProps } from '../../utils'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
@@ -30,10 +30,6 @@ export const Browse = () => {
       dispatch(searchFoods(searchValue.trim()))
     }
   }
-
-  useEffect(() => {
-    dispatch(getAllFoodReviews())
-  }, [])
 
   return (
     <Container className={classes.wrapper}>

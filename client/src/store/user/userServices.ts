@@ -10,6 +10,7 @@ import {
   followToUserUrl,
   getFollowingsUrl,
   getFollowersUrl,
+  getUserNotificationsUrl,
 } from '../../api/user'
 
 export interface IUser {
@@ -24,6 +25,7 @@ export interface IUser {
   followings: string[]
   followers: string[]
   reviews: string[]
+  notifications: string[]
 }
 
 export interface UserRequestBody {
@@ -42,6 +44,24 @@ export interface LikePostInfoProps {
 export interface FollowToUserProps {
   userId: string
   followingUserId: string
+}
+
+export type NotificationType = 'liked' | 'posted' | 'commented' | 'followed' | 'rated'
+export type NotificationAge = 'new' | 'old'
+
+export interface NotificationProps {
+  _id: string
+  age: NotificationAge
+  type: NotificationType
+  user: {
+    name: string
+    userId: string
+  }
+  what: {
+    name: string
+    whatId: string
+  }
+  createdAt: string
 }
 
 export const registerUser = createAsyncThunk('user/registerUser', async (user: UserRequestBody) => {
@@ -86,4 +106,8 @@ export const getFollowings = createAsyncThunk('user/getFollowings', async (userI
 
 export const getFollowers = createAsyncThunk('user/getFollwers', async (userEmail: string) => {
   return await axios.get(getFollowersUrl.href, { params: { email: userEmail } })
+})
+
+export const getUserNotifications = createAsyncThunk('user/getUserNotifications', async (userId: string) => {
+  return await axios.get(getUserNotificationsUrl.href, { params: { userId } })
 })
