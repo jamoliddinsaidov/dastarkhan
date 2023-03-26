@@ -7,9 +7,10 @@ import {
 } from './localStorage'
 import { mapFoodsArrayToComponentProps, getFoodType, getServiceType } from './mapFoodsArrayToComponentProps'
 import { shortenString } from './shortenString'
-import { cleanUpInputValues } from './cleanUpInputValues'
+import { cleanUpReviewInputValues } from './cleanUpReviewInputValues'
 import { formatPrice } from './formatPrice'
 import { formatDate } from './formatDate'
+import { cleanUpSignUpValues } from './cleanUpSignUpValues'
 
 export {
   getPathnameWithoutSlash,
@@ -19,9 +20,10 @@ export {
   clearUserInfoFromLocalStorage,
   mapFoodsArrayToComponentProps,
   shortenString,
-  cleanUpInputValues,
+  cleanUpReviewInputValues,
   formatPrice,
   getServiceType,
   getFoodType,
   formatDate,
+  cleanUpSignUpValues,
 }

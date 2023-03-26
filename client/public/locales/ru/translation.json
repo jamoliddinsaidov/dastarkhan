@@ -121,5 +121,7 @@
   "someone_rated_your_review": "Кто-то оценил ваш отзыв!",
   "liked_your_review_about": "понравился ваш отзыв о",
   "started_following_you": "подписался на вас",
-  "commented_on_your_review": "прокомментировал ваш отзыв о"
+  "commented_on_your_review": "прокомментировал ваш отзыв о",
+  "under_maintenance": "На обслуживании",
+  "under_maintenance_description": "Страница, которую вы пытаетесь использовать, в настоящее время находится на обслуживании и скоро будет работать правильно."
 }

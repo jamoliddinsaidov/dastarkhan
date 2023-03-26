@@ -6,7 +6,6 @@ import {
   IconSettings,
   IconChevronDown,
   IconBookmark,
-  IconUsers,
   IconUserHeart,
   IconWriting,
   IconBell,
@@ -61,7 +60,7 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
           </Group>
         </UnstyledButton>
       </Menu.Target>
-      <Menu.Dropdown>
+      <Menu.Dropdown className={classes.wrapper}>
         <Menu.Item
           icon={<IconBell size='0.9rem' color={theme.colors.cyan[6]} stroke={1.5} />}
           onClick={() => navigateToAPage('/user/profile/notifications')}

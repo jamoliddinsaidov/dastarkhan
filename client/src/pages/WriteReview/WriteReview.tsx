@@ -23,7 +23,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
 import { getFoodState } from '../../store/food/foodSelectors'
 import { noImageUrl } from '../../utils/constants'
-import { cleanUpInputValues } from '../../utils'
+import { cleanUpReviewInputValues } from '../../utils'
 import { Toaster } from '../../components/Toaster/Toaster'
 
 export const WriteReview = () => {
@@ -76,7 +76,7 @@ export const WriteReview = () => {
     }
 
     dispatch(addFoodReview(foodReview))
-    cleanUpInputValues(form)
+    cleanUpReviewInputValues(form)
   }
 
   return (

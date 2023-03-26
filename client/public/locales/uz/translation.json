@@ -121,5 +121,7 @@
   "someone_rated_your_review": "Kimdir sizning sharhingizni baholadi!",
   "liked_your_review_about": "ga sharhingiz yoqdi",
   "started_following_you": "sizni kuzatishni boshladi",
-  "commented_on_your_review": "sizning sharhingizga fikr bildirdi"
+  "commented_on_your_review": "sizning sharhingizga fikr bildirdi",
+  "under_maintenance": "Qurilish jarayonida",
+  "under_maintenance_description": "Siz foydalanmoqchi bo'lgan sahifa hozirda qurilmoqda va tez orada ishlatishga tayyor bo'ladi"
 }

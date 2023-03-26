@@ -25,6 +25,7 @@ import { registerUser } from '../../store/user/userServices'
 import { getUser } from '../../store/user/userSelectors'
 import { changeUserSuccesStatus } from '../../store/user/userSlice'
 import { Toaster } from '../../components/Toaster/Toaster'
+import { cleanUpSignUpValues } from '../../utils'
 
 export const SignUp = () => {
   const { classes } = useSignUpStyles()
@@ -63,6 +64,7 @@ export const SignUp = () => {
 
   const onSubmit = () => {
     dispatch(registerUser(form.values))
+    cleanUpSignUpValues(form)
   }
 
   return (

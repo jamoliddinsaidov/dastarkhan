@@ -22,10 +22,10 @@ export const UnderMaintenance = () => {
         <div className={classes.content}>
           <Flex direction='column' align='center' justify='center'>
             <IconTool size='10rem' className={classes.icon} />
-            <Title className={classes.title}>Under Maintenance</Title>
+            <Title className={classes.title}>{t('under_maintenance')}</Title>
           </Flex>
           <Text color='dimmed' size='lg' align='center' className={classes.description}>
-            The page you are trying to use is currently under maintenance and will be working properly soon.
+            {t('under_maintenance_description')}
           </Text>
           <Group position='center'>
             <Button size='md' onClick={onClick}>

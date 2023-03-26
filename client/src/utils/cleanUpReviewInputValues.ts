@@ -1,4 +1,4 @@
-export const cleanUpInputValues = (form: any) => {
+export const cleanUpReviewInputValues = (form: any) => {
   form.setFieldValue('foodName', '')
   form.setFieldValue('foodPlaceName', '')
   form.setFieldValue('review', '')

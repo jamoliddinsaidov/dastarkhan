@@ -13,15 +13,17 @@ import {
 
 interface LanguageSelectProps {
   show?: boolean
+  onChangeCallback?: () => void
 }
 
-export const LanguageSelect = ({ show }: LanguageSelectProps) => {
+export const LanguageSelect = ({ show, onChangeCallback }: LanguageSelectProps) => {
   const { i18n } = useTranslation()
   const { classes, cx } = useLanguageSelectStyles()
 
   const onChange = (lng: string) => {
     const selectedLanguage = lng as LongLanguagesType
     i18n.changeLanguage(languagesShort[selectedLanguage])
+    onChangeCallback?.()
   }
 
   const getDefaultLanguageValue = () => {

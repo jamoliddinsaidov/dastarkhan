@@ -71,8 +71,8 @@ export const GeneralHeader = () => {
               {linkItems}
               {isUserLoggedIn && <UserDropdown closeBurgerMenuOnMobile={close} />}
               <Group spacing={1}>
-                <LanguageSelect show />
-                <ThemeToggle />
+                <LanguageSelect show onChangeCallback={close} />
+                <ThemeToggle onClickCallback={close} />
               </Group>
             </Paper>
           )}
