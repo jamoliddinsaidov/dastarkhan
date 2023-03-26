@@ -50,6 +50,9 @@ const UserSchema = new mongoose.Schema({
   },
 })
 
+UserSchema.index({ '$**': 'text' })
+UserSchema.set('timestamps', true)
+
 export const User = mongoose.model('User', UserSchema)
 
 export interface IUser {

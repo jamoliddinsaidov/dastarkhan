@@ -41,4 +41,6 @@ const LoggedInUserInfoSchema = new mongoose.Schema({
   },
 })
 
+LoggedInUserInfoSchema.set('timestamps', true)
+
 export const LoggedInUserInfo = mongoose.model('LoggedInUserInfo', LoggedInUserInfoSchema)
