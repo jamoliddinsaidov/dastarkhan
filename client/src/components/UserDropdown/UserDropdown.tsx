@@ -66,7 +66,7 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
           icon={<IconBell size='0.9rem' color={theme.colors.cyan[6]} stroke={1.5} />}
           onClick={() => navigateToAPage('/user/profile/notifications')}
         >
-          {t('profile')}
+          {t('notifications')}
         </Menu.Item>
         <Menu.Item
           icon={<IconHeart size='0.9rem' color={theme.colors.red[6]} stroke={1.5} />}

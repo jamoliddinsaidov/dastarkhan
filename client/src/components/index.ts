@@ -12,6 +12,7 @@ import { AddComment } from './AddComment/AddComment'
 import { Comment } from './Comment/Comment'
 import { FoodsList } from './FoodsList/FoodsList'
 import { Person } from './Person/Person'
+import { CustomNotification } from './CustomNotification/CustomNotification'
 
 export {
   Filter,
@@ -28,4 +29,5 @@ export {
   Comment,
   FoodsList,
   Person,
+  CustomNotification,
 }
