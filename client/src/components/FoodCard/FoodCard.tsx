@@ -46,7 +46,7 @@ export const FoodCard = ({
   }
 
   const onShowDetailsClick = () => {
-    navigate(`food/${id}`)
+    navigate(`/browse/food/${id}`)
   }
 
   const onCopy = () => {
@@ -73,7 +73,7 @@ export const FoodCard = ({
   }
 
   const onComment = () => {
-    navigate(`food/${id}`)
+    navigate(`/browse/food/${id}`)
     const intervalId = setInterval(() => {
       const commentSection = document.querySelector('#comment_section')
       const bottomRect = commentSection?.getBoundingClientRect().bottom

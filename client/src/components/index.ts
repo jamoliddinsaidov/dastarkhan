@@ -11,6 +11,7 @@ import { Sidebar } from './Sidebar/Sidebar'
 import { AddComment } from './AddComment/AddComment'
 import { Comment } from './Comment/Comment'
 import { FoodsList } from './FoodsList/FoodsList'
+import { Person } from './Person/Person'
 
 export {
   Filter,
@@ -26,4 +27,5 @@ export {
   AddComment,
   Comment,
   FoodsList,
+  Person,
 }

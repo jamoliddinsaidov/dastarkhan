@@ -81,16 +81,10 @@ export const UserDropdown = ({ closeBurgerMenuOnMobile }: UserdropdownProps) => 
           {t('saved_posts')}
         </Menu.Item>
         <Menu.Item
-          icon={<IconUsers size='0.9rem' color={theme.colors.indigo[6]} stroke={1.5} />}
-          onClick={() => navigateToAPage('/user/profile/followers')}
-        >
-          {t('followers')}
-        </Menu.Item>
-        <Menu.Item
           icon={<IconUserHeart size='0.9rem' color={theme.colors.blue[6]} stroke={1.5} />}
-          onClick={() => navigateToAPage('/user/profile/followings')}
+          onClick={() => navigateToAPage('/user/profile/friends')}
         >
-          {t('followings')}
+          {t('friends')}
         </Menu.Item>
         <Menu.Item
           icon={<IconWriting size='0.9rem' color={theme.colors.orange[6]} stroke={1.5} />}
