@@ -39,12 +39,7 @@ export const useFiltersList = () => {
     { value: 'delivery', label: t('delivery') },
   ]
 
-  const reviewedFilters = [
-    { value: 'mostReviewed', label: t('most_reviewed') },
-    { value: 'leastReviewed', label: t('least_reviewed') },
-  ]
+  const allFilters = [...ratingFilters, ...priceFilters, ...foodTypeFilters, ...serviceTypeFilters]
 
-  const allFilters = [...ratingFilters, ...priceFilters, ...foodTypeFilters, ...serviceTypeFilters, ...reviewedFilters]
-
-  return { allFilters, ratingFilters, priceFilters, foodTypeFilters, serviceTypeFilters, reviewedFilters }
+  return { allFilters, ratingFilters, priceFilters, foodTypeFilters, serviceTypeFilters }
 }

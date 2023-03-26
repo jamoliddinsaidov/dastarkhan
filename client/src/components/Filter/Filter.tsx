@@ -10,8 +10,7 @@ import { filterFoods } from '../../store/food/foodServices'
 export const Filter = () => {
   const { classes } = useFilterStyles()
   const { t } = useTranslation()
-  const { allFilters, priceFilters, ratingFilters, foodTypeFilters, serviceTypeFilters, reviewedFilters } =
-    useFiltersList()
+  const { allFilters, priceFilters, ratingFilters, foodTypeFilters, serviceTypeFilters } = useFiltersList()
   const dispatch = useAppDispatch()
 
   const [multiSelectValues, setMultiSelectValues] = useState<string[]>([])
@@ -20,7 +19,6 @@ export const Filter = () => {
     price: '',
     foodType: '',
     serviceType: '',
-    reviewed: '',
   })
 
   const onSelectChange = (value: string | null, filterName: string) => {
@@ -108,15 +106,6 @@ export const Filter = () => {
           nothingFound={t('no_options')}
           data={serviceTypeFilters}
           onChange={(value) => onSelectChange(value, 'serviceType')}
-          dropdownPosition='top'
-          searchable
-        />
-        <Select
-          label={t('reviewed')}
-          placeholder={t('pick_one')!}
-          nothingFound={t('no_options')}
-          data={reviewedFilters}
-          onChange={(value) => onSelectChange(value, 'reviewed')}
           dropdownPosition='top'
           searchable
         />
