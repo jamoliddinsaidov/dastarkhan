@@ -30,6 +30,7 @@ export const likePost = asyncWrapper(async (req: Request, res: Response) => {
     likedPosts.splice(likedPostIndex, 1)
   } else {
     likedPosts?.push(foodId)
+    await setLikePostNotification(foodId, user as IUser)
   }
 
   await User.findOneAndUpdate({ _id: userId }, { likedPosts })
@@ -123,3 +124,40 @@ export const getFollowers = asyncWrapper(async (req: Request, res: Response) => 
 
   res.status(StatusCodes.OK).json({ success: true, data: followers })
 })
+
+export const getUserNotifications = asyncWrapper(async (req: Request, res: Response) => {
+  const { userId } = req.query
+  const user = await User.findOne({ _id: userId })
+
+  res.status(StatusCodes.OK).json({ succes: true, data: user?.notifications ?? [] })
+})
+
+const setLikePostNotification = async (foodId: string, user: IUser) => {
+  const food = await Food.findOne({ _id: foodId })
+
+  if (food?.user?.userId) {
+    const foodCreatedUserId = food.user.userId
+    const foodCreatedUser = await User.findOne({ _id: foodCreatedUserId })
+    const foodCreatedUserNotifications = foodCreatedUser?.notifications
+    const isAlreadyNotified = foodCreatedUserNotifications?.find(
+      (notification) => notification.what?.whatId === foodId && String(notification.user?.userId) === String(user._id)
+    )
+
+    if (!isAlreadyNotified) {
+      const notification = {
+        age: 'new',
+        type: 'liked',
+        what: {
+          name: 'food',
+          whatId: foodId,
+        },
+        user: {
+          name: user.name,
+          userId: user._id,
+        },
+      }
+      foodCreatedUser?.notifications?.unshift(notification)
+      await foodCreatedUser?.save()
+    }
+  }
+}

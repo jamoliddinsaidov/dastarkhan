@@ -11,6 +11,7 @@ export const getUserForResponse = ({
   followings,
   followers,
   reviews,
+  notifications,
 }: IUser) => {
   return {
     _id,
@@ -23,5 +24,6 @@ export const getUserForResponse = ({
     followings,
     followers,
     reviews,
+    notifications,
   }
 }

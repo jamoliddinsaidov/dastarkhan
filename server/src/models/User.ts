@@ -1,4 +1,34 @@
 import mongoose, { Types } from 'mongoose'
+import { userSubSchema } from './Food.js'
+
+export type NotificationType = 'liked' | 'posted' | 'commented' | 'followed' | 'rated'
+export type NotificationAge = 'new' | 'old'
+
+export const notificationWhatSubSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  whatId: {
+    type: String,
+    required: true,
+  },
+})
+
+export const notificationSubSchema = new mongoose.Schema({
+  age: {
+    type: String,
+    defaultValue: 'new',
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  what: notificationWhatSubSchema,
+  user: userSubSchema,
+})
+
+notificationSubSchema.set('timestamps', true)
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -48,6 +78,10 @@ const UserSchema = new mongoose.Schema({
     type: Array,
     defaultValue: [],
   },
+  notifications: {
+    type: [notificationSubSchema],
+    defaultValue: [],
+  },
 })
 
 UserSchema.index({ '$**': 'text' })
@@ -67,6 +101,7 @@ export interface IUser {
   followings: string[]
   followers: string[]
   reviews: string[]
+  notifications: any[]
   refreshToken?: string | undefined
 }
 

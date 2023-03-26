@@ -8,6 +8,7 @@ import {
   getReviewedPosts,
   likePost,
   getFollowers,
+  getUserNotifications,
 } from '../controllers/userController.js'
 
 export const userRouter = Router()
@@ -20,3 +21,4 @@ userRouter.get('/getAllUsers', getAllUsers)
 userRouter.post('/followToUser', followToUser)
 userRouter.post('/getFollowings', getFollowings)
 userRouter.get('/getFollowers', getFollowers)
+userRouter.get('/getUserNotifications', getUserNotifications)

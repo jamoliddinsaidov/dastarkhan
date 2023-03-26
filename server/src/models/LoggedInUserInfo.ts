@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { notificationSubSchema } from './User.js'
 
 const LoggedInUserInfoSchema = new mongoose.Schema({
   name: {
@@ -37,6 +38,10 @@ const LoggedInUserInfoSchema = new mongoose.Schema({
   },
   reviews: {
     type: Array,
+    defaultValue: [],
+  },
+  notifications: {
+    type: [notificationSubSchema],
     defaultValue: [],
   },
 })
