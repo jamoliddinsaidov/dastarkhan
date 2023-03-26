@@ -7,10 +7,19 @@ import { asyncWrapper } from '../middlewares/index.js'
 import { CommentProps, Food, FoodFilterOptions, FoodRequestBody, IFood } from '../models/Food.js'
 import { REVIEW_ADDED } from '../utils/constants.js'
 import { parseRatingFilter } from '../utils/index.js'
+import { User } from '../models/User.js'
 
 export const addFoodReview = asyncWrapper(async (req: Request, res: Response) => {
   const foodReview: FoodRequestBody = req.body
   const food = await Food.create(foodReview)
+
+  const userId = foodReview.user?.userId
+  if (userId) {
+    const user = await User.findOne({ _id: userId })
+    const userReviews = user?.reviews
+    userReviews?.push(food._id)
+    await User.findOneAndUpdate({ _id: userId }, { reviews: userReviews })
+  }
 
   res.status(StatusCodes.CREATED).json({ success: true, data: food, message: REVIEW_ADDED })
 })
