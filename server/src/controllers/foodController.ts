@@ -120,7 +120,7 @@ export const addComment = asyncWrapper(async (req: Request, res: Response) => {
   const food = (await Food.findOne({ _id: foodId })) as IFood
 
   const comments = food.comments
-  comments.push(newComment)
+  comments.unshift(newComment)
 
   const updatedFood = (await Food.findOneAndUpdate({ _id: foodId }, { comments })) as IFood
   updatedFood.comments = comments
