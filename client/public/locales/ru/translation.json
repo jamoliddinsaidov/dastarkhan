@@ -118,5 +118,8 @@
   "someone_followed_you": "Кто-то подписался на вас!",
   "someone_commented_on_your_review": "Кто-то прокомментировал ваш отзыв!",
   "someone_posted": "Новый отзыв!",
-  "someone_rated_your_review": "Кто-то оценил ваш отзыв!"
+  "someone_rated_your_review": "Кто-то оценил ваш отзыв!",
+  "liked_your_review_about": "понравился ваш отзыв о",
+  "started_following_you": "подписался на вас",
+  "commented_on_your_review": "прокомментировал ваш отзыв о"
 }

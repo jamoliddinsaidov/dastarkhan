@@ -119,5 +119,8 @@
   "someone_followed_you": "Somenone followed you!",
   "someone_commented_on_your_review": "Someone commented on your review!",
   "someone_posted": "New review!",
-  "someone_rated_your_review": "Someone rated your review!"
+  "someone_rated_your_review": "Someone rated your review!",
+  "liked_your_review_about": "liked your review about ",
+  "started_following_you": "started following you",
+  "commented_on_your_review": "commented on your review of "
 }

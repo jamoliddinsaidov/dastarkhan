@@ -118,5 +118,8 @@
   "someone_followed_siz": "Kimdir sizni kuzatishni boshladi!",
   "someone_commented_on_your_review": "Kimdir sizning sharhingizga fikr bildirdi!",
   "someone_posted": "Yangi sharh!",
-  "someone_rated_your_review": "Kimdir sizning sharhingizni baholadi!"
+  "someone_rated_your_review": "Kimdir sizning sharhingizni baholadi!",
+  "liked_your_review_about": "ga sharhingiz yoqdi",
+  "started_following_you": "sizni kuzatishni boshladi",
+  "commented_on_your_review": "sizning sharhingizga fikr bildirdi"
 }

@@ -10,6 +10,7 @@ import { useFoodDetailsStyles } from './FoodDetails.style'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
 import { getServiceType, formatPrice, getFoodType } from '../../utils'
 import { AddComment, Comment } from '../../components'
+import { Toaster } from '../../components/Toaster/Toaster'
 
 export const FoodDetails = () => {
   const { t } = useTranslation()
@@ -17,7 +18,7 @@ export const FoodDetails = () => {
   const dispatch = useAppDispatch()
 
   const foodState = useAppSelector(getFoodState)
-  const { loading, food } = foodState
+  const { loading, food, error } = foodState
   const { foodId } = useParams()
   const { serviceTypeFilters, foodTypeFilters } = useFiltersList()
   const serviceType = getServiceType(serviceTypeFilters, food.serviceType)
@@ -97,6 +98,7 @@ export const FoodDetails = () => {
         </>
       )}
       <LoadingOverlay visible={loading} />
+      <Toaster opened={!!error} text={error} isError />
     </Container>
   )
 }

@@ -9,6 +9,7 @@ import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { loginUser } from '../../store/user/userServices'
 import { getUser } from '../../store/user/userSelectors'
 import { useEffect } from 'react'
+import { Toaster } from '../../components/Toaster/Toaster'
 
 export const Login = () => {
   const { classes } = useLoginStyles()
@@ -89,6 +90,7 @@ export const Login = () => {
         {t('forgot_password')}
       </Link>
       <LoadingOverlay visible={user.loading} overlayBlur={1} />
+      <Toaster opened={!!user.error} text={user.error} isError />
     </Paper>
   )
 }

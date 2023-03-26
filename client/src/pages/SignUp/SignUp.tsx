@@ -24,6 +24,7 @@ import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { registerUser } from '../../store/user/userServices'
 import { getUser } from '../../store/user/userSelectors'
 import { changeUserSuccesStatus } from '../../store/user/userSlice'
+import { Toaster } from '../../components/Toaster/Toaster'
 
 export const SignUp = () => {
   const { classes } = useSignUpStyles()
@@ -175,6 +176,7 @@ export const SignUp = () => {
           <Button onClick={navigateToLogin}>{t('login')}</Button>
         </Flex>
       </Dialog>
+      <Toaster opened={!!user.error} text={user.error} isError />
     </Paper>
   )
 }

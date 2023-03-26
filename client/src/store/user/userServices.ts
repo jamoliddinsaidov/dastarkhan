@@ -64,50 +64,119 @@ export interface NotificationProps {
   createdAt: string
 }
 
-export const registerUser = createAsyncThunk('user/registerUser', async (user: UserRequestBody) => {
-  return await axios.post(registerUrl.href, user)
+export const registerUser = createAsyncThunk(
+  'user/registerUser',
+  async (user: UserRequestBody, { rejectWithValue }) => {
+    try {
+      return await axios.post(registerUrl.href, user)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const loginUser = createAsyncThunk('user/loginUser', async (user: UserRequestBody, { rejectWithValue }) => {
+  try {
+    return await axios.post(loginUrl.href, user)
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const loginUser = createAsyncThunk('user/loginUser', async (user: UserRequestBody) => {
-  return await axios.post(loginUrl.href, user)
+export const logoutUser = createAsyncThunk('user/logoutUser', async (userEmail: string, { rejectWithValue }) => {
+  try {
+    return await axios.post(logoutUrl.href, { email: userEmail })
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const logoutUser = createAsyncThunk('user/logoutUser', async (userEmail: string) => {
-  return await axios.post(logoutUrl.href, { email: userEmail })
+export const getLoggedInUserInfo = createAsyncThunk(
+  'user/getLoggedInUserInfo',
+  async (userEmail: string, { rejectWithValue }) => {
+    try {
+      return await axios.get(getLoggedInUserInforUrl.href, { params: { userEmail } })
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const likePost = createAsyncThunk(
+  'user/likePost',
+  async (likePostInfo: LikePostInfoProps, { rejectWithValue }) => {
+    try {
+      return await axios.post(likePostUrl.href, likePostInfo)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const getLikedPosts = createAsyncThunk(
+  'user/getLikedPosts',
+  async (likedPostsId: string[], { rejectWithValue }) => {
+    try {
+      return await axios.post(getLikedPostsUrl.href, likedPostsId)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const getReviewedPosts = createAsyncThunk(
+  'user/getReviewedPosts',
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      return await axios.get(getReviewedPostsUrl.href, { params: { userId } })
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const getAllUsers = createAsyncThunk('user/getAllUsers', async (searchQuery: string, { rejectWithValue }) => {
+  try {
+    return await axios.get(getAllUsersUrl.href, { params: { searchQuery } })
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const getLoggedInUserInfo = createAsyncThunk('user/getLoggedInUserInfo', async (userEmail: string) => {
-  return await axios.get(getLoggedInUserInforUrl.href, { params: { userEmail } })
+export const followToUser = createAsyncThunk(
+  'user/followToUser',
+  async (followToUserInfo: FollowToUserProps, { rejectWithValue }) => {
+    try {
+      return await axios.post(followToUserUrl.href, followToUserInfo)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const getFollowings = createAsyncThunk('user/getFollowings', async (userIds: string[], { rejectWithValue }) => {
+  try {
+    return await axios.post(getFollowingsUrl.href, userIds)
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const likePost = createAsyncThunk('user/likePost', async (likePostInfo: LikePostInfoProps) => {
-  return await axios.post(likePostUrl.href, likePostInfo)
+export const getFollowers = createAsyncThunk('user/getFollwers', async (userEmail: string, { rejectWithValue }) => {
+  try {
+    return await axios.get(getFollowersUrl.href, { params: { email: userEmail } })
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const getLikedPosts = createAsyncThunk('user/getLikedPosts', async (likedPostsId: string[]) => {
-  return await axios.post(getLikedPostsUrl.href, likedPostsId)
-})
-
-export const getReviewedPosts = createAsyncThunk('user/getReviewedPosts', async (userId: string) => {
-  return await axios.get(getReviewedPostsUrl.href, { params: { userId } })
-})
-
-export const getAllUsers = createAsyncThunk('user/getAllUsers', async (searchQuery?: string) => {
-  return await axios.get(getAllUsersUrl.href, { params: { searchQuery } })
-})
-
-export const followToUser = createAsyncThunk('user/followToUser', async (followToUserInfo: FollowToUserProps) => {
-  return await axios.post(followToUserUrl.href, followToUserInfo)
-})
-
-export const getFollowings = createAsyncThunk('user/getFollowings', async (userIds: string[]) => {
-  return await axios.post(getFollowingsUrl.href, userIds)
-})
-
-export const getFollowers = createAsyncThunk('user/getFollwers', async (userEmail: string) => {
-  return await axios.get(getFollowersUrl.href, { params: { email: userEmail } })
-})
-
-export const getUserNotifications = createAsyncThunk('user/getUserNotifications', async (userId: string) => {
-  return await axios.get(getUserNotificationsUrl.href, { params: { userId } })
-})
+export const getUserNotifications = createAsyncThunk(
+  'user/getUserNotifications',
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      return await axios.get(getUserNotificationsUrl.href, { params: { userId } })
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)

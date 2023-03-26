@@ -15,7 +15,6 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import { useWriteReviewStyles } from './WriteReview.style'
 import { CustomDropzone } from '../../components'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
@@ -25,13 +24,13 @@ import { getUserInfo } from '../../store/user/userSelectors'
 import { getFoodState } from '../../store/food/foodSelectors'
 import { noImageUrl } from '../../utils/constants'
 import { cleanUpInputValues } from '../../utils'
+import { Toaster } from '../../components/Toaster/Toaster'
 
 export const WriteReview = () => {
   const { t } = useTranslation()
   const { classes } = useWriteReviewStyles()
   const { foodTypeFilters, serviceTypeFilters } = useFiltersList()
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const user = useAppSelector(getUserInfo)
   const foodState = useAppSelector(getFoodState)
@@ -214,6 +213,7 @@ export const WriteReview = () => {
           </Text>
         </Flex>
       </Dialog>
+      <Toaster opened={!!foodState.error} text={foodState.error} isError />
     </Container>
   )
 }

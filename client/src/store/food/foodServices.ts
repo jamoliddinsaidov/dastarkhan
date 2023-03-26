@@ -10,8 +10,7 @@ import {
   addCommentUrl,
 } from '../../api/foodReview'
 
-export interface IFood {
-  _id?: string
+export interface IReview {
   rating: number
   city: string
   foodName: string
@@ -25,6 +24,10 @@ export interface IFood {
     name: string
   }
   image: string
+}
+
+export interface IFood extends IReview {
+  _id?: string
   comments: Comment[]
   likes: string[]
 }
@@ -54,34 +57,68 @@ export interface CommentProps {
   comment: string
 }
 
-export const addFoodReview = createAsyncThunk('food/addFoodReview', async (foodReview: IFood) => {
-  return await axios.post(addFoodReviewUrl.href, foodReview)
+export const addFoodReview = createAsyncThunk(
+  'food/addFoodReview',
+  async (foodReview: IReview, { rejectWithValue }) => {
+    try {
+      return await axios.post(addFoodReviewUrl.href, foodReview)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const uploadImage = createAsyncThunk('food/uploadImage', async (formData: FormData, { rejectWithValue }) => {
+  try {
+    return await axios.post(uploadImageUrl.href, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const uploadImage = createAsyncThunk('food/uploadImage', async (formData: FormData) => {
-  return await axios.post(uploadImageUrl.href, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
+export const getAllFoodReviews = createAsyncThunk('food/getAllFoodReviews', async (_, { rejectWithValue }) => {
+  try {
+    return await axios.get(getAllFoodReviewsUrl.href)
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const getAllFoodReviews = createAsyncThunk('food/getAllFoodReviews', async () => {
-  return await axios.get(getAllFoodReviewsUrl.href)
+export const filterFoods = createAsyncThunk(
+  'food/filterFoods',
+  async (query: FoodFilterOptions, { rejectWithValue }) => {
+    try {
+      return await axios.post(getFilterFoodsUrl.href, query)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const searchFoods = createAsyncThunk('food/searchFoods', async (searchValue: string, { rejectWithValue }) => {
+  try {
+    return await axios.post(searchFoodsUrl.href, { search: searchValue })
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const filterFoods = createAsyncThunk('food/filterFoods', async (query: FoodFilterOptions) => {
-  return await axios.post(getFilterFoodsUrl.href, query)
+export const getFoodById = createAsyncThunk('food/getFoodById', async (foodId: string, { rejectWithValue }) => {
+  try {
+    return await axios.get(getFoodReviewByIdUrl.href, { params: { foodId } })
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })
 
-export const searchFoods = createAsyncThunk('food/searchFoods', async (searchValue: string) => {
-  return await axios.post(searchFoodsUrl.href, { search: searchValue })
-})
-
-export const getFoodById = createAsyncThunk('food/getFoodById', async (foodId: string) => {
-  return await axios.get(getFoodReviewByIdUrl.href, { params: { foodId } })
-})
-
-export const addComment = createAsyncThunk('food/addComment', async (comment: CommentProps) => {
-  return await axios.post(addCommentUrl.href, comment)
+export const addComment = createAsyncThunk('food/addComment', async (comment: CommentProps, { rejectWithValue }) => {
+  try {
+    return await axios.post(addCommentUrl.href, comment)
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
 })

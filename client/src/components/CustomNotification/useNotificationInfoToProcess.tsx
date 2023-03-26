@@ -32,7 +32,7 @@ export const useNotificationInfoToProcess = (
       const icon = <IconHeart size='1rem' />
       const body = (
         <>
-          <Link to={userLink}>{userName}</Link> liked your review about <Link to={foodLink}>{foodName}</Link>
+          <Link to={userLink}>{userName}</Link> {t('liked_your_review_about')} <Link to={foodLink}>{foodName}</Link>
         </>
       )
 
@@ -44,7 +44,7 @@ export const useNotificationInfoToProcess = (
       const icon = <IconUserHeart size='1rem' />
       const body = (
         <>
-          <Link to={userLink}>{userName}</Link> started following you
+          <Link to={userLink}>{userName}</Link> {t('started_following_you')}
         </>
       )
       return { title, color, icon, body }
@@ -55,7 +55,7 @@ export const useNotificationInfoToProcess = (
       const icon = <IconMessage size='1rem' />
       const body = (
         <>
-          <Link to={userLink}>{userName}</Link> commented on your review of <Link to={foodLink}>{foodName}</Link>
+          <Link to={userLink}>{userName}</Link> {t('commented_on_your_review')} <Link to={foodLink}>{foodName}</Link>
         </>
       )
       return { title, color, icon, body }

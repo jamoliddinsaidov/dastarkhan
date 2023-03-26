@@ -7,6 +7,7 @@ export const getFoodsAndLoadingState = (state: RootState) => ({
   foods: state.food.foods as IFood[],
   isLoading: state.food.loading,
   success: state.food.success,
+  error: state.food.error,
 })
 export const getIsAddingComment = (state: RootState) => state.food.isAddingComment
 export const getAllFoods = (state: RootState) => state.food.foods as IFood[]

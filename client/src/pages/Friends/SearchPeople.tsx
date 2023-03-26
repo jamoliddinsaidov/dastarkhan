@@ -28,7 +28,7 @@ export const SearchPeople = ({ activeTab }: SearchPeopleProps) => {
 
   useEffect(() => {
     if (activeTab === 'people') {
-      dispatch(getAllUsers())
+      dispatch(getAllUsers(''))
     }
   }, [activeTab])
 
