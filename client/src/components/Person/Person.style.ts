@@ -10,4 +10,9 @@ export const usePersonStyles = createStyles((theme) => ({
     color: theme.colors.orange[5],
     fontWeight: 600,
   },
+
+  disabledBtn: {
+    cursor: 'none',
+    pointerEvents: 'none',
+  },
 }))

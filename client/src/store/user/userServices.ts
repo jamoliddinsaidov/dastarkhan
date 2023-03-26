@@ -72,8 +72,8 @@ export const getReviewedPosts = createAsyncThunk('user/getReviewedPosts', async 
   return await axios.get(getReviewedPostsUrl.href, { params: { userId } })
 })
 
-export const getAllUsers = createAsyncThunk('user/getAllUsers', async () => {
-  return await axios.get(getAllUsersUrl.href)
+export const getAllUsers = createAsyncThunk('user/getAllUsers', async (searchQuery?: string) => {
+  return await axios.get(getAllUsersUrl.href, { params: { searchQuery } })
 })
 
 export const followToUser = createAsyncThunk('user/followToUser', async (followToUserInfo: FollowToUserProps) => {

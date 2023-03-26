@@ -112,5 +112,7 @@
   "unfollow": "Unfollow",
   "followers_text": "followers",
   "follower_text": "follower",
-  "friends": "Friends"
+  "friends": "Friends",
+  "following": "Following",
+  "follow_back": "Follow Back"
 }

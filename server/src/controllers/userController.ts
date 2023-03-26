@@ -54,7 +54,14 @@ export const getReviewedPosts = asyncWrapper(async (req: Request, res: Response)
 })
 
 export const getAllUsers = asyncWrapper(async (req: Request, res: Response) => {
-  const users = await User.find({}).select('_id name reviews followers')
+  const searchQuery = req.query?.searchQuery
+  let filter = {}
+
+  if (searchQuery) {
+    filter = { $text: { $search: searchQuery } }
+  }
+
+  const users = await User.find(filter).select('_id name reviews followers')
 
   res.status(StatusCodes.OK).json({ success: true, data: users })
 })

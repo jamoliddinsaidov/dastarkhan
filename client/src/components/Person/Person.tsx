@@ -40,6 +40,8 @@ export const Person = ({ name, _id: userId, reviews, followers, activeTab }: Per
     return null
   }
 
+  const isFollowing = currentUser.followings.includes(userId)
+
   return (
     <Paper withBorder radius='md' className={classes.wrapper}>
       <Flex align='center' justify='space-between'>
@@ -56,10 +58,22 @@ export const Person = ({ name, _id: userId, reviews, followers, activeTab }: Per
             </Text>
           </Flex>
         </Flex>
-        {!isActiveTabFollowers && (
+        {!isActiveTabFollowers ? (
           <Button variant='outline' px='xl' onClick={onFollow} loading={isLoading}>
             {followText}
           </Button>
+        ) : (
+          <>
+            {isFollowing ? (
+              <Button variant='default' px='xl' className={classes.disabledBtn}>
+                {t('following')}
+              </Button>
+            ) : (
+              <Button variant='outline' px='xl' onClick={onFollow} loading={isLoading}>
+                {t('follow_back')}
+              </Button>
+            )}
+          </>
         )}
       </Flex>
     </Paper>

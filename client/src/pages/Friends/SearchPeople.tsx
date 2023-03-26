@@ -23,9 +23,7 @@ export const SearchPeople = ({ activeTab }: SearchPeopleProps) => {
   }
 
   const onSearchClick = () => {
-    if (searchValue) {
-      //  dispatch()
-    }
+    dispatch(getAllUsers(searchValue))
   }
 
   useEffect(() => {
