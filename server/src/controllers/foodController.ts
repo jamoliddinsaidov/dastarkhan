@@ -7,7 +7,7 @@ import { asyncWrapper } from '../middlewares/index.js'
 import { CommentProps, Food, FoodFilterOptions, FoodRequestBody, IFood } from '../models/Food.js'
 import { REVIEW_ADDED } from '../utils/constants.js'
 import { parseRatingFilter } from '../utils/index.js'
-import { User } from '../models/User.js'
+import { NotificationType, User } from '../models/User.js'
 
 export const addFoodReview = asyncWrapper(async (req: Request, res: Response) => {
   const foodReview: FoodRequestBody = req.body
@@ -16,9 +16,8 @@ export const addFoodReview = asyncWrapper(async (req: Request, res: Response) =>
   const userId = foodReview.user?.userId
   if (userId) {
     const user = await User.findOne({ _id: userId })
-    const userReviews = user?.reviews
-    userReviews?.push(food._id)
-    await User.findOneAndUpdate({ _id: userId }, { reviews: userReviews })
+    user?.reviews?.push(food._id)
+    await user?.save()
   }
 
   res.status(StatusCodes.CREATED).json({ success: true, data: food, message: REVIEW_ADDED })
@@ -117,13 +116,42 @@ export const addComment = asyncWrapper(async (req: Request, res: Response) => {
     comment,
   }
 
-  const food = (await Food.findOne({ _id: foodId })) as IFood
+  const food = await Food.findOne({ _id: foodId })
+  food?.comments.unshift(newComment)
+  await food?.save()
+  await setCommentNotification(food as unknown as IFood, foodId, userId, userName)
 
-  const comments = food.comments
-  comments.unshift(newComment)
-
-  const updatedFood = (await Food.findOneAndUpdate({ _id: foodId }, { comments })) as IFood
-  updatedFood.comments = comments
-
-  res.status(StatusCodes.OK).json({ success: true, data: updatedFood })
+  res.status(StatusCodes.OK).json({ success: true, data: food })
 })
+
+const setCommentNotification = async (
+  food: IFood,
+  foodId: string,
+  commentedUserId: string,
+  commentedUserName: string
+) => {
+  try {
+    const foodCreatedUserId = food?.user?.userId
+
+    if (foodCreatedUserId && commentedUserId !== foodCreatedUserId) {
+      const notification = {
+        age: 'new',
+        type: NotificationType.COMMENTED,
+        what: {
+          name: 'comment',
+          whatId: foodId,
+        },
+        user: {
+          name: commentedUserName,
+          userId: commentedUserId,
+        },
+      }
+
+      const foodCreatedUser = await User.findOne({ _id: foodCreatedUserId })
+      foodCreatedUser?.notifications?.unshift(notification)
+      await foodCreatedUser?.save()
+    }
+  } catch (error: any) {
+    throw new Error(error.message)
+  }
+}

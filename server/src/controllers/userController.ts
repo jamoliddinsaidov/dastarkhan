@@ -4,7 +4,7 @@ import { BadRequestError } from '../errors/index.js'
 import { asyncWrapper } from '../middlewares/index.js'
 import { PROVIDE_EMAIL } from '../utils/constants.js'
 import { LoggedInUserInfo } from '../models/LoggedInUserInfo.js'
-import { IUser, User } from '../models/User.js'
+import { IUser, NotificationType, User } from '../models/User.js'
 import { Food } from '../models/Food.js'
 
 export const getLoggedInUserInfo = asyncWrapper(async (req: Request, res: Response) => {
@@ -133,31 +133,35 @@ export const getUserNotifications = asyncWrapper(async (req: Request, res: Respo
 })
 
 const setLikePostNotification = async (foodId: string, user: IUser) => {
-  const food = await Food.findOne({ _id: foodId })
+  try {
+    const food = await Food.findOne({ _id: foodId })
+    const foodCreatedUserId = food?.user?.userId
 
-  if (food?.user?.userId) {
-    const foodCreatedUserId = food.user.userId
-    const foodCreatedUser = await User.findOne({ _id: foodCreatedUserId })
-    const foodCreatedUserNotifications = foodCreatedUser?.notifications
-    const isAlreadyNotified = foodCreatedUserNotifications?.find(
-      (notification) => notification.what?.whatId === foodId && String(notification.user?.userId) === String(user._id)
-    )
+    if (foodCreatedUserId) {
+      const foodCreatedUser = await User.findOne({ _id: foodCreatedUserId })
+      const foodCreatedUserNotifications = foodCreatedUser?.notifications
+      const isAlreadyNotified = foodCreatedUserNotifications?.find(
+        (notification) => notification.what?.whatId === foodId && String(notification.user?.userId) === String(user._id)
+      )
 
-    if (!isAlreadyNotified) {
-      const notification = {
-        age: 'new',
-        type: 'liked',
-        what: {
-          name: 'food',
-          whatId: foodId,
-        },
-        user: {
-          name: user.name,
-          userId: user._id,
-        },
+      if (!isAlreadyNotified) {
+        const notification = {
+          age: 'new',
+          type: NotificationType.LIKED,
+          what: {
+            name: 'food',
+            whatId: foodId,
+          },
+          user: {
+            name: user.name,
+            userId: user._id,
+          },
+        }
+        foodCreatedUser?.notifications?.unshift(notification)
+        await foodCreatedUser?.save()
       }
-      foodCreatedUser?.notifications?.unshift(notification)
-      await foodCreatedUser?.save()
     }
+  } catch (error: any) {
+    throw new Error(error.message)
   }
 }

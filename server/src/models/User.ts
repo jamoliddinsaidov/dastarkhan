@@ -1,7 +1,13 @@
 import mongoose, { Types } from 'mongoose'
 import { userSubSchema } from './Food.js'
 
-export type NotificationType = 'liked' | 'posted' | 'commented' | 'followed' | 'rated'
+export enum NotificationType {
+  LIKED = 'liked',
+  POSTED = 'posted',
+  COMMENTED = 'commented',
+  FOLLOWED = 'followed',
+  RATED = 'rated',
+}
 export type NotificationAge = 'new' | 'old'
 
 export const notificationWhatSubSchema = new mongoose.Schema({

@@ -19,18 +19,17 @@ export const useNotificationInfoToProcess = (
 ) => {
   const foods = useAppSelector(getAllFoods)
 
+  const foodLink = `/browse/food/${what.whatId}`
+  const foodName = foods.find((food) => food._id === what.whatId)?.foodName
+
+  const userLink = `/user/${user.userId}`
+  const userName = user.name
+
   switch (type) {
     case 'liked': {
       const title = t('someone_liked_your_review')
       const color = 'pink'
       const icon = <IconHeart size='1rem' />
-
-      const foodLink = `/browse/food/${what.whatId}`
-      const foodName = foods.find((food) => food._id === what.whatId)?.foodName
-
-      const userLink = `/user/${user.userId}`
-      const userName = user.name
-
       const body = (
         <>
           <Link to={userLink}>{userName}</Link> liked your review about <Link to={foodLink}>{foodName}</Link>
@@ -48,9 +47,13 @@ export const useNotificationInfoToProcess = (
     }
     case 'commented': {
       const title = t('someone_commented_on_your_review')
-      const color = 'orange'
+      const color = 'indigo'
       const icon = <IconMessage size='1rem' />
-      const body = ''
+      const body = (
+        <>
+          <Link to={userLink}>{userName}</Link> commented on your review of <Link to={foodLink}>{foodName}</Link>
+        </>
+      )
       return { title, color, icon, body }
     }
     case 'posted': {

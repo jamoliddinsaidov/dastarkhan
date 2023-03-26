@@ -40,10 +40,6 @@ const LoggedInUserInfoSchema = new mongoose.Schema({
     type: Array,
     defaultValue: [],
   },
-  notifications: {
-    type: [notificationSubSchema],
-    defaultValue: [],
-  },
 })
 
 LoggedInUserInfoSchema.set('timestamps', true)
