@@ -123,5 +123,14 @@
   "started_following_you": "sizni kuzatishni boshladi",
   "commented_on_your_review": "sizning sharhingizga fikr bildirdi",
   "under_maintenance": "Qurilish jarayonida",
-  "under_maintenance_description": "Siz foydalanmoqchi bo'lgan sahifa hozirda qurilmoqda va tez orada ishlatishga tayyor bo'ladi"
+  "under_maintenance_description": "Siz foydalanmoqchi bo'lgan sahifa hozirda qurilmoqda va tez orada ishlatishga tayyor bo'ladi",
+  "contact_information": "Kontakt ma'lumotlari",
+  "get_in_touch": "Bog'lanish",
+  "send_message": "Xabar yuborish",
+  "subject": "Mavzu",
+  "your_message": "Sizning xabaringiz",
+  "relevant_info": "Iltimos, barcha tegishli ma'lumotlarni kiriting",
+  "phone_number": "Telefon raqami",
+  "address": "Manzil",
+  "working_hours": "Ish vaqti"
 }

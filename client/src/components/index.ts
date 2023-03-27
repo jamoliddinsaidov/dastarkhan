@@ -14,6 +14,7 @@ import { FoodsList } from './FoodsList/FoodsList'
 import { Person } from './Person/Person'
 import { CustomNotification } from './CustomNotification/CustomNotification'
 import { UnderMaintenance } from './UnderMaintenance/UnderMaintenance'
+import { ContactUs } from './ContactUs/ContactUs'
 
 export {
   Filter,
@@ -32,4 +33,5 @@ export {
   Person,
   CustomNotification,
   UnderMaintenance,
+  ContactUs,
 }

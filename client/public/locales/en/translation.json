@@ -124,5 +124,14 @@
   "started_following_you": "started following you",
   "commented_on_your_review": "commented on your review of",
   "under_maintenance": "Under Maintenance",
-  "under_maintenance_description": "The page you are trying to use is currently under maintenance and will be working properly soon."
+  "under_maintenance_description": "The page you are trying to use is currently under maintenance and will be working properly soon.",
+  "contact_information": "Contact information",
+  "get_in_touch": "Get in touch",
+  "send_message": "Send message",
+  "subject": "Subject",
+  "your_message": "Your message",
+  "relevant_info": "Please include all relevant information",
+  "phone_number": "Phone number",
+  "address": "Address",
+  "working_hours": "Working hours"
 }
