@@ -132,5 +132,14 @@
   "relevant_info": "Iltimos, barcha tegishli ma'lumotlarni kiriting",
   "phone_number": "Telefon raqami",
   "address": "Manzil",
-  "working_hours": "Ish vaqti"
+  "working_hours": "Ish vaqti",
+  "contact_us": "Biz bilan bog'laning",
+  "motto_features": "Dastarkhan bilan O'zbekiston lazzatlariga sho'ng'ing",
+  "motto_description": "Siz yangi kelgan yoki mahalliy aholi bo'lishingizdan qat'i nazar, Dastarkhan yashirin pazandalik boyliklarini kashf qilish uchun asosiy yo'lboshchingiz bo'la oladi.",
+  "feature_1_title": "Mahalliy noyob taomlarni osongina kashf eting",
+  "feature_1_description": "O'zbekistondagi eng yaxshi mahalliy restoran va taomlarni osongina toping. Haqiqiy mijozlardan batafsil sharhlar, baholar va fotosuratlarni oling.",
+  "feature_2_title": "Do'stlar bilan bog'laning",
+  "feature_2_description": "Postlarga fikr bildiring, like bosing, saqlang va boshqa foydalanuvchilarni kuzatib boring. Taomga bo'lgan muhabbatini baham ko'radiganlar hamjamiyatiga qo'shiling.",
+  "feature_3_title": "Mahalliy restoranlarning rivojlanishiga yordam bering",
+  "feature_3_description": "Ularga o'z takliflarini yaxshilash, menyusini yaxshilash, narxlarini moslashtirish va mijozlarga xizmat ko'rsatishni yaxshilashga yordam berish uchun qimmatli fikr-mulohazalarni taqdim eting."
 }

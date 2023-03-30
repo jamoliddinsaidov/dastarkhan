@@ -15,6 +15,7 @@ import { Person } from './Person/Person'
 import { CustomNotification } from './CustomNotification/CustomNotification'
 import { UnderMaintenance } from './UnderMaintenance/UnderMaintenance'
 import { ContactUs } from './ContactUs/ContactUs'
+import { Features } from './Features/Features'
 
 export {
   Filter,
@@ -34,4 +35,5 @@ export {
   CustomNotification,
   UnderMaintenance,
   ContactUs,
+  Features,
 }
