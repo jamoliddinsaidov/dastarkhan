@@ -1,5 +1,3 @@
-import { authRouter } from './authRouter.js'
-import { userRouter } from './userRouter.js'
-import { foodRouter } from './foodRouter.js'
-
-export { authRouter, userRouter, foodRouter }
+export { authRouter } from './authRouter.js'
+export { userRouter } from './userRouter.js'
+export { foodRouter } from './foodRouter.js'

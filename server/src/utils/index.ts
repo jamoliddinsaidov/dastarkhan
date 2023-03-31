@@ -1,4 +1,2 @@
-import { getUserForResponse } from './getUserForResponse.js'
-import { parseRatingFilter } from './parseRatingFilter.js'
-
-export { getUserForResponse, parseRatingFilter }
+export { getUserForResponse } from './getUserForResponse.js'
+export { parseRatingFilter } from './parseRatingFilter.js'
