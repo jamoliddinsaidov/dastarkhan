@@ -6,19 +6,19 @@ export const useGeneralHeaderLinks = () => {
   const { t } = useTranslation()
   const links = [
     {
-      link: 'browse',
+      link: '/browse',
       label: t('browse'),
     },
     {
-      link: 'writeReview',
+      link: '/writeReview',
       label: t('write_a_review'),
     },
     {
-      link: 'login',
+      link: '/login',
       label: t('login'),
     },
     {
-      link: 'signup',
+      link: '/signup',
       label: t('signup'),
     },
   ]

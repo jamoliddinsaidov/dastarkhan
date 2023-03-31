@@ -16,6 +16,7 @@ import { CustomNotification } from './CustomNotification/CustomNotification'
 import { UnderMaintenance } from './UnderMaintenance/UnderMaintenance'
 import { ContactUs } from './ContactUs/ContactUs'
 import { Features } from './Features/Features'
+import { Footer } from './Footer/Footer'
 
 export {
   Filter,
@@ -36,4 +37,5 @@ export {
   UnderMaintenance,
   ContactUs,
   Features,
+  Footer,
 }

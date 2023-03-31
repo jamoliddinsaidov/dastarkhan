@@ -1,4 +1,4 @@
-import { ContactUs, Features, HeroWithBackground } from '../../components'
+import { ContactUs, Features, Footer, HeroWithBackground } from '../../components'
 
 export const Home = () => {
   return (
@@ -6,6 +6,7 @@ export const Home = () => {
       <HeroWithBackground />
       <Features />
       <ContactUs />
+      <Footer />
     </>
   )
 }
