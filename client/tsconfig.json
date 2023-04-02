@@ -18,7 +18,8 @@
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["vite/client"]
   },
   "include": ["src", "../vite-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
