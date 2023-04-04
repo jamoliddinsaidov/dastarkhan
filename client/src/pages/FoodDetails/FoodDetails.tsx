@@ -2,7 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { IconBread, IconHome, IconMoneybag, IconStar, IconUser } from '@tabler/icons-react'
-import { Container, Divider, Flex, Image, LoadingOverlay, Skeleton, Text, Title } from '@mantine/core'
+import {
+  Button,
+  Container,
+  Divider,
+  Flex,
+  Image,
+  LoadingOverlay,
+  Skeleton,
+  Slider,
+  Text,
+  Title,
+  rem,
+} from '@mantine/core'
 import { getFoodState } from '../../store/food/foodSelectors'
 import { getFoodById } from '../../store/food/foodServices'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
@@ -21,6 +33,7 @@ export const FoodDetails = () => {
   const { loading, food, error } = foodState
   const { foodId } = useParams()
   const { serviceTypeFilters, foodTypeFilters } = useFiltersList()
+  const [userRating, setUserRating] = useState(0)
   const serviceType = getServiceType(serviceTypeFilters, food.serviceType)
   const foodType = getFoodType(foodTypeFilters, food.foodType)
 
@@ -77,12 +90,33 @@ export const FoodDetails = () => {
                   <Text className={classes.marginLeft}>{food.user.name}</Text>
                 )}
               </Flex>
+              <Flex className={classes.marginBottom} align='center'>
+                <Slider
+                  labelTransition='skew-down'
+                  labelTransitionDuration={150}
+                  labelTransitionTimingFunction='ease'
+                  min={0}
+                  max={5}
+                  step={0.5}
+                  size='xl'
+                  w={rem(280)}
+                  value={userRating}
+                  onChange={(value) => setUserRating(value)}
+                />
+                <Button ml={rem(16)} radius='lg'>
+                  {t('rate')}
+                </Button>
+              </Flex>
             </div>
           </Flex>
           <section className={classes.marginBottom}>
             <Text className={classes.label}>{t('review')}:</Text>
             <Text>{food.review}</Text>
           </section>
+          <Flex align='center' justify='flex-end'>
+            <Button>{t('save')}</Button>
+            <Button ml={rem(8)}>{t('recommend')}</Button>
+          </Flex>
 
           <Divider className={classes.divider} size='sm' id='comment_section' />
           <AddComment foodId={foodId ?? ''} />

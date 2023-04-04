@@ -142,5 +142,8 @@
   "feature_2_title": "Connect with Fellow Foodies",
   "feature_2_description": "Like, save, and comment on posts, and follow other users. Join a community of passionate foodies who share your love of food.",
   "feature_3_title": "Help Local Restaurants Thrive",
-  "feature_3_description": "Provide valuable feedback to help them improve their offerings, refine their menu, adjust their prices, and enhance their customer service."
+  "feature_3_description": "Provide valuable feedback to help them improve their offerings, refine their menu, adjust their prices, and enhance their customer service.",
+  "rate": "Rate",
+  "save": "Save",
+  "recommend": "Recommend"
 }
