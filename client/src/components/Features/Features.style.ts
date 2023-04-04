@@ -4,6 +4,10 @@ export const useFeaturesStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: '80vh',
     marginTop: rem(64),
+
+    [theme.fn.largerThan('xxl')]: {
+    minHeight: '60vh',
+    },
   },
 
   title: {

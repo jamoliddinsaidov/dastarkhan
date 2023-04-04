@@ -38,7 +38,7 @@ export const Footer = () => {
         </div>
 
         <Text color='dimmed' size='sm' className={classes.copyright}>
-          <Link to='https://github.com/jamoliddinsaidov' target='_blank'>
+          <Link to='https://github.com/jamoliddinsaidov/dastarkhan' target='_blank'>
             Jamoliddin Saidov
           </Link>
           , 2023

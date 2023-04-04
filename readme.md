@@ -1,5 +1,7 @@
 # Dastarkhan
 
+Dastarkhan is a web application that enables users to discover and share local food experiences in Uzbekistan. It features a review and rating system, search and filter functions, and user accounts with various features (liking or saving posts, following people, receiving notifications, or recommending food).
+
 ## Prerequisites to run the project locally
 
 - Make sure to have Node.js 14+ installed on your device
@@ -22,4 +24,4 @@ If the steps are completed successfully, the web application should be available
 
 If the steps are completed successfully, the server should be available at port `3000` or whatever the port you have provided in the `.env` file.
 
-- some of the keys should acquired from [MongoDB](https://www.mongodb.com/) and [Cloudinary](https://cloudinary.com/) to run the server fully, otherwise you will face errors.
+\* some of the keys should acquired from [MongoDB](https://www.mongodb.com/) and [Cloudinary](https://cloudinary.com/) to run the server fully, otherwise you will face errors.
