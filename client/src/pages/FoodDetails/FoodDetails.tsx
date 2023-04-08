@@ -90,7 +90,7 @@ export const FoodDetails = () => {
                   <Text className={classes.marginLeft}>{food.user.name}</Text>
                 )}
               </Flex>
-              <Flex className={classes.marginBottom} align='center'>
+              {/* <Flex className={classes.marginBottom} align='center'>
                 <Slider
                   labelTransition='skew-down'
                   labelTransitionDuration={150}
@@ -106,17 +106,17 @@ export const FoodDetails = () => {
                 <Button ml={rem(16)} radius='lg'>
                   {t('rate')}
                 </Button>
-              </Flex>
+              </Flex> */}
             </div>
           </Flex>
           <section className={classes.marginBottom}>
             <Text className={classes.label}>{t('review')}:</Text>
             <Text>{food.review}</Text>
           </section>
-          <Flex align='center' justify='flex-end'>
+          {/* <Flex align='center' justify='flex-end'>
             <Button>{t('save')}</Button>
             <Button ml={rem(8)}>{t('recommend')}</Button>
-          </Flex>
+          </Flex> */}
 
           <Divider className={classes.divider} size='sm' id='comment_section' />
           <AddComment foodId={foodId ?? ''} />
