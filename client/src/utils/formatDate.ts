@@ -16,5 +16,5 @@ export const formatDate = (date: string | null) => {
   let minutes: number | string = dateObj.getMinutes()
   minutes = minutes < 10 ? `0${minutes}` : minutes
 
-  return `at ${hours}:${minutes} on ${fullDate}`
+  return `${hours}:${minutes}, ${fullDate}`
 }
