@@ -155,6 +155,7 @@ export const WriteReview = () => {
               onChange={(value) => form.setFieldValue('price', Number(value))}
               error={form.errors?.price}
               type='number'
+              min={0}
             />
 
             <Select
