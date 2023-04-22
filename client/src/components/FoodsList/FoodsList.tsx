@@ -3,22 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { useAppDispatch } from '../../store/hooks'
-import { FoodCard } from '../FoodCard/FoodCard'
+import { FoodCard, FoodCardProps } from '../FoodCard/FoodCard'
 import { useFoodsListStyles } from './FoodsList.style'
 
-interface Foods {
-  id: string
-  image: string
-  title: string
-  city: string
-  description: string
-  badges: string[]
-  stars: number
-  price: string | number
-}
-
 interface FoodsListProps {
-  foods: Foods[]
+  foods: FoodCardProps[]
   success?: boolean
   onLikeCallback?: (likedPosts: string[]) => void
 }
