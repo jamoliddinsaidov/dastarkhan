@@ -33,11 +33,12 @@ export const SignUp = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const user = useAppSelector(getUser)
+  const maxAgeDate = dayjs(new Date()).subtract(16, 'year').toDate()
 
   const form = useForm({
     initialValues: {
       email: '',
-      dateOfBirth: new Date(),
+      dateOfBirth: maxAgeDate,
       gender: 'male',
       name: '',
       password: '',
@@ -46,7 +47,7 @@ export const SignUp = () => {
 
     validate: {
       name: (val) => (val.length >= 3 ? null : t('name_error_message')),
-      dateOfBirth: (val) => (val.getFullYear() === new Date().getFullYear() ? t('dob_error_message') : null),
+      dateOfBirth: (val) => (val === maxAgeDate ? t('dob_error_message') : null),
       email: (val) => (/^\S+@\S+$/.test(val) ? null : t('invalid_email')),
       password: (val) => (val.length <= 6 ? t('invalid_password') : null),
     },
@@ -58,7 +59,7 @@ export const SignUp = () => {
 
   const navigateToLogin = () => {
     navigate('/login')
-    dispatch(changeLink('login'))
+    dispatch(changeLink('/login'))
     dispatch(changeUserSuccesStatus())
   }
 
@@ -89,7 +90,7 @@ export const SignUp = () => {
             error={form.errors?.dateOfBirth}
             label={t('date_of_birth')}
             placeholder={t('date_of_birth')!}
-            maxDate={dayjs(new Date()).add(1, 'month').toDate()}
+            maxDate={maxAgeDate}
           />
 
           <Text className={classes.text}>{t('gender')}</Text>

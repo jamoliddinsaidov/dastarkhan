@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { useHeroWithBackgroundStyles } from './HeroWithBackground.style'
 import { useAppDispatch } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
-import { getPathnameWithoutSlash } from '../../utils'
 
 export function HeroWithBackground() {
   const { t } = useTranslation()
@@ -15,7 +14,7 @@ export function HeroWithBackground() {
 
   const onNavigate = (pathname: string) => {
     navigate(pathname)
-    dispatch(changeLink(getPathnameWithoutSlash(pathname)))
+    dispatch(changeLink(pathname))
   }
 
   return (

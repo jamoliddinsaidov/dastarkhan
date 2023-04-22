@@ -7,7 +7,6 @@ import { useGeneralHeaderLinks } from './generalHeaderLinks'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { getIsUserLoggedIn } from '../../store/user/userSelectors'
-import { getPathnameWithoutSlash } from '../../utils'
 import { LanguageSelect, ThemeToggle, UserDropdown } from '..'
 
 export const GeneralHeader = () => {
@@ -38,7 +37,6 @@ export const GeneralHeader = () => {
 
   const navigateToHome = () => {
     navigate('home')
-    dispatch(changeLink('home'))
 
     // mobile menu closing
     if (opened) {
@@ -47,7 +45,7 @@ export const GeneralHeader = () => {
   }
 
   useEffect(() => {
-    dispatch(changeLink(getPathnameWithoutSlash(pathname)))
+    dispatch(changeLink(pathname))
   }, [])
 
   return (

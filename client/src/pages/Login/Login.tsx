@@ -39,11 +39,11 @@ export const Login = () => {
   }
 
   useEffect(() => {
-    if (user.success) {
+    if (user.user?._id) {
       navigate('/browse')
-      onLinkClick('browse')
+      onLinkClick('/browse')
     }
-  }, [user.success])
+  }, [user.user])
 
   return (
     <Paper className={classes.form} shadow='md' withBorder radius='md' p='xl'>
@@ -81,12 +81,12 @@ export const Login = () => {
       </form>
       <Text ta='center' mt='md'>
         {t('dont_have_account')}
-        <Link to='/signup' className={classes.link} onClick={() => onLinkClick('signup')}>
+        <Link to='/signup' className={classes.link} onClick={() => onLinkClick('/signup')}>
           {t('signup')}
         </Link>
       </Text>
 
-      <Link to='/forgotPassword' className={classes.forgotPasswordLink} onClick={() => onLinkClick('forgotPassword')}>
+      <Link to='/forgotPassword' className={classes.forgotPasswordLink} onClick={() => onLinkClick('/forgotPassword')}>
         {t('forgot_password')}
       </Link>
       <LoadingOverlay visible={user.loading} overlayBlur={1} />

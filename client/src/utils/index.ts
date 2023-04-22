@@ -1,4 +1,3 @@
-export { getPathnameWithoutSlash } from './getPathnameWithoutSlash'
 export {
   getIsUserLoggedInFromLocalStorage,
   setIsUserLoggedInToLocalStorage,

@@ -47,7 +47,7 @@ export const FoodsList = ({ foods, success = false, onLikeCallback }: FoodsListP
           {success && (
             <>
               <Title align='center'>{t('nothing_found_search')}</Title>
-              <Link to='/writeReview' className={classes.link} onClick={() => onChangeLink('writeReview')}>
+              <Link to='/writeReview' className={classes.link} onClick={() => onChangeLink('/writeReview')}>
                 {t('try_adding_review')}
               </Link>
             </>

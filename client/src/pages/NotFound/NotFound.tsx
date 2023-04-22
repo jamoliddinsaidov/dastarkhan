@@ -1,7 +1,6 @@
 import { Title, Text, Button, Container, Group } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { changeLink } from '../../store/activeLink/activeLinkSlice'
 import { useAppDispatch } from '../../store/hooks'
 import { useNotFoundStyles } from './NotFound.style'
 
@@ -14,7 +13,6 @@ export const NotFound = () => {
 
   const onClick = () => {
     navigate('home')
-    dispatch(changeLink('home'))
   }
 
   return (
