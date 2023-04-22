@@ -71,7 +71,10 @@ export const login = asyncWrapper(async (req: Request, res: Response) => {
 
   const userData = getUserForResponse(user)
 
-  await LoggedInUserInfo.create(userData)
+  const isUserLoggedInBefore = await LoggedInUserInfo.findOne({ _id: userData._id }).select('_id')
+  if (!isUserLoggedInBefore) {
+    await LoggedInUserInfo.create(userData)
+  }
 
   res.status(StatusCodes.OK).json({ succes: true, message: USER_LOGGED_IN, data: userData })
 })
