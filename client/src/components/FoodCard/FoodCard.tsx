@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IconCopy, IconHeart, IconMessage, IconStar } from '@tabler/icons-react'
 import { Card, Image, Text, Group, Badge, Button, ActionIcon, Flex, Skeleton, Tooltip } from '@mantine/core'
-import { useFoodCardStyles } from './FoodCard.style'
 import { useTranslation } from 'react-i18next'
+import { useFoodCardStyles } from './FoodCard.style'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
 import { Toaster } from '../Toaster/Toaster'
@@ -18,6 +18,7 @@ export interface FoodCardProps {
   badges: string[]
   stars: number
   price: string | number
+  createdUserId: string
   onLikeCallback?: (likedPosts: string[]) => void
 }
 
@@ -30,6 +31,7 @@ export const FoodCard = ({
   badges,
   stars,
   price,
+  createdUserId,
   onLikeCallback,
 }: FoodCardProps) => {
   const { classes, theme, cx } = useFoodCardStyles()
@@ -153,7 +155,7 @@ export const FoodCard = ({
             <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
           </ActionIcon>
         </Tooltip>
-        {!!user._id && (
+        {!!user._id && user._id !== createdUserId && (
           <Tooltip label={t('add_to_likes')}>
             <ActionIcon variant='default' radius='md' size={36} onClick={onLike}>
               <IconHeart

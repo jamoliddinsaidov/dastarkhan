@@ -13,32 +13,35 @@ export const mapFoodsArrayToComponentProps = (
     return []
   }
 
-  const mappedFoods = foods.map(({ _id, foodName, city, image, review, foodType, price, rating, serviceType }) => {
-    const badges: string[] = []
+  const mappedFoods: FoodCardProps[] = foods.map(
+    ({ _id, foodName, city, image, review, foodType, price, rating, serviceType, user }) => {
+      const badges: string[] = []
 
-    const foodTypeBadge = getFoodType(foodTypeFilters, foodType)
-    if (foodTypeBadge) {
-      badges.push(foodTypeBadge)
+      const foodTypeBadge = getFoodType(foodTypeFilters, foodType)
+      if (foodTypeBadge) {
+        badges.push(foodTypeBadge)
+      }
+
+      const serviceTypeBadge = getServiceType(serviceTypeFilters, serviceType)
+      if (serviceTypeBadge) {
+        badges.push(serviceTypeBadge)
+      }
+
+      return {
+        id: _id!,
+        title: shortenString(foodName, 20),
+        stars: rating,
+        description: shortenString(review, 90),
+        price: formatPrice(price),
+        image,
+        city,
+        badges,
+        createdUserId: user.userId,
+      }
     }
+  )
 
-    const serviceTypeBadge = getServiceType(serviceTypeFilters, serviceType)
-    if (serviceTypeBadge) {
-      badges.push(serviceTypeBadge)
-    }
-
-    return {
-      id: _id,
-      title: shortenString(foodName, 20),
-      stars: rating,
-      description: shortenString(review, 90),
-      price: formatPrice(price),
-      image,
-      city,
-      badges,
-    }
-  })
-
-  return mappedFoods as FoodCardProps[]
+  return mappedFoods
 }
 
 export const getServiceType = (serviceTypeFilters: FiltresType[], serviceType: string) => {
