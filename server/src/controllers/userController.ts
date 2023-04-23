@@ -154,8 +154,9 @@ const setLikePostNotification = async (foodId: string, user: IUser) => {
       const isAlreadyNotified = foodCreatedUserNotifications?.find(
         (notification) => notification.what?.whatId === foodId && String(notification.user?.userId) === String(user._id)
       )
+      const isCreatedUserLikeTheirOwnPost = foodCreatedUserId === String(user._id)
 
-      if (!isAlreadyNotified) {
+      if (!isAlreadyNotified && !isCreatedUserLikeTheirOwnPost) {
         const notification = {
           age: 'new',
           type: NotificationType.LIKED,

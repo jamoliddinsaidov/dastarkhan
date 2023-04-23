@@ -36,7 +36,6 @@ export const mapFoodsArrayToComponentProps = (
         image,
         city,
         badges,
-        createdUserId: user.userId,
       }
     }
   )

@@ -18,7 +18,6 @@ export interface FoodCardProps {
   badges: string[]
   stars: number
   price: string | number
-  createdUserId: string
   onLikeCallback?: (likedPosts: string[]) => void
 }
 
@@ -31,7 +30,6 @@ export const FoodCard = ({
   badges,
   stars,
   price,
-  createdUserId,
   onLikeCallback,
 }: FoodCardProps) => {
   const { classes, theme, cx } = useFoodCardStyles()
@@ -155,7 +153,7 @@ export const FoodCard = ({
             <IconMessage size='1.1rem' className={classes.comment} stroke={1.5} />
           </ActionIcon>
         </Tooltip>
-        {!!user._id && user._id !== createdUserId && (
+        {!!user._id && (
           <Tooltip label={t('add_to_likes')}>
             <ActionIcon variant='default' radius='md' size={36} onClick={onLike}>
               <IconHeart
