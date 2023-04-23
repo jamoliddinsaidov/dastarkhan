@@ -128,9 +128,9 @@ export const deleteComment = asyncWrapper(async (req: Request, res: Response) =>
   const { foodId, commentId } = req.query
 
   const food = await Food.findOne({ _id: foodId })
-  const commentIndex = food?.comments.findIndex((comment) => comment._id === commentId)
+  const commentIndex = food?.comments.findIndex((comment) => String(comment._id) === String(commentId))
 
-  if (commentIndex) {
+  if (commentIndex !== undefined) {
     food?.comments.splice(commentIndex, 1)
     await food?.save()
   }
