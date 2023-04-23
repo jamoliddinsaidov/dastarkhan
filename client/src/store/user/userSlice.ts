@@ -20,6 +20,7 @@ import {
   getFollowers,
   getUserNotifications,
   NotificationProps,
+  savePost,
 } from './userServices'
 
 const initialState = {
@@ -234,6 +235,21 @@ const userSlice = createSlice({
       state.error = ''
     })
     builder.addCase(getUserNotifications.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.payload as string
+    })
+
+    // savePost
+    builder.addCase(savePost.pending, (state) => {
+      state.loading = true
+      state.error = ''
+    })
+    builder.addCase(savePost.fulfilled, (state, action: any) => {
+      state.user = action.payload?.data?.data
+      state.loading = false
+      state.error = ''
+    })
+    builder.addCase(savePost.rejected, (state, action) => {
       state.loading = false
       state.error = action.payload as string
     })

@@ -23,6 +23,8 @@ import { useFiltersList } from '../../components/Filter/useFiltersList'
 import { getServiceType, formatPrice, getFoodType } from '../../utils'
 import { AddComment, Comment } from '../../components'
 import { Toaster } from '../../components/Toaster/Toaster'
+import { getIsUserLoading, getUserInfo } from '../../store/user/userSelectors'
+import { savePost } from '../../store/user/userServices'
 
 export const FoodDetails = () => {
   const { t } = useTranslation()
@@ -34,14 +36,21 @@ export const FoodDetails = () => {
   const { foodId } = useParams()
   const { serviceTypeFilters, foodTypeFilters } = useFiltersList()
   const [userRating, setUserRating] = useState(0)
+  const [isImageLoading, setIsImageLoading] = useState(true)
+
+  const user = useAppSelector(getUserInfo)
   const serviceType = getServiceType(serviceTypeFilters, food.serviceType)
   const foodType = getFoodType(foodTypeFilters, food.foodType)
   const isDeletingComment = useAppSelector(getIsDeletingComment)
-
-  const [isImageLoading, setIsImageLoading] = useState(true)
+  const isUserLoading = useAppSelector(getIsUserLoading)
+  const isFoodSaved = user.savedPosts.includes(foodId!)
 
   const onImageLoad = () => {
     setIsImageLoading(false)
+  }
+
+  const onSaveFood = () => {
+    dispatch(savePost({ foodId: foodId!, userId: user._id }))
   }
 
   useEffect(() => {
@@ -114,10 +123,12 @@ export const FoodDetails = () => {
             <Text className={classes.label}>{t('review')}:</Text>
             <Text>{food.review}</Text>
           </section>
-          {/* <Flex align='center' justify='flex-end'>
-            <Button>{t('save')}</Button>
+          <Flex align='center' justify='flex-end'>
+            <Button onClick={onSaveFood} loading={isUserLoading}>
+              {isFoodSaved ? t('saved') : t('save')}
+            </Button>
             <Button ml={rem(8)}>{t('recommend')}</Button>
-          </Flex> */}
+          </Flex>
           <Divider className={classes.divider} size='sm' id='comment_section' />
           <AddComment foodId={foodId ?? ''} />
           {!!food.comments.length && (

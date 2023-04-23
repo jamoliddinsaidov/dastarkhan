@@ -11,6 +11,7 @@ import {
   getFollowingsUrl,
   getFollowersUrl,
   getUserNotificationsUrl,
+  savePostUrl,
 } from '../../api/user'
 
 export interface IUser {
@@ -175,6 +176,17 @@ export const getUserNotifications = createAsyncThunk(
   async (userId: string, { rejectWithValue }) => {
     try {
       return await axios.get(getUserNotificationsUrl.href, { params: { userId } })
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const savePost = createAsyncThunk(
+  'user/savePost',
+  async (savePostInfo: LikePostInfoProps, { rejectWithValue }) => {
+    try {
+      return await axios.post(savePostUrl.href, savePostInfo)
     } catch (error: any) {
       return rejectWithValue(error.response.data.message)
     }

@@ -143,6 +143,26 @@ export const getUserNotifications = asyncWrapper(async (req: Request, res: Respo
   res.status(StatusCodes.OK).json({ succes: true, data: user?.notifications ?? [] })
 })
 
+export const savePost = asyncWrapper(async (req: Request, res: Response) => {
+  const { userId, foodId } = req.body
+
+  const user = await User.findOne({ _id: userId })
+  const savedPosts = user?.savedPosts as string[]
+
+  if (savedPosts?.includes(foodId)) {
+    const likedPostIndex = savedPosts.findIndex((post) => post === foodId)
+    savedPosts.splice(likedPostIndex, 1)
+  } else {
+    savedPosts?.push(foodId)
+  }
+
+  await User.findOneAndUpdate({ _id: userId }, { savedPosts })
+  const updatedUser = (await LoggedInUserInfo.findOneAndUpdate({ _id: userId }, { savedPosts })) as IUser
+  updatedUser.savedPosts = savedPosts
+
+  res.status(StatusCodes.OK).json({ success: true, data: updatedUser })
+})
+
 const setLikePostNotification = async (foodId: string, user: IUser) => {
   try {
     const food = await Food.findOne({ _id: foodId })
