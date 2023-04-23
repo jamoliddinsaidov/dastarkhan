@@ -10,6 +10,7 @@ import {
   getFollowers,
   getUserNotifications,
   savePost,
+  getSavedPosts,
 } from '../controllers/userController.js'
 
 export const userRouter = Router()
@@ -24,3 +25,4 @@ userRouter.post('/getFollowings', getFollowings)
 userRouter.get('/getFollowers', getFollowers)
 userRouter.get('/getUserNotifications', getUserNotifications)
 userRouter.post('/savePost', savePost)
+userRouter.post('/getSavedPosts', getSavedPosts)

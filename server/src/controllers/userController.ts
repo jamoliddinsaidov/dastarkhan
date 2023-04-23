@@ -163,6 +163,13 @@ export const savePost = asyncWrapper(async (req: Request, res: Response) => {
   res.status(StatusCodes.OK).json({ success: true, data: updatedUser })
 })
 
+export const getSavedPosts = asyncWrapper(async (req: Request, res: Response) => {
+  const savedPostIds = req.body
+  const savedPosts = await Food.find({ _id: { $in: savedPostIds } })
+
+  res.status(StatusCodes.OK).json({ success: true, data: savedPosts })
+})
+
 const setLikePostNotification = async (foodId: string, user: IUser) => {
   try {
     const food = await Food.findOne({ _id: foodId })
