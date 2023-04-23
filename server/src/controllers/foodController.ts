@@ -138,6 +138,20 @@ export const deleteComment = asyncWrapper(async (req: Request, res: Response) =>
   res.status(StatusCodes.OK).json({ success: true, data: food })
 })
 
+export const editComment = asyncWrapper(async (req: Request, res: Response) => {
+  const { foodId, commentId, editedComment } = req.body
+
+  const food = await Food.findOne({ _id: foodId })
+  const commentIndex = food?.comments.findIndex((comment) => String(comment._id) === String(commentId))
+
+  if (commentIndex !== undefined && food?.comments) {
+    food.comments[commentIndex]!.comment = editedComment
+    await food?.save()
+  }
+
+  res.status(StatusCodes.OK).json({ success: true, data: food })
+})
+
 const setCommentNotification = async (
   food: IFood,
   foodId: string,

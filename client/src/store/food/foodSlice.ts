@@ -9,6 +9,7 @@ import {
   addComment,
   IFood,
   deleteComment,
+  editComment,
 } from './foodServices'
 
 const initialState = {
@@ -163,6 +164,20 @@ const foodSlice = createSlice({
     })
     builder.addCase(deleteComment.rejected, (state, action) => {
       state.isDeletingComment = false
+      state.success = false
+      state.error = action.payload as string
+    })
+
+    // editComment
+    builder.addCase(editComment.pending, (state) => {
+      state.success = false
+      state.error = ''
+    })
+    builder.addCase(editComment.fulfilled, (state, action: any) => {
+      state.food = action.payload.data.data
+      state.error = ''
+    })
+    builder.addCase(editComment.rejected, (state, action) => {
       state.success = false
       state.error = action.payload as string
     })

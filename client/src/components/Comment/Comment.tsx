@@ -1,13 +1,13 @@
-import { Text, Group, Paper, Flex, Popover, Button, LoadingOverlay } from '@mantine/core'
+import { Text, Group, Paper, Flex, Popover, Button, Textarea } from '@mantine/core'
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCommentStyles } from './Comment.style'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
 import { formatDate } from '../../utils'
-import { deleteComment } from '../../store/food/foodServices'
+import { deleteComment, editComment } from '../../store/food/foodServices'
 
 interface CommentProps {
   commentId: string
@@ -23,12 +23,31 @@ interface CommentProps {
 export const Comment = ({ createdAt, comment, user, foodId, commentId }: CommentProps) => {
   const { t } = useTranslation()
   const { classes } = useCommentStyles()
-  const [opened, { close, open }] = useDisclosure(false)
   const dispatch = useAppDispatch()
   const currentUser = useAppSelector(getUserInfo)
 
+  const [opened, { close, open }] = useDisclosure(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [commentValue, setCommentValue] = useState(comment)
+
   const onDeleteComment = () => {
     dispatch(deleteComment({ foodId, commentId }))
+  }
+
+  const onEditComment = () => {
+    setIsEditing(true)
+  }
+
+  const onCommentCancel = () => {
+    setIsEditing(false)
+    setCommentValue(comment)
+  }
+
+  const onCommentSave = () => {
+    setIsEditing(false)
+    if (commentValue !== comment) {
+      dispatch(editComment({ foodId, commentId, editedComment: commentValue }))
+    }
   }
 
   useEffect(() => {
@@ -63,7 +82,15 @@ export const Comment = ({ createdAt, comment, user, foodId, commentId }: Comment
               />
             </Popover.Target>
             <Popover.Dropdown>
-              <Button leftIcon={<IconEdit size='1.1rem' />} variant='outline' fullWidth color='blue' mb={12} size='xs'>
+              <Button
+                leftIcon={<IconEdit size='1.1rem' />}
+                variant='outline'
+                fullWidth
+                color='blue'
+                mb={12}
+                size='xs'
+                onClick={onEditComment}
+              >
                 {t('edit')}
               </Button>
               <Button
@@ -80,9 +107,29 @@ export const Comment = ({ createdAt, comment, user, foodId, commentId }: Comment
           </Popover>
         )}
       </Flex>
-      <Text className={classes.body} size='sm'>
-        {comment}
-      </Text>
+      {isEditing ? (
+        <>
+          <Textarea
+            minRows={1}
+            value={commentValue}
+            onChange={(event) => setCommentValue(event.currentTarget.value)}
+            className={classes.body}
+            autosize
+          />
+          <Flex align='center' justify='flex-end' mt={16}>
+            <Button size='xs' variant='outline' onClick={onCommentSave}>
+              {t('save')}
+            </Button>
+            <Button size='xs' variant='outline' ml={8} onClick={onCommentCancel}>
+              {t('cancel')}
+            </Button>
+          </Flex>
+        </>
+      ) : (
+        <Text className={classes.body} size='sm'>
+          {commentValue}
+        </Text>
+      )}
     </Paper>
   )
 }

@@ -147,5 +147,6 @@
   "save": "Save",
   "recommend": "Recommend",
   "delete": "Delete",
-  "edit": "Edit"
+  "edit": "Edit",
+  "cancel": "Cancel"
 }

@@ -9,6 +9,7 @@ import {
   getFoodReviewByIdUrl,
   addCommentUrl,
   deleteCommentUrl,
+  editCommentUrl,
 } from '../../api/foodReview'
 
 export interface IReview {
@@ -58,9 +59,10 @@ export interface CommentProps {
   comment: string
 }
 
-export interface DeleteCommentProps {
+export interface CommentActionProps {
   foodId: string
   commentId: string
+  editedComment?: string
 }
 
 export const addFoodReview = createAsyncThunk(
@@ -131,9 +133,20 @@ export const addComment = createAsyncThunk('food/addComment', async (comment: Co
 
 export const deleteComment = createAsyncThunk(
   'food/deleteComment',
-  async (deleteCommentProps: DeleteCommentProps, { rejectWithValue }) => {
+  async (deleteCommentProps: CommentActionProps, { rejectWithValue }) => {
     try {
       return await axios.delete(deleteCommentUrl.href, { params: deleteCommentProps })
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const editComment = createAsyncThunk(
+  'food/editComment',
+  async (editedCommentProps: CommentActionProps, { rejectWithValue }) => {
+    try {
+      return await axios.put(editCommentUrl.href, editedCommentProps)
     } catch (error: any) {
       return rejectWithValue(error.response.data.message)
     }

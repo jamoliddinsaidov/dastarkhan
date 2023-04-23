@@ -8,6 +8,7 @@ import {
   getFoodById,
   addComment,
   deleteComment,
+  editComment,
 } from '../controllers/foodController.js'
 
 export const foodRouter = Router()
@@ -20,3 +21,4 @@ foodRouter.post('/searchFoods', searchFoods)
 foodRouter.get('/getFoodById', getFoodById)
 foodRouter.post('/addComment', addComment)
 foodRouter.delete('/deleteComment', deleteComment)
+foodRouter.put('/editComment', editComment)
