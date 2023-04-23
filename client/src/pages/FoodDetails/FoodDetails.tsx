@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { IconBread, IconHome, IconMoneybag, IconStar, IconUser } from '@tabler/icons-react'
@@ -15,7 +15,7 @@ import {
   Title,
   rem,
 } from '@mantine/core'
-import { getFoodState } from '../../store/food/foodSelectors'
+import { getFoodState, getIsDeletingComment } from '../../store/food/foodSelectors'
 import { getFoodById } from '../../store/food/foodServices'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { useFoodDetailsStyles } from './FoodDetails.style'
@@ -36,6 +36,7 @@ export const FoodDetails = () => {
   const [userRating, setUserRating] = useState(0)
   const serviceType = getServiceType(serviceTypeFilters, food.serviceType)
   const foodType = getFoodType(foodTypeFilters, food.foodType)
+  const isDeletingComment = useAppSelector(getIsDeletingComment)
 
   const [isImageLoading, setIsImageLoading] = useState(true)
 
@@ -117,17 +118,16 @@ export const FoodDetails = () => {
             <Button>{t('save')}</Button>
             <Button ml={rem(8)}>{t('recommend')}</Button>
           </Flex> */}
-
           <Divider className={classes.divider} size='sm' id='comment_section' />
           <AddComment foodId={foodId ?? ''} />
-
           {!!food.comments.length && (
-            <>
+            <div className={classes.relativePosition}>
               <Divider className={classes.divider} size='sm' />
               {food.comments.map((comment) => (
-                <Comment {...comment} key={comment._id} />
+                <Comment key={comment._id} foodId={foodId ?? ''} commentId={comment._id} {...comment} />
               ))}
-            </>
+              <LoadingOverlay visible={isDeletingComment} />
+            </div>
           )}
         </>
       )}

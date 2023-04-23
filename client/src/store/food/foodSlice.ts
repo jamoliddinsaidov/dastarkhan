@@ -8,6 +8,7 @@ import {
   getFoodById,
   addComment,
   IFood,
+  deleteComment,
 } from './foodServices'
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   success: false,
   isUploadingImage: false,
   isAddingComment: false,
+  isDeletingComment: false,
   uploadedImageUrl: '',
   foods: [],
   food: {} as IFood,
@@ -144,6 +146,23 @@ const foodSlice = createSlice({
     })
     builder.addCase(addComment.rejected, (state, action) => {
       state.isAddingComment = false
+      state.success = false
+      state.error = action.payload as string
+    })
+
+    // deleteComment
+    builder.addCase(deleteComment.pending, (state) => {
+      state.isDeletingComment = true
+      state.success = false
+      state.error = ''
+    })
+    builder.addCase(deleteComment.fulfilled, (state, action: any) => {
+      state.isDeletingComment = false
+      state.food = action.payload.data.data
+      state.error = ''
+    })
+    builder.addCase(deleteComment.rejected, (state, action) => {
+      state.isDeletingComment = false
       state.success = false
       state.error = action.payload as string
     })

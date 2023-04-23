@@ -124,6 +124,20 @@ export const addComment = asyncWrapper(async (req: Request, res: Response) => {
   res.status(StatusCodes.OK).json({ success: true, data: food })
 })
 
+export const deleteComment = asyncWrapper(async (req: Request, res: Response) => {
+  const { foodId, commentId } = req.query
+
+  const food = await Food.findOne({ _id: foodId })
+  const commentIndex = food?.comments.findIndex((comment) => comment._id === commentId)
+
+  if (commentIndex) {
+    food?.comments.splice(commentIndex, 1)
+    await food?.save()
+  }
+
+  res.status(StatusCodes.OK).json({ success: true, data: food })
+})
+
 const setCommentNotification = async (
   food: IFood,
   foodId: string,

@@ -1,27 +1,35 @@
-import { Text, Group, Paper, Flex, Popover, Button } from '@mantine/core'
+import { Text, Group, Paper, Flex, Popover, Button, LoadingOverlay } from '@mantine/core'
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCommentStyles } from './Comment.style'
-import { useAppSelector } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getUserInfo } from '../../store/user/userSelectors'
 import { formatDate } from '../../utils'
+import { deleteComment } from '../../store/food/foodServices'
 
 interface CommentProps {
+  commentId: string
   createdAt: string | null
   comment: string
+  foodId: string
   user: {
     name: string
     userId: string | null
   }
 }
 
-export const Comment = ({ createdAt, comment, user }: CommentProps) => {
-  const {t} = useTranslation()
+export const Comment = ({ createdAt, comment, user, foodId, commentId }: CommentProps) => {
+  const { t } = useTranslation()
   const { classes } = useCommentStyles()
-  const [opened, { close, open }] = useDisclosure(false);
+  const [opened, { close, open }] = useDisclosure(false)
+  const dispatch = useAppDispatch()
   const currentUser = useAppSelector(getUserInfo)
+
+  const onDeleteComment = () => {
+    dispatch(deleteComment({ foodId, commentId }))
+  }
 
   useEffect(() => {
     document.body.addEventListener('click', close)
@@ -42,19 +50,35 @@ export const Comment = ({ createdAt, comment, user }: CommentProps) => {
             {formatDate(createdAt)}
           </Text>
         </Group>
-        {user.userId === currentUser._id && 
-          (<Popover width={130} position="left" withArrow shadow="md" opened={opened}>
+        {user.userId === currentUser._id && (
+          <Popover width={130} position='left' withArrow shadow='md' opened={opened}>
             <Popover.Target>
-                <IconDotsVertical size={16} cursor='pointer' onClick={(mouseEvent) => {
+              <IconDotsVertical
+                size={16}
+                cursor='pointer'
+                onClick={(mouseEvent) => {
                   mouseEvent.stopPropagation()
                   opened ? close() : open()
-                }}/>
+                }}
+              />
             </Popover.Target>
             <Popover.Dropdown>
-              <Button leftIcon={<IconEdit size='1.1rem' />} variant='outline' fullWidth color="blue" mb={12} size='xs'>{t('edit')}</Button>
-              <Button leftIcon={<IconTrash size='1.1rem' />} variant='outline' fullWidth color="red" size='xs'>{t('delete')}</Button>
+              <Button leftIcon={<IconEdit size='1.1rem' />} variant='outline' fullWidth color='blue' mb={12} size='xs'>
+                {t('edit')}
+              </Button>
+              <Button
+                leftIcon={<IconTrash size='1.1rem' />}
+                variant='outline'
+                fullWidth
+                color='red'
+                size='xs'
+                onClick={onDeleteComment}
+              >
+                {t('delete')}
+              </Button>
             </Popover.Dropdown>
-          </Popover>)}
+          </Popover>
+        )}
       </Flex>
       <Text className={classes.body} size='sm'>
         {comment}

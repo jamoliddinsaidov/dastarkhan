@@ -8,6 +8,7 @@ import {
   searchFoodsUrl,
   getFoodReviewByIdUrl,
   addCommentUrl,
+  deleteCommentUrl,
 } from '../../api/foodReview'
 
 export interface IReview {
@@ -55,6 +56,11 @@ export interface CommentProps {
   userId: string
   userName: string
   comment: string
+}
+
+export interface DeleteCommentProps {
+  foodId: string
+  commentId: string
 }
 
 export const addFoodReview = createAsyncThunk(
@@ -122,3 +128,14 @@ export const addComment = createAsyncThunk('food/addComment', async (comment: Co
     return rejectWithValue(error.response.data.message)
   }
 })
+
+export const deleteComment = createAsyncThunk(
+  'food/deleteComment',
+  async (deleteCommentProps: DeleteCommentProps, { rejectWithValue }) => {
+    try {
+      return await axios.delete(deleteCommentUrl.href, { params: deleteCommentProps })
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)

@@ -4,6 +4,7 @@ export const useCommentStyles = createStyles((theme) => ({
   comment: {
     padding: `${theme.spacing.lg} ${theme.spacing.xl}`,
     margin: `${rem(16)} 0`,
+    position: 'relative',
   },
 
   body: {
