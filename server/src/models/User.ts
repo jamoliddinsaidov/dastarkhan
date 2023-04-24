@@ -7,6 +7,7 @@ export enum NotificationType {
   COMMENTED = 'commented',
   FOLLOWED = 'followed',
   RATED = 'rated',
+  RECOMMENDED = 'recommended',
 }
 export type NotificationAge = 'new' | 'old'
 

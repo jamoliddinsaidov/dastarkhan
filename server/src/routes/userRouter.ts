@@ -11,6 +11,7 @@ import {
   getUserNotifications,
   savePost,
   getSavedPosts,
+  recommendFood,
 } from '../controllers/userController.js'
 
 export const userRouter = Router()
@@ -26,3 +27,4 @@ userRouter.get('/getFollowers', getFollowers)
 userRouter.get('/getUserNotifications', getUserNotifications)
 userRouter.post('/savePost', savePost)
 userRouter.post('/getSavedPosts', getSavedPosts)
+userRouter.post('/recommendFood', recommendFood)

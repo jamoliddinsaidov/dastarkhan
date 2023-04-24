@@ -179,7 +179,10 @@ const setLikePostNotification = async (foodId: string, user: IUser) => {
       const foodCreatedUser = await User.findOne({ _id: foodCreatedUserId })
       const foodCreatedUserNotifications = foodCreatedUser?.notifications
       const isAlreadyNotified = foodCreatedUserNotifications?.find(
-        (notification) => notification.what?.whatId === foodId && String(notification.user?.userId) === String(user._id)
+        (notification) =>
+          notification.what?.whatId === foodId &&
+          String(notification.user?.userId) === String(user._id) &&
+          notification.type === NotificationType.LIKED
       )
       const isCreatedUserLikeTheirOwnPost = foodCreatedUserId === String(user._id)
 
@@ -204,6 +207,37 @@ const setLikePostNotification = async (foodId: string, user: IUser) => {
     throw new Error(error.message)
   }
 }
+
+export const recommendFood = asyncWrapper(async (req: Request, res: Response) => {
+  const { foodId, userId, userName, recommendedUserId } = req.body
+  const recommendedUser = await User.findOne({ _id: recommendedUserId })
+
+  const isAlreadyNotified = recommendedUser?.notifications?.find(
+    (notification) =>
+      notification.what?.whatId === foodId &&
+      String(notification.user?.userId) === String(userId) &&
+      notification.type === NotificationType.RECOMMENDED
+  )
+
+  if (!isAlreadyNotified) {
+    const notification = {
+      age: 'new',
+      type: NotificationType.RECOMMENDED,
+      what: {
+        name: 'recommendation',
+        whatId: foodId,
+      },
+      user: {
+        name: userName,
+        userId: userId,
+      },
+    }
+    recommendedUser?.notifications?.unshift(notification)
+    await recommendedUser?.save()
+  }
+
+  res.status(StatusCodes.OK).json({ success: true })
+})
 
 const getFollowedNotification = (followingUserName: string, followingUserId: string) => {
   const notification = {
