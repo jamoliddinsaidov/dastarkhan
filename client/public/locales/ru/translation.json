@@ -148,5 +148,9 @@
   "recommend": "Рекомендовать",
   "delete": "Удалить",
   "edit": "Редактировать",
-  "cancel": "Отмена"
+  "cancel": "Отмена",
+  "recommend_text": "Рекомендовать {{foodName}} одному из ваших подписчиков",
+  "someone_recommended": "Кто-то порекомендовал вам еду!",
+  "recommended_you_text": "рекомендовал вам поесть",
+  "food_has_been_recommended": "✔ Еда была рекомендована!"
 }

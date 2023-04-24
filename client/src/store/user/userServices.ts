@@ -13,6 +13,7 @@ import {
   getUserNotificationsUrl,
   savePostUrl,
   getSavedPostsUrl,
+  recommendFoodUrl,
 } from '../../api/user'
 
 export interface IUser {
@@ -48,7 +49,7 @@ export interface FollowToUserProps {
   followingUserId: string
 }
 
-export type NotificationType = 'liked' | 'posted' | 'commented' | 'followed' | 'rated'
+export type NotificationType = 'liked' | 'posted' | 'commented' | 'followed' | 'rated' | 'recommended'
 export type NotificationAge = 'new' | 'old'
 
 export interface NotificationProps {
@@ -64,6 +65,13 @@ export interface NotificationProps {
     whatId: string
   }
   createdAt: string
+}
+
+interface RecommendFoodProps {
+  foodId: string
+  userId: string
+  userName: string
+  recommendedUserId: string
 }
 
 export const registerUser = createAsyncThunk(
@@ -199,6 +207,17 @@ export const getSavedPosts = createAsyncThunk(
   async (savedPostsId: string[], { rejectWithValue }) => {
     try {
       return await axios.post(getSavedPostsUrl.href, savedPostsId)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const recommendFood = createAsyncThunk(
+  'user/recommendFood',
+  async (recommendFoodProps: RecommendFoodProps, { rejectWithValue }) => {
+    try {
+      return await axios.post(recommendFoodUrl.href, recommendFoodProps)
     } catch (error: any) {
       return rejectWithValue(error.response.data.message)
     }

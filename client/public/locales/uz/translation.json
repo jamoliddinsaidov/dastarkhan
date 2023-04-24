@@ -148,5 +148,9 @@
   "recommend": "Tavsiya qiling",
   "delete": "O'chirish",
   "edit": "Tahrirlash",
-  "cancel": "Bekor qilish"
+  "cancel": "Bekor qilish",
+  "recommend_text": "Do'stlaringizdan biriga {{foodName}}ni tavsiya eting",
+  "someone_recommended": "Kimdir sizga ovqat tavsiya qildi!",
+  "recommended_you_text": "sizga bu ovqatni tavsiya qildi - ",
+  "food_has_been_recommended": "✔ Ovqat tavsiya etildi!"
 }

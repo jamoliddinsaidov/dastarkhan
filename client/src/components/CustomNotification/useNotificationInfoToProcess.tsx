@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IconHeart, IconUserHeart, IconMessage, IconStar, IconWriting } from '@tabler/icons-react'
+import { IconHeart, IconUserHeart, IconMessage, IconStar, IconWriting, IconMailForward } from '@tabler/icons-react'
 import { NotificationType } from '../../store/user/userServices'
 import { useAppSelector } from '../../store/hooks'
 import { getAllFoods } from '../../store/food/foodSelectors'
@@ -72,6 +72,17 @@ export const useNotificationInfoToProcess = (
       const color = 'yellow'
       const icon = <IconStar />
       const body = ''
+      return { title, color, icon, body }
+    }
+    case 'recommended': {
+      const title = t('someone_recommended')
+      const color = 'grape'
+      const icon = <IconMailForward />
+      const body = (
+        <>
+          <Link to={userLink}>{userName}</Link> {t('recommended_you_text')} <Link to={foodLink}>{foodName}</Link>
+        </>
+      )
       return { title, color, icon, body }
     }
   }

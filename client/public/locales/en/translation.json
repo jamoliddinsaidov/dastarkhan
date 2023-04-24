@@ -149,5 +149,9 @@
   "recommend": "Recommend",
   "delete": "Delete",
   "edit": "Edit",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "recommend_text": "Recommend {{foodName}} to one of your followings",
+  "someone_recommended": "Someone recommended you food!",
+  "recommended_you_text": "recommended you to eat",
+  "food_has_been_recommended": "✔ The food has been recommended!"
 }

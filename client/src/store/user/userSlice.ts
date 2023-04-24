@@ -22,6 +22,7 @@ import {
   NotificationProps,
   savePost,
   getSavedPosts,
+  recommendFood,
 } from './userServices'
 
 const initialState = {
@@ -267,6 +268,11 @@ const userSlice = createSlice({
     })
     builder.addCase(getSavedPosts.rejected, (state, action) => {
       state.loading = false
+      state.error = action.payload as string
+    })
+
+    // recommendFood
+    builder.addCase(recommendFood.rejected, (state, action) => {
       state.error = action.payload as string
     })
   },

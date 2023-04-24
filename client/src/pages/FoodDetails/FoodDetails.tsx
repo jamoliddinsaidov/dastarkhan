@@ -21,7 +21,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { useFoodDetailsStyles } from './FoodDetails.style'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
 import { getServiceType, formatPrice, getFoodType } from '../../utils'
-import { AddComment, Comment } from '../../components'
+import { AddComment, Comment, FollowingsModal } from '../../components'
 import { Toaster } from '../../components/Toaster/Toaster'
 import { getIsUserLoading, getUserInfo } from '../../store/user/userSelectors'
 import { savePost } from '../../store/user/userServices'
@@ -37,13 +37,14 @@ export const FoodDetails = () => {
   const { serviceTypeFilters, foodTypeFilters } = useFiltersList()
   const [userRating, setUserRating] = useState(0)
   const [isImageLoading, setIsImageLoading] = useState(true)
+  const [isRecommended, setIsRecommended] = useState(false)
 
   const user = useAppSelector(getUserInfo)
   const serviceType = getServiceType(serviceTypeFilters, food.serviceType)
   const foodType = getFoodType(foodTypeFilters, food.foodType)
   const isDeletingComment = useAppSelector(getIsDeletingComment)
   const isUserLoading = useAppSelector(getIsUserLoading)
-  const isFoodSaved = user.savedPosts.includes(foodId!)
+  const isFoodSaved = user?.savedPosts?.includes(foodId!)
 
   const onImageLoad = () => {
     setIsImageLoading(false)
@@ -59,7 +60,7 @@ export const FoodDetails = () => {
 
   return (
     <Container className={cx(classes.wrapper, classes.relativePosition)}>
-      {food._id && (
+      {food?._id && (
         <>
           <Title className={classes.title}>{food.foodName}</Title>
           <Flex justify='flex-start' mb={16} className={classes.flexColumn}>
@@ -124,12 +125,12 @@ export const FoodDetails = () => {
             <Text>{food.review}</Text>
           </section>
           <Flex align='center' justify='flex-end'>
-            <Button onClick={onSaveFood} loading={isUserLoading}>
+            <Button onClick={onSaveFood} loading={isUserLoading} mr={rem(8)}>
               {isFoodSaved ? t('saved') : t('save')}
             </Button>
-            <Button ml={rem(8)}>{t('recommend')}</Button>
+            <FollowingsModal foodId={food._id} foodName={food.foodName} setIsRecommended={setIsRecommended} />
           </Flex>
-          <Divider className={classes.divider} size='sm' id='comment_section' />
+          <Divider className={classes.divider} size='sm' />
           <AddComment foodId={foodId ?? ''} />
           {!!food.comments.length && (
             <div className={classes.relativePosition}>
@@ -144,6 +145,7 @@ export const FoodDetails = () => {
       )}
       <LoadingOverlay visible={loading} />
       <Toaster opened={!!error} text={error} isError />
+      <Toaster opened={isRecommended} text={t('food_has_been_recommended')} />
     </Container>
   )
 }
