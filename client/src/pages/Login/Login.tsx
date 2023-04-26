@@ -51,11 +51,9 @@ export const Login = () => {
         <Title order={2} className={classes.title} ta='center' mt='md' mb={50}>
           {t('welcome_back')}
         </Title>
-
         <TextInput
           label={t('email_addess')}
           placeholder='email@gmail.com'
-          // size='md'
           name='email'
           radius='md'
           value={form.values.email}
@@ -85,7 +83,6 @@ export const Login = () => {
           {t('signup')}
         </Link>
       </Text>
-
       <Link to='/forgotPassword' className={classes.forgotPasswordLink} onClick={() => onLinkClick('/forgotPassword')}>
         {t('forgot_password')}
       </Link>

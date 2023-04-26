@@ -29,6 +29,7 @@ export interface IUser {
   followers: string[]
   reviews: string[]
   notifications: string[]
+  createdAt: string
 }
 
 export interface UserRequestBody {

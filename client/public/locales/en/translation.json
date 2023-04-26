@@ -37,7 +37,7 @@
   "saved_posts": "Saved posts",
   "settings": "Settings",
   "account_settings": "Account settings",
-  "logout": "Logout",
+  "logout": "Log out",
   "filters_you_selected": "Filters you selected",
   "pick_you_like": "Pick all that you like",
   "filters": "Filters",
@@ -153,5 +153,11 @@
   "recommend_text": "Recommend {{foodName}} to one of your followings",
   "someone_recommended": "Someone recommended you food!",
   "recommended_you_text": "recommended you to eat",
-  "food_has_been_recommended": "✔ The food has been recommended!"
+  "food_has_been_recommended": "✔ The food has been recommended!",
+  "update": "Update",
+  "likedPosts": "Liked Posts",
+  "savedPosts": "Saved Posts",
+  "delete_account_title": "Delete account",
+  "delete_account_btn": "Delete your account",
+  "delete_account_text": "Once you delete your account, there is no going back. Please be certain."
 }

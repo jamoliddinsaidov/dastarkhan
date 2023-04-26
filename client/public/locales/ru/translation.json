@@ -152,5 +152,11 @@
   "recommend_text": "Рекомендовать {{foodName}} одному из ваших подписчиков",
   "someone_recommended": "Кто-то порекомендовал вам еду!",
   "recommended_you_text": "рекомендовал вам поесть",
-  "food_has_been_recommended": "✔ Еда была рекомендована!"
+  "food_has_been_recommended": "✔ Еда была рекомендована!",
+  "update": "Обновить",
+  "likedPosts": "Понравившиеся посты",
+  "savedPosts": "Сохраненные посты",
+  "delete_account_title": "Удалить аккаунт",
+  "delete_account_btn": "Удалить свой аккаунт",
+  "delete_account_text": "После того, как вы удалите свою учетную запись, пути назад уже не будет. Будьте уверены."
 }
