@@ -160,5 +160,6 @@
   "savedPosts": "Saqlangan postlar",
   "delete_account_title": "Akkountni o'chirish",
   "delete_account_btn": "Akkountingizni o'chirib tashlang",
-  "delete_account_text": "Akkountingizni o'chirib tashlaganingizdan so'ng, orqaga qaytishning iloji yo'q. Iltimos, yaxshilab o'ylab ko'ring."
+  "delete_account_text_warning": "Akkountingizni o'chirib tashlaganingizdan so'ng, orqaga qaytishning iloji yo'q. Iltimos, yaxshilab o'ylab ko'ring.",
+  "delete_account_text": "Akkountingizni o'chirib tashlamoqchi ekanligingizga ishonchingiz komilmi?"
 }

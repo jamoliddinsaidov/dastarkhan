@@ -161,5 +161,6 @@
   "savedPosts": "Saved Posts",
   "delete_account_title": "Delete account",
   "delete_account_btn": "Delete your account",
-  "delete_account_text": "Once you delete your account, there is no going back. Please be certain."
+  "delete_account_text_warning": "Once you delete your account, there is no going back. Please be certain.",
+  "delete_account_text": "Are you really sure that you want to delete your account?"
 }

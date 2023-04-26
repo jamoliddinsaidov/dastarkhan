@@ -233,6 +233,14 @@ export const recommendFood = asyncWrapper(async (req: Request, res: Response) =>
   res.status(StatusCodes.OK).json({ success: true })
 })
 
+export const deleteProfile = asyncWrapper(async (req: Request, res: Response) => {
+  const { userId } = req.query
+
+  await User.deleteOne({ _id: userId })
+
+  res.status(StatusCodes.NO_CONTENT).json({ success: true })
+})
+
 const getFollowedNotification = (followingUserName: string, followingUserId: string) => {
   const notification = {
     age: 'new',

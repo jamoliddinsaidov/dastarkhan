@@ -23,6 +23,7 @@ import {
   savePost,
   getSavedPosts,
   recommendFood,
+  deleteProfile,
 } from './userServices'
 
 const initialState = {
@@ -273,6 +274,25 @@ const userSlice = createSlice({
 
     // recommendFood
     builder.addCase(recommendFood.rejected, (state, action) => {
+      state.error = action.payload as string
+    })
+
+    // deleteProfile
+    builder.addCase(deleteProfile.pending, (state) => {
+      state.loading = true
+      state.success = false
+      state.error = ''
+    })
+    builder.addCase(deleteProfile.fulfilled, (state, action: any) => {
+      state.loading = false
+      state.isLoggedIn = false
+      state.user = {} as IUser
+      clearUserInfoFromLocalStorage()
+      state.error = ''
+    })
+    builder.addCase(deleteProfile.rejected, (state, action) => {
+      state.loading = false
+      state.success = false
       state.error = action.payload as string
     })
   },

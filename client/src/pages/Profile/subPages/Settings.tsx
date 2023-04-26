@@ -7,6 +7,7 @@ import { useSubPagesStyles } from './SubPages.style'
 import { useAppSelector } from '../../../store/hooks'
 import { getUserInfo } from '../../../store/user/userSelectors'
 import { getUserBadgesInfo } from '../../../utils'
+import { DeleteModal } from '../../../components'
 
 export const Settings = () => {
   const { t } = useTranslation()
@@ -28,6 +29,8 @@ export const Settings = () => {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : t('invalid_email')),
     },
   })
+
+  const onDeleteClick = () => {}
 
   return (
     <Flex direction='column' className={classes.relativePosition}>
@@ -99,11 +102,9 @@ export const Settings = () => {
         <Title className={classes.titleh3}>{t('delete_account_title')}</Title>
         <Divider />
         <Text mt={16} mb={8} color='red'>
-          {t('delete_account_text')}
+          {t('delete_account_text_warning')}
         </Text>
-        <Button type='submit' radius='sm' mt={8} color='red'>
-          {t('delete_account_btn')}
-        </Button>
+        <DeleteModal />
       </div>
     </Flex>
   )

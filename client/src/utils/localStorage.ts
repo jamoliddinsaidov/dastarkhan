@@ -12,5 +12,6 @@ export const setIsUserLoggedInToLocalStorage = (userEmail: 'string') => {
 }
 
 export const clearUserInfoFromLocalStorage = () => {
-  localStorage.clear()
+  localStorage.removeItem('isLoggedIn')
+  localStorage.removeItem('userEmail')
 }

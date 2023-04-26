@@ -14,6 +14,7 @@ import {
   savePostUrl,
   getSavedPostsUrl,
   recommendFoodUrl,
+  deleteProfileUrl,
 } from '../../api/user'
 
 export interface IUser {
@@ -224,3 +225,12 @@ export const recommendFood = createAsyncThunk(
     }
   }
 )
+
+export const deleteProfile = createAsyncThunk('user/deleteProfile', async (userId: string, { rejectWithValue }) => {
+  try {
+    return await axios.delete(deleteProfileUrl.href, { params: { userId } })
+  } catch (error: any) {
+    console.log(error)
+    return rejectWithValue(error.response.data.message)
+  }
+})

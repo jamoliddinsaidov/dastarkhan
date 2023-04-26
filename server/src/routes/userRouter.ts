@@ -12,6 +12,7 @@ import {
   savePost,
   getSavedPosts,
   recommendFood,
+  deleteProfile,
 } from '../controllers/userController.js'
 
 export const userRouter = Router()
@@ -28,3 +29,4 @@ userRouter.get('/getUserNotifications', getUserNotifications)
 userRouter.post('/savePost', savePost)
 userRouter.post('/getSavedPosts', getSavedPosts)
 userRouter.post('/recommendFood', recommendFood)
+userRouter.delete('/deleteProfile', deleteProfile)

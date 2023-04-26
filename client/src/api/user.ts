@@ -12,3 +12,4 @@ export const getUserNotificationsUrl = new URL('user/getUserNotifications', apiB
 export const savePostUrl = new URL('user/savePost', apiBaseUrl)
 export const getSavedPostsUrl = new URL('user/getSavedPosts', apiBaseUrl)
 export const recommendFoodUrl = new URL('user/recommendFood', apiBaseUrl)
+export const deleteProfileUrl = new URL('user/deleteProfile', apiBaseUrl)

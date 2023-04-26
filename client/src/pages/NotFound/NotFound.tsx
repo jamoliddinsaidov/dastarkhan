@@ -1,15 +1,12 @@
 import { Title, Text, Button, Container, Group } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../../store/hooks'
 import { useNotFoundStyles } from './NotFound.style'
 
 export const NotFound = () => {
   const { classes } = useNotFoundStyles()
   const { t } = useTranslation()
-
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
 
   const onClick = () => {
     navigate('home')

@@ -12,3 +12,4 @@ export const getFoodsAndLoadingState = (state: RootState) => ({
 export const getIsAddingComment = (state: RootState) => state.food.isAddingComment
 export const getIsDeletingComment = (state: RootState) => state.food.isDeletingComment
 export const getAllFoods = (state: RootState) => state.food.foods as IFood[]
+export const getIsFoodsLoading = (state: RootState) => state.food.loading
