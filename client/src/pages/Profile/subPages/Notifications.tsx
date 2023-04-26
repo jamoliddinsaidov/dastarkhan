@@ -20,7 +20,7 @@ export const Notifications = () => {
 
   return (
     <Flex direction='column' align='center' justify='center' className={classes.relativePosition}>
-      <Title className={classes.titleh2}>{t('notifications')}</Title>
+      <Title className={classes.titleh2}>{notifications.length ? t('notifications') : t('no_notifications')}</Title>
       <Flex direction='column' align='center' justify='center'>
         {notifications?.map((notification) => (
           <CustomNotification key={notification._id} {...notification} />

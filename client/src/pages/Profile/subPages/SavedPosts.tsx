@@ -29,7 +29,7 @@ export const SavedPosts = () => {
 
   return (
     <Flex align='center' justify='center' direction='column' className={classes.relativePosition}>
-      <Title className={classes.titleh2}>{t('saved_posts')}</Title>
+      <Title className={classes.titleh2}>{savedFoods.length ? t('saved_posts') : t('no_saved_posts')}</Title>
       <div className={classes.containerMargin}>
         <FoodsList foods={mappedFoods} />
       </div>
