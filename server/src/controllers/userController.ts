@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
-import { BadRequestError } from '../errors/index.js'
+import { BadRequestError, UnauthenticatedError } from '../errors/index.js'
 import { asyncWrapper } from '../middlewares/index.js'
-import { NO_USER_FOUND, PROVIDE_EMAIL } from '../utils/constants.js'
-import { LoggedInUserInfo } from '../models/LoggedInUserInfo.js'
+import { INVALID_CREDENTIALS, NO_USER_FOUND, PROVIDE_EMAIL } from '../utils/constants.js'
 import { IUser, NotificationType, User } from '../models/User.js'
 import { Food } from '../models/Food.js'
+import { getUserForResponse } from '../utils/index.js'
 
 export const getLoggedInUserInfo = asyncWrapper(async (req: Request, res: Response) => {
   const email = req.query?.userEmail
@@ -14,9 +14,13 @@ export const getLoggedInUserInfo = asyncWrapper(async (req: Request, res: Respon
     throw new BadRequestError(PROVIDE_EMAIL)
   }
 
-  const user = await LoggedInUserInfo.findOne({ email })
+  const user = await User.findOne({ email })
 
-  res.status(StatusCodes.OK).json({ success: true, data: user })
+  if (!user) {
+    throw new UnauthenticatedError(INVALID_CREDENTIALS)
+  }
+
+  res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(user) })
 })
 
 export const likePost = asyncWrapper(async (req: Request, res: Response) => {
@@ -33,11 +37,10 @@ export const likePost = asyncWrapper(async (req: Request, res: Response) => {
     await setLikePostNotification(foodId, user as IUser)
   }
 
-  await User.findOneAndUpdate({ _id: userId }, { likedPosts })
-  const updatedUser = (await LoggedInUserInfo.findOneAndUpdate({ _id: userId }, { likedPosts })) as IUser
+  const updatedUser = (await User.findOneAndUpdate({ _id: userId }, { likedPosts }))!
   updatedUser.likedPosts = likedPosts
 
-  res.status(StatusCodes.OK).json({ success: true, data: updatedUser })
+  res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(updatedUser) })
 })
 
 export const getLikedPosts = asyncWrapper(async (req: Request, res: Response) => {
@@ -106,16 +109,8 @@ export const followToUser = asyncWrapper(async (req: Request, res: Response) => 
   followedUser.notifications.unshift(followedNotification)
 
   await followedUser.save()
-  await LoggedInUserInfo.findOneAndUpdate({ _id: followedUser._id }, { followers })
 
-  // update the followingUser for response
-  const updatedFollowingUser = (await LoggedInUserInfo.findOneAndUpdate(
-    { _id: followingUser._id },
-    { followings }
-  )) as IUser
-  updatedFollowingUser.followings = followings
-
-  res.status(StatusCodes.OK).json({ success: true, data: updatedFollowingUser })
+  res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(followingUser) })
 })
 
 export const getFollowings = asyncWrapper(async (req: Request, res: Response) => {
@@ -156,11 +151,10 @@ export const savePost = asyncWrapper(async (req: Request, res: Response) => {
     savedPosts?.push(foodId)
   }
 
-  await User.findOneAndUpdate({ _id: userId }, { savedPosts })
-  const updatedUser = (await LoggedInUserInfo.findOneAndUpdate({ _id: userId }, { savedPosts })) as IUser
+  const updatedUser = (await User.findOneAndUpdate({ _id: userId }, { savedPosts }))!
   updatedUser.savedPosts = savedPosts
 
-  res.status(StatusCodes.OK).json({ success: true, data: updatedUser })
+  res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(updatedUser) })
 })
 
 export const getSavedPosts = asyncWrapper(async (req: Request, res: Response) => {

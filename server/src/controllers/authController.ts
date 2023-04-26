@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken'
 import { StatusCodes } from 'http-status-codes'
 import { asyncWrapper } from '../middlewares/index.js'
 import { User } from '../models/User.js'
-import { LoggedInUserInfo } from '../models/LoggedInUserInfo.js'
 import { BadRequestError } from '../errors/badRequest.js'
 import {
   EMAIL_ALREADY_EXISTS,
@@ -69,21 +68,13 @@ export const login = asyncWrapper(async (req: Request, res: Response) => {
     expires: new Date(Date.now() + 259200000), // 3 days
   })
 
-  const userData = getUserForResponse(user)
-
-  const isUserLoggedInBefore = await LoggedInUserInfo.findOne({ _id: userData._id }).select('_id')
-  if (!isUserLoggedInBefore) {
-    await LoggedInUserInfo.create(userData)
-  }
-
-  res.status(StatusCodes.OK).json({ succes: true, message: USER_LOGGED_IN, data: userData })
+  res.status(StatusCodes.OK).json({ succes: true, message: USER_LOGGED_IN, data: getUserForResponse(user) })
 })
 
 export const logout = asyncWrapper(async (req: Request, res: Response) => {
   const { email } = req.body
 
   await User.findOneAndUpdate({ email }, { refreshToken: null })
-  await LoggedInUserInfo.deleteOne({ email })
 
   res.clearCookie('accessToken', {
     httpOnly: true,
