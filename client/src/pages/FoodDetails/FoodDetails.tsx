@@ -16,7 +16,7 @@ import {
   rem,
 } from '@mantine/core'
 import { getFoodState, getIsDeletingComment } from '../../store/food/foodSelectors'
-import { getFoodById } from '../../store/food/foodServices'
+import { getFoodById, rateFood } from '../../store/food/foodServices'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { useFoodDetailsStyles } from './FoodDetails.style'
 import { useFiltersList } from '../../components/Filter/useFiltersList'
@@ -38,20 +38,28 @@ export const FoodDetails = () => {
   const [userRating, setUserRating] = useState(0)
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [isRecommended, setIsRecommended] = useState(false)
-
   const user = useAppSelector(getUserInfo)
   const serviceType = getServiceType(serviceTypeFilters, food.serviceType)
   const foodType = getFoodType(foodTypeFilters, food.foodType)
   const isDeletingComment = useAppSelector(getIsDeletingComment)
   const isUserLoading = useAppSelector(getIsUserLoading)
   const isFoodSaved = user?.savedPosts?.includes(foodId!)
+  const isUserAlreadyRated = food?.ratings?.find((rating) => rating?.userId === user?._id)
 
   const onImageLoad = () => {
     setIsImageLoading(false)
   }
 
   const onSaveFood = () => {
-    dispatch(savePost({ foodId: foodId!, userId: user._id }))
+    if (foodId) {
+      dispatch(savePost({ foodId, userId: user._id }))
+    }
+  }
+
+  const onRateFood = () => {
+    if (foodId) {
+      dispatch(rateFood({ foodId, rating: userRating, ratedUserId: user._id }))
+    }
   }
 
   useEffect(() => {
@@ -101,7 +109,7 @@ export const FoodDetails = () => {
                   <Text className={classes.marginLeft}>{food.user.name}</Text>
                 )}
               </Flex>
-              {/* <Flex className={classes.marginBottom} align='center'>
+              <Flex className={classes.marginBottom} align='center'>
                 <Slider
                   labelTransition='skew-down'
                   labelTransitionDuration={150}
@@ -113,11 +121,12 @@ export const FoodDetails = () => {
                   w={rem(280)}
                   value={userRating}
                   onChange={(value) => setUserRating(value)}
+                  disabled={!!isUserAlreadyRated}
                 />
-                <Button ml={rem(16)} radius='lg'>
-                  {t('rate')}
+                <Button ml={rem(16)} radius='lg' onClick={onRateFood} disabled={!!isUserAlreadyRated}>
+                  {!!isUserAlreadyRated ? t('rated') : t('rate')}
                 </Button>
-              </Flex> */}
+              </Flex>
             </div>
           </Flex>
           <section className={classes.marginBottom}>
@@ -144,7 +153,7 @@ export const FoodDetails = () => {
         </>
       )}
       <LoadingOverlay visible={loading} />
-      <Toaster opened={!!error} text={error} isError />
+      <Toaster opened={!!error} text={t('food_doesnt_exist')} isError />
       <Toaster opened={isRecommended} text={t('food_has_been_recommended')} />
     </Container>
   )

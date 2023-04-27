@@ -10,6 +10,7 @@ import {
   addCommentUrl,
   deleteCommentUrl,
   editCommentUrl,
+  rateFoodUrl,
 } from '../../api/foodReview'
 
 export interface IReview {
@@ -32,6 +33,12 @@ export interface IFood extends IReview {
   _id?: string
   comments: Comment[]
   likes: string[]
+  ratings: Rating[]
+}
+
+export interface Rating {
+  userId: string
+  rating: number
 }
 
 export interface Comment {
@@ -63,6 +70,12 @@ export interface CommentActionProps {
   foodId: string
   commentId: string
   editedComment?: string
+}
+
+export interface RatingProps {
+  foodId: string
+  rating: number
+  ratedUserId: string
 }
 
 export const addFoodReview = createAsyncThunk(
@@ -152,3 +165,11 @@ export const editComment = createAsyncThunk(
     }
   }
 )
+
+export const rateFood = createAsyncThunk('food/rateFood', async (ratingProps: RatingProps, { rejectWithValue }) => {
+  try {
+    return await axios.post(rateFoodUrl.href, ratingProps)
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
+  }
+})

@@ -164,5 +164,8 @@
   "delete_account_text_warning": "Once you delete your account, there is no going back. Please be certain.",
   "delete_account_text": "Are you really sure that you want to delete your account?",
   "profile_updated_text": "✔ Your profile has been updated",
-  "user_doesnt_exist": "The user you are looking for doesn't exist"
+  "user_doesnt_exist": "The user you are looking for doesn't exist",
+  "food_doesnt_exist": "The food you are looking for doesn't exist",
+  "rated": "Rated",
+  "rated_your_review": "rated ({{rating}}) your review of"
 }

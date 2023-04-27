@@ -163,5 +163,8 @@
   "delete_account_text_warning": "Akkountingizni o'chirib tashlaganingizdan so'ng, orqaga qaytishning iloji yo'q. Iltimos, yaxshilab o'ylab ko'ring.",
   "delete_account_text": "Akkountingizni o'chirib tashlamoqchi ekanligingizga ishonchingiz komilmi?",
   "profile_updated_text": "✔ Profilingiz yangilandi",
-  "user_doesnt_exist": "Siz izlayotgan foydalanuvchi mavjud emas"
+  "user_doesnt_exist": "Siz izlayotgan foydalanuvchi mavjud emas",
+  "food_doesnt_exist": "Siz izlayotgan taom mavjud emas",
+  "rated": "Baholangan",
+  "rated_your_review": "sizning sharhingizni baholadi ({{rating}})"
 }

@@ -67,6 +67,7 @@ export interface NotificationProps {
   what: {
     name: string
     whatId: string
+    whatValue: string | number
   }
   createdAt: string
 }

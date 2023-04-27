@@ -10,6 +10,7 @@ import {
   IFood,
   deleteComment,
   editComment,
+  rateFood,
 } from './foodServices'
 
 const initialState = {
@@ -179,6 +180,23 @@ const foodSlice = createSlice({
     })
     builder.addCase(editComment.rejected, (state, action) => {
       state.success = false
+      state.error = action.payload as string
+    })
+
+    // rateFood
+    builder.addCase(rateFood.pending, (state) => {
+      state.loading = true
+      state.success = false
+      state.error = ''
+    })
+    builder.addCase(rateFood.fulfilled, (state, action: any) => {
+      state.loading = false
+      state.food = action.payload.data.data
+      state.error = ''
+    })
+    builder.addCase(rateFood.rejected, (state, action) => {
+      state.success = false
+      state.loading = false
       state.error = action.payload as string
     })
   },

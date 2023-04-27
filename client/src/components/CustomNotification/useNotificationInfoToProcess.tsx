@@ -14,6 +14,7 @@ export const useNotificationInfoToProcess = (
   what: {
     name: string
     whatId: string
+    whatValue: string | number
   },
   t: TFunction
 ) => {
@@ -68,10 +69,16 @@ export const useNotificationInfoToProcess = (
       return { title, color, icon, body }
     }
     case 'rated': {
+      console.log(what)
       const title = t('someone_rated_your_review')
       const color = 'yellow'
       const icon = <IconStar />
-      const body = ''
+      const body = (
+        <>
+          <Link to={userLink}>{userName}</Link> {t('rated_your_review', { rating: what.whatValue })}{' '}
+          <Link to={foodLink}>{foodName}</Link>
+        </>
+      )
       return { title, color, icon, body }
     }
     case 'recommended': {
