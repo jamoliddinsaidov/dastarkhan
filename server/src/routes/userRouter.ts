@@ -14,6 +14,7 @@ import {
   recommendFood,
   deleteProfile,
   updateUserInfo,
+  getUserById,
 } from '../controllers/userController.js'
 
 export const userRouter = Router()
@@ -32,3 +33,4 @@ userRouter.post('/getSavedPosts', getSavedPosts)
 userRouter.post('/recommendFood', recommendFood)
 userRouter.delete('/deleteProfile', deleteProfile)
 userRouter.put('/updateUserInfo', updateUserInfo)
+userRouter.get('/getUserById', getUserById)

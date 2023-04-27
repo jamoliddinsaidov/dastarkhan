@@ -260,7 +260,18 @@ export const updateUserInfo = asyncWrapper(async (req: Request, res: Response) =
   user.email = email
   await user.save()
 
-  res.status(StatusCodes.OK).json({ success: true, data: user })
+  res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(user) })
+})
+
+export const getUserById = asyncWrapper(async (req: Request, res: Response) => {
+  const { userId } = req.query
+
+  const user = await User.findOne({ _id: userId })
+  if (!user) {
+    throw new UnauthenticatedError(NO_USER_FOUND)
+  }
+
+  res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(user) })
 })
 
 const getFollowedNotification = (followingUserName: string, followingUserId: string) => {
