@@ -25,15 +25,12 @@ export const Friends = () => {
             {t('search_people')}
           </Tabs.Tab>
         </Tabs.List>
-
         <Tabs.Panel value='followings' pt='xs'>
           <Followings activeTab={activeTab} />
         </Tabs.Panel>
-
         <Tabs.Panel value='followers' pt='xs'>
           <Followers activeTab={activeTab} />
         </Tabs.Panel>
-
         <Tabs.Panel value='people' pt='xs'>
           <SearchPeople activeTab={activeTab} />
         </Tabs.Panel>

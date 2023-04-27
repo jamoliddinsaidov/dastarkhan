@@ -4,14 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { Person } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getPeople, getUserInfo } from '../../store/user/userSelectors'
-import { getFollowings } from '../../store/user/userServices'
+import { IUser, getFollowings } from '../../store/user/userServices'
 import { useFriendsStyles } from './Friends.style'
 
 interface FollowingsProps {
   activeTab: string
+  userDetails?: IUser
 }
 
-export const Followings = ({ activeTab }: FollowingsProps) => {
+export const Followings = ({ activeTab, userDetails }: FollowingsProps) => {
   const { t } = useTranslation()
   const { classes } = useFriendsStyles()
   const dispatch = useAppDispatch()
@@ -20,7 +21,7 @@ export const Followings = ({ activeTab }: FollowingsProps) => {
 
   useEffect(() => {
     if (activeTab === 'followings') {
-      dispatch(getFollowings(user.followings))
+      dispatch(getFollowings(userDetails ? userDetails.followings : user.followings))
     }
   }, [activeTab])
 

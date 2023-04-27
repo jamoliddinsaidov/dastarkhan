@@ -1,17 +1,18 @@
 import { Title } from '@mantine/core'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Person } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getPeople, getUserInfo } from '../../store/user/userSelectors'
-import { getFollowers } from '../../store/user/userServices'
+import { IUser, getFollowers } from '../../store/user/userServices'
 import { useFriendsStyles } from './Friends.style'
 
 interface FollowersProps {
   activeTab: string
+  userDetails?: IUser
 }
 
-export const Followers = ({ activeTab }: FollowersProps) => {
+export const Followers = ({ activeTab, userDetails }: FollowersProps) => {
   const { t } = useTranslation()
   const { classes } = useFriendsStyles()
   const dispatch = useAppDispatch()
@@ -20,7 +21,7 @@ export const Followers = ({ activeTab }: FollowersProps) => {
 
   useEffect(() => {
     if (activeTab === 'followers') {
-      dispatch(getFollowers(user.email))
+      dispatch(getFollowers(userDetails ? userDetails.email : user.email))
     }
   }, [activeTab])
 

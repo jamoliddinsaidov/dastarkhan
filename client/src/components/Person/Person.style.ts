@@ -9,6 +9,12 @@ export const usePersonStyles = createStyles((theme) => ({
   userName: {
     color: theme.colors.orange[5],
     fontWeight: 600,
+    textDecoration: 'none',
+    transition: 'color 200ms ease-in-out',
+
+    '&:hover': {
+      color: theme.colors.orange[6],
+    },
   },
 
   disabledBtn: {

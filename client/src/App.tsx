@@ -13,6 +13,7 @@ import {
   FoodDetails,
   Profile,
   Friends,
+  UserDetails,
 } from './pages'
 import { LikedPosts, SavedPosts, Settings, Notifications, Reviews } from './pages/Profile/subPages'
 import { getIsUserLoggedInFromLocalStorage, getUserEmailFromLocalStorage } from './utils'
@@ -54,6 +55,7 @@ export const App = () => {
           <Route path='friends' element={<Friends />} />
           <Route path='settings' element={<Settings />} />
         </Route>
+        <Route path='/user/:userId' element={<UserDetails />} />
         <Route path='/' element={<Navigate to='/home' />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

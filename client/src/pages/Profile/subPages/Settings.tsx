@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 import { DateInput, DateValue } from '@mantine/dates'
-import { Flex, Group, Radio, TextInput, Title, Text, Button, Divider, Badge, Notification } from '@mantine/core'
+import { Flex, Group, Radio, TextInput, Title, Text, Button, Divider, Badge } from '@mantine/core'
 import { useSubPagesStyles } from './SubPages.style'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { getUser } from '../../../store/user/userSelectors'
@@ -43,7 +43,7 @@ export const Settings = () => {
     <Flex direction='column' className={classes.relativePosition}>
       <Title className={classes.titleh2}>{t('settings')}</Title>
       <form className={classes.customDiv}>
-        <Title className={classes.titleh3}>Profile</Title>
+        <Title className={classes.titleh3}>{t('profile')}</Title>
         <Divider />
         <Group py={16}>
           {profileBadges.map((profileBadge) => (
@@ -113,7 +113,7 @@ export const Settings = () => {
         </Text>
         <DeleteModal />
       </div>
-      <Toaster opened={success} text={'✔ Your profile has been updated'} />
+      <Toaster opened={success} text={t('profile_updated_text')} />
     </Flex>
   )
 }
