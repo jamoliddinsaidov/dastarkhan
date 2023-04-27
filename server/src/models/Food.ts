@@ -75,6 +75,10 @@ const FoodSchema = new mongoose.Schema({
     type: Array,
     defaultValue: [],
   },
+  ratings: {
+    type: Array,
+    defaultValue: [],
+  },
 })
 
 FoodSchema.index({ '$**': 'text' })
@@ -106,6 +110,7 @@ export interface FoodFilterOptions {
 }
 
 export interface IFood extends FoodRequestBody {
+  _id: string
   comments: CommentProps[]
   likes: string[]
 }

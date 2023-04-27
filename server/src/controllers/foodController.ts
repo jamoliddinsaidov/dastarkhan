@@ -18,6 +18,9 @@ export const addFoodReview = asyncWrapper(async (req: Request, res: Response) =>
     const user = await User.findOne({ _id: userId })
     user?.reviews?.push(food._id)
     await user?.save()
+
+    food.ratings = [{ userId, rating: foodReview.rating }]
+    await food.save()
   }
 
   res.status(StatusCodes.CREATED).json({ success: true, data: food, message: REVIEW_ADDED })
@@ -151,6 +154,60 @@ export const editComment = asyncWrapper(async (req: Request, res: Response) => {
 
   res.status(StatusCodes.OK).json({ success: true, data: food })
 })
+
+export const rateFood = asyncWrapper(async (req: Request, res: Response) => {
+  const { foodId, rating, ratedUserId } = req.body
+  const food = (await Food.findOne({ _id: foodId }))!
+  let ratings = food.ratings
+
+  if (!ratings.length) {
+    ratings.push({ userId: food?.user?.userId, rating: food.rating })
+  }
+
+  ratings.push({ userId: ratedUserId, rating })
+
+  const calculatedRating = (
+    ratings.reduce((currentRating, ratingObject) => currentRating + Number(ratingObject.rating), 0) / ratings.length
+  ).toFixed(1)
+
+  food.ratings = ratings
+  food.rating = calculatedRating
+
+  await food.save()
+  await setRatingFoodNotification(food as unknown as IFood, ratedUserId, rating)
+
+  res.status(StatusCodes.OK).json({ success: true, data: food })
+})
+
+const setRatingFoodNotification = async (food: IFood, ratedUserId: string, rating: number) => {
+  const foodCreatedUserId = food?.user?.userId
+
+  try {
+    if (foodCreatedUserId && ratedUserId !== foodCreatedUserId) {
+      const ratedUser = await User.findOne({ _id: ratedUserId })
+
+      const notification = {
+        age: 'new',
+        type: NotificationType.RATED,
+        what: {
+          name: 'rating',
+          whatId: food._id,
+          whatValue: rating,
+        },
+        user: {
+          name: ratedUser?.name,
+          userId: ratedUserId,
+        },
+      }
+
+      const foodCreatedUser = await User.findOne({ _id: foodCreatedUserId })
+      foodCreatedUser?.notifications?.unshift(notification)
+      await foodCreatedUser?.save()
+    }
+  } catch (error: any) {
+    throw new Error(error.message)
+  }
+}
 
 const setCommentNotification = async (
   food: IFood,

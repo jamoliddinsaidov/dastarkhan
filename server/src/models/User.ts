@@ -20,6 +20,9 @@ export const notificationWhatSubSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  whatValue: {
+    type: Number || String,
+  },
 })
 
 export const notificationSubSchema = new mongoose.Schema({

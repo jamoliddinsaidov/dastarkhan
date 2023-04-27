@@ -9,6 +9,7 @@ import {
   addComment,
   deleteComment,
   editComment,
+  rateFood,
 } from '../controllers/foodController.js'
 
 export const foodRouter = Router()
@@ -22,3 +23,4 @@ foodRouter.get('/getFoodById', getFoodById)
 foodRouter.post('/addComment', addComment)
 foodRouter.delete('/deleteComment', deleteComment)
 foodRouter.put('/editComment', editComment)
+foodRouter.post('/rateFood', rateFood)
