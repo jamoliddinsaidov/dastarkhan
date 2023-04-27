@@ -10,11 +10,12 @@ import {
   INVALID_CREDENTIALS,
   LOGGED_OUT,
   NO_EMAIL_PASSWORD,
+  NO_USER_FOUND,
   USER_CREATED,
   USER_LOGGED_IN,
 } from '../utils/constants.js'
 import { UnauthenticatedError } from '../errors/unauthenticated.js'
-import { getUserForResponse } from '../utils/index.js'
+import { getUserForResponse, sendEmail } from '../utils/index.js'
 
 export const register = asyncWrapper(async (req: Request, res: Response) => {
   const { email, password, name, dateOfBirth, gender } = req.body
@@ -90,4 +91,29 @@ export const logout = asyncWrapper(async (req: Request, res: Response) => {
   })
 
   res.status(StatusCodes.OK).json({ success: true, message: LOGGED_OUT })
+})
+
+export const forgotPassword = asyncWrapper(async (req: Request, res: Response) => {
+  const { email } = req.body
+
+  const user = await User.findOne({ email })
+  if (!user) {
+    throw new UnauthenticatedError(NO_USER_FOUND)
+  }
+
+  const newPassword = Math.random().toString().slice(2, 12)
+  const hashedPassword = await bcrypt.hash(newPassword, 10)
+
+  user.password = hashedPassword
+  await user.save()
+
+  const emailOptions = {
+    to: email as string,
+    subject: 'Forgot the password of Dastarkhan profile',
+    html: `<p>Hi, ${user.name}! Your new password is <strong>${newPassword}</strong> <br>We recommend to change it ASAP!</p>`,
+  }
+
+  await sendEmail(emailOptions)
+
+  res.status(StatusCodes.OK).json({ success: true })
 })
