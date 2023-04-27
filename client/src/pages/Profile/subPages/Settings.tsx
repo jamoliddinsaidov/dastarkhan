@@ -79,15 +79,16 @@ export const Settings = () => {
           <Radio
             label={t('male')}
             name='gender'
-            defaultChecked
+            defaultChecked={user.gender === 'male'}
             value='male'
-            onSelect={(event) => form.setFieldValue('gender', event.currentTarget.value)}
+            onChange={(event) => form.setFieldValue('gender', event.currentTarget.value)}
           />
           <Radio
             label={t('female')}
             name='gender'
             value='female'
-            onSelect={(event) => form.setFieldValue('gender', event.currentTarget.value)}
+            defaultChecked={user.gender === 'female'}
+            onChange={(event) => form.setFieldValue('gender', event.currentTarget.value)}
           />
         </Group>
         <TextInput

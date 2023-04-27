@@ -23,7 +23,7 @@
   "accept_terms_conditions": "I accept terms and conditions",
   "already_have_account": "Already have an account?",
   "terms_conditions": "Terms and Conditions",
-  "enter_email_to_reset_password": "Enter your email to get a reset link",
+  "enter_email_to_reset_password": "Enter your email to get reset instructions",
   "back_to_login": "Back to the login page",
   "reset_password": "Reset password",
   "404_title": "You have found a secret place.",
@@ -168,5 +168,6 @@
   "food_doesnt_exist": "The food you are looking for doesn't exist",
   "rated": "Rated",
   "rated_your_review": "rated ({{rating}}) your review of",
-  "email_sent": "✔ Your email has been sent!"
+  "email_sent": "✔ Your email has been sent!",
+  "reset_password_dialog": "The instructions on how to reset your password has been sent to your email ({{email}}). Please check your email as soon as you can."
 }

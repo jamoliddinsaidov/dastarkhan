@@ -23,7 +23,7 @@
   "accept_terms_conditions": "Men foydalanish shartlariga roziman",
   "already_have_account": "Akkountingiz bormi?",
   "terms_conditions": "Foydalanish shartlari",
-  "enter_email_to_reset_password": "Qayta tiklash havolasini olish uchun elektron pochtangizni kiriting",
+  "enter_email_to_reset_password": "Qayta tiklash ko'rsatmalarini olish uchun elektron pochta manzilingizni kiriting",
   "back_to_login": "Kirish sahifasiga qaytish",
   "reset_password": "Parolni tiklash",
   "404_title": "Siz maxfiy joy topdingiz.",
@@ -167,5 +167,6 @@
   "food_doesnt_exist": "Siz izlayotgan taom mavjud emas",
   "rated": "Baholangan",
   "rated_your_review": "sizning sharhingizni baholadi ({{rating}})",
-  "email_sent": "✔ Sizning pochtangiz yuborildi!"
+  "email_sent": "✔ Sizning pochtangiz yuborildi!",
+  "reset_password_dialog": "Parolni qanday tiklash bo'yicha ko'rsatmalar elektron pochtangizga ({{email}}) yuborildi. Iltimos, iloji boricha tezroq elektron pochtangizni tekshiring."
 }
