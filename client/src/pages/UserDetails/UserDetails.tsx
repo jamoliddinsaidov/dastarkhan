@@ -72,7 +72,7 @@ export const UserDetails = () => {
                 <Followings activeTab={activeTab} userDetails={userDetails} />
               </Tabs.Panel>
               <Tabs.Panel value='followers' pt='xs'>
-                <Followers activeTab={activeTab} />
+                <Followers activeTab={activeTab} userDetails={userDetails} />
               </Tabs.Panel>
             </Tabs>
           </Flex>
