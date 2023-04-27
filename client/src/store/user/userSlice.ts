@@ -24,6 +24,7 @@ import {
   getSavedPosts,
   recommendFood,
   deleteProfile,
+  updateUserInfo,
 } from './userServices'
 
 const initialState = {
@@ -44,6 +45,9 @@ const userSlice = createSlice({
   reducers: {
     changeUserSuccesStatus: (state) => {
       state.success = false
+    },
+    changeUserErrorStatus: (state) => {
+      state.error = ''
     },
   },
   extraReducers: (builder) => {
@@ -295,8 +299,26 @@ const userSlice = createSlice({
       state.success = false
       state.error = action.payload as string
     })
+
+    // updateUserInfo
+    builder.addCase(updateUserInfo.pending, (state) => {
+      state.loading = true
+      state.success = false
+      state.error = ''
+    })
+    builder.addCase(updateUserInfo.fulfilled, (state, action: any) => {
+      state.loading = false
+      state.success = true
+      state.user = action.payload?.data?.data
+      state.error = ''
+    })
+    builder.addCase(updateUserInfo.rejected, (state, action) => {
+      state.loading = false
+      state.success = false
+      state.error = action.payload as string
+    })
   },
 })
 
 export const userReducer = userSlice.reducer
-export const { changeUserSuccesStatus } = userSlice.actions
+export const { changeUserSuccesStatus, changeUserErrorStatus } = userSlice.actions

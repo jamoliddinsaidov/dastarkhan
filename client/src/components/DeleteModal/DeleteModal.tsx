@@ -17,7 +17,6 @@ export const DeleteModal = () => {
     console.log(userId)
     dispatch(deleteProfile(userId))
     navigate('/home')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (

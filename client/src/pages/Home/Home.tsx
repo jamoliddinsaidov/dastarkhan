@@ -3,10 +3,15 @@ import { ContactUs, Features, Footer, HeroWithBackground } from '../../component
 import { getIsFoodsLoading } from '../../store/food/foodSelectors'
 import { useAppSelector } from '../../store/hooks'
 import { getIsUserLoading } from '../../store/user/userSelectors'
+import { useEffect } from 'react'
 
 export const Home = () => {
   const isUserLoading = useAppSelector(getIsUserLoading)
   const isFoodLoading = useAppSelector(getIsFoodsLoading)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   return (
     <div style={{ position: 'relative' }}>

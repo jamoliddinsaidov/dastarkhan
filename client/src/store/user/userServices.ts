@@ -15,6 +15,7 @@ import {
   getSavedPostsUrl,
   recommendFoodUrl,
   deleteProfileUrl,
+  updateUserInfoUrl,
 } from '../../api/user'
 
 export interface IUser {
@@ -34,11 +35,12 @@ export interface IUser {
 }
 
 export interface UserRequestBody {
-  email: string
+  id?: string
+  email?: string
   dateOfBirth?: Date
   gender?: string
   name?: string
-  password: string
+  password?: string
 }
 
 export interface LikePostInfoProps {
@@ -230,7 +232,17 @@ export const deleteProfile = createAsyncThunk('user/deleteProfile', async (userI
   try {
     return await axios.delete(deleteProfileUrl.href, { params: { userId } })
   } catch (error: any) {
-    console.log(error)
     return rejectWithValue(error.response.data.message)
   }
 })
+
+export const updateUserInfo = createAsyncThunk(
+  'user/updateUserInfo',
+  async (updatedUserInfo: UserRequestBody, { rejectWithValue }) => {
+    try {
+      return await axios.put(updateUserInfoUrl.href, updatedUserInfo)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)

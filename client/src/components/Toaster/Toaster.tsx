@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { Dialog, Text } from '@mantine/core'
 import { useToasterStyles } from './Toaster.style'
+import { useAppDispatch } from '../../store/hooks'
+import { changeUserErrorStatus, changeUserSuccesStatus } from '../../store/user/userSlice'
 
 interface ToasterProps {
   text: string
@@ -11,6 +14,15 @@ interface ToasterProps {
 export const Toaster = ({ text, opened, position = { top: 20, right: 20 }, isError = false }: ToasterProps) => {
   const { classes, cx } = useToasterStyles()
   const borderColor = isError ? 'errorBorderColor' : 'successBorderColor'
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (opened) {
+      setTimeout(() => {
+        isError ? dispatch(changeUserErrorStatus()) : dispatch(changeUserSuccesStatus())
+      }, 1200)
+    }
+  }, [opened])
 
   return (
     <Dialog

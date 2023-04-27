@@ -2,18 +2,21 @@ import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 import { DateInput, DateValue } from '@mantine/dates'
-import { Flex, Group, Radio, TextInput, Title, Text, Button, Divider, Badge } from '@mantine/core'
+import { Flex, Group, Radio, TextInput, Title, Text, Button, Divider, Badge, Notification } from '@mantine/core'
 import { useSubPagesStyles } from './SubPages.style'
-import { useAppSelector } from '../../../store/hooks'
-import { getUserInfo } from '../../../store/user/userSelectors'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+import { getUser } from '../../../store/user/userSelectors'
 import { getUserBadgesInfo } from '../../../utils'
 import { DeleteModal } from '../../../components'
+import { updateUserInfo } from '../../../store/user/userServices'
+import { Toaster } from '../../../components/Toaster/Toaster'
 
 export const Settings = () => {
   const { t } = useTranslation()
   const { classes } = useSubPagesStyles()
+  const dispatch = useAppDispatch()
 
-  const user = useAppSelector(getUserInfo)
+  const { user, loading, success } = useAppSelector(getUser)
   const profileBadges = getUserBadgesInfo(user, t)
 
   const form = useForm({
@@ -30,7 +33,11 @@ export const Settings = () => {
     },
   })
 
-  const onDeleteClick = () => {}
+  const onUpdateClick = () => {
+    if (form.isTouched()) {
+      dispatch(updateUserInfo({ id: user._id, ...form.values }))
+    }
+  }
 
   return (
     <Flex direction='column' className={classes.relativePosition}>
@@ -94,7 +101,7 @@ export const Settings = () => {
           error={form.errors?.email}
           mb={16}
         />
-        <Button type='submit' radius='sm' mt={8}>
+        <Button radius='sm' mt={8} loading={loading} onClick={onUpdateClick}>
           {t('update')}
         </Button>
       </form>
@@ -106,6 +113,7 @@ export const Settings = () => {
         </Text>
         <DeleteModal />
       </div>
+      <Toaster opened={success} text={'✔ Your profile has been updated'} />
     </Flex>
   )
 }

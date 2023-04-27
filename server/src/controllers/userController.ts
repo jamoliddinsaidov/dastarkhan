@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { BadRequestError, UnauthenticatedError } from '../errors/index.js'
 import { asyncWrapper } from '../middlewares/index.js'
-import { INVALID_CREDENTIALS, NO_USER_FOUND, PROVIDE_EMAIL } from '../utils/constants.js'
+import { EMAIL_ALREADY_EXISTS, NO_USER_FOUND, PROVIDE_EMAIL } from '../utils/constants.js'
 import { IUser, NotificationType, User } from '../models/User.js'
 import { Food } from '../models/Food.js'
 import { getUserForResponse } from '../utils/index.js'
@@ -17,7 +17,7 @@ export const getLoggedInUserInfo = asyncWrapper(async (req: Request, res: Respon
   const user = await User.findOne({ email })
 
   if (!user) {
-    throw new UnauthenticatedError(INVALID_CREDENTIALS)
+    throw new UnauthenticatedError(NO_USER_FOUND)
   }
 
   res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(user) })
@@ -239,6 +239,28 @@ export const deleteProfile = asyncWrapper(async (req: Request, res: Response) =>
   await User.deleteOne({ _id: userId })
 
   res.status(StatusCodes.NO_CONTENT).json({ success: true })
+})
+
+export const updateUserInfo = asyncWrapper(async (req: Request, res: Response) => {
+  const { id, name, dateOfBirth, gender, email } = req.body
+
+  const user = await User.findOne({ _id: id })
+  if (!user) {
+    throw new UnauthenticatedError(NO_USER_FOUND)
+  }
+
+  const emailAlreadyExists = await User.findOne({ email })
+  if (emailAlreadyExists && user.email !== email) {
+    throw new BadRequestError(EMAIL_ALREADY_EXISTS)
+  }
+
+  user.name = name
+  user.dateOfBirth = dateOfBirth
+  user.gender = gender
+  user.email = email
+  await user.save()
+
+  res.status(StatusCodes.OK).json({ success: true, data: user })
 })
 
 const getFollowedNotification = (followingUserName: string, followingUserId: string) => {
