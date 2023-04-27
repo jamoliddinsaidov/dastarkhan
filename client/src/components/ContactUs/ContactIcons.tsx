@@ -31,7 +31,7 @@ export const ContactIconsList = () => {
   const { t } = useTranslation()
 
   const contactData = [
-    { title: t('email_addess'), description: '00009987js@gmail.com', icon: IconAt },
+    { title: t('email_addess'), description: 'sjamoliddin21@gmail.com', icon: IconAt },
     { title: t('phone_number'), description: '+998 968 01 78', icon: IconPhone },
     { title: t('address'), description: '12 Istikbol Street, Tashkent ', icon: IconMapPin },
     { title: t('working_hours'), description: '09:00 – 18:00', icon: IconSun },

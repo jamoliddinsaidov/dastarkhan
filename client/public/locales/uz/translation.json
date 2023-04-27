@@ -166,5 +166,6 @@
   "user_doesnt_exist": "Siz izlayotgan foydalanuvchi mavjud emas",
   "food_doesnt_exist": "Siz izlayotgan taom mavjud emas",
   "rated": "Baholangan",
-  "rated_your_review": "sizning sharhingizni baholadi ({{rating}})"
+  "rated_your_review": "sizning sharhingizni baholadi ({{rating}})",
+  "email_sent": "✔ Sizning pochtangiz yuborildi!"
 }

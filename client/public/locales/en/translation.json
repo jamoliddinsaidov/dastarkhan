@@ -167,5 +167,6 @@
   "user_doesnt_exist": "The user you are looking for doesn't exist",
   "food_doesnt_exist": "The food you are looking for doesn't exist",
   "rated": "Rated",
-  "rated_your_review": "rated ({{rating}}) your review of"
+  "rated_your_review": "rated ({{rating}}) your review of",
+  "email_sent": "✔ Your email has been sent!"
 }

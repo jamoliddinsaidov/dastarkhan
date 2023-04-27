@@ -166,5 +166,6 @@
   "user_doesnt_exist": "Пользователь, которого вы ищете, не существует",
   "food_doesnt_exist": "Еда, которую вы ищете, не существует",
   "rated": "Оценил",
-  "rated_your_review": "оценил ({{rating}}) ваш отзыв o"
+  "rated_your_review": "оценил ({{rating}}) ваш отзыв o",
+  "email_sent": "✔ Ваше письмо отправлено!"
 }
