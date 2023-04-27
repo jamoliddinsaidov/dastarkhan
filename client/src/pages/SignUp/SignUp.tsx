@@ -6,7 +6,6 @@ import {
   Paper,
   Group,
   Button,
-  Checkbox,
   Stack,
   Title,
   Text,
@@ -42,7 +41,6 @@ export const SignUp = () => {
       gender: 'male',
       name: '',
       password: '',
-      terms: true,
     },
 
     validate: {
@@ -100,13 +98,13 @@ export const SignUp = () => {
               name='gender'
               defaultChecked
               value='male'
-              onSelect={(event) => form.setFieldValue('gender', event.currentTarget.value)}
+              onChange={(event) => form.setFieldValue('gender', event.currentTarget.value)}
             />
             <Radio
               label={t('female')}
               name='gender'
               value='female'
-              onSelect={(event) => form.setFieldValue('gender', event.currentTarget.value)}
+              onChange={(event) => form.setFieldValue('gender', event.currentTarget.value)}
             />
           </Group>
 
@@ -129,12 +127,6 @@ export const SignUp = () => {
             error={form.errors?.password}
             radius='md'
           />
-
-          <Checkbox
-            label={t('accept_terms_conditions')}
-            checked={form.values.terms}
-            onChange={(event) => form.setFieldValue('terms', event.currentTarget.checked)}
-          />
         </Stack>
 
         <Flex align='center' justify='space-between' className={classes.flexDiv}>
@@ -149,14 +141,6 @@ export const SignUp = () => {
             {t('signup')}
           </Button>
         </Flex>
-
-        <Link
-          to='/termsAndConditions'
-          className={classes.termsAndConditionsLink}
-          onClick={() => onLinkClick('termsAndConditions')}
-        >
-          {t('terms_conditions')}
-        </Link>
       </form>
 
       <LoadingOverlay visible={user.loading} overlayBlur={1} />
