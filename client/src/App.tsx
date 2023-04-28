@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { MantineUiProvider } from './hoc/MantineUiProvider'
-import { GeneralHeader } from './components'
+import { GeneralHeader, PrivateRoute } from './components'
 import {
   ForgotPassword,
   Home,
@@ -41,13 +41,34 @@ export const App = () => {
       <GeneralHeader />
       <Routes>
         <Route path='/home' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route
+          path='/login'
+          element={
+            <PrivateRoute isLoginRelatedPage>
+              <Login />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/signup'
+          element={
+            <PrivateRoute isLoginRelatedPage>
+              <SignUp />
+            </PrivateRoute>
+          }
+        />
         <Route path='/forgotPassword' element={<ForgotPassword />} />
         <Route path='/browse/food/:foodId' element={<FoodDetails />} />
         <Route path='/browse' element={<Browse />} />
         <Route path='/writeReview' element={<WriteReview />} />
-        <Route path='/user/profile' element={<Profile />}>
+        <Route
+          path='/user/profile'
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        >
           <Route path='likedPosts' element={<LikedPosts />} />
           <Route path='savedPosts' element={<SavedPosts />} />
           <Route path='reviews' element={<Reviews />} />

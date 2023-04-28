@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Flex, LoadingOverlay, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useSubPagesStyles } from './SubPages.style'

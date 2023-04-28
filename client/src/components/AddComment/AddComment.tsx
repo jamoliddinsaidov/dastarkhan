@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Button, Flex, LoadingOverlay, Textarea, TextInput } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { getIsAddingComment } from '../../store/food/foodSelectors'
