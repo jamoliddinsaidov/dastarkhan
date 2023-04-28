@@ -14,7 +14,7 @@ export const PrivateRoute = ({ children, isLoginRelatedPage = false }: PrivateRo
     return <>{children}</>
   }
 
-  if (!isUserLoggedIn) {
+  if (!isUserLoggedIn || (isUserLoggedIn && isLoginRelatedPage)) {
     return <Navigate to='/home' />
   }
 
