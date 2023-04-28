@@ -117,3 +117,23 @@ export const forgotPassword = asyncWrapper(async (req: Request, res: Response) =
 
   res.status(StatusCodes.OK).json({ success: true })
 })
+
+export const changePassword = asyncWrapper(async (req: Request, res: Response) => {
+  const { userId, oldPassword, newPassword, confirmPassword } = req.body
+
+  const user = await User.findOne({ _id: userId })
+  if (!user) {
+    throw new UnauthenticatedError(NO_USER_FOUND)
+  }
+
+  const isPasswordCorrect = (await bcrypt.compare(oldPassword, user.password)) && newPassword === confirmPassword
+  if (!isPasswordCorrect) {
+    throw new UnauthenticatedError(INVALID_CREDENTIALS)
+  }
+
+  const hashedNewPassword = await bcrypt.hash(newPassword, 10)
+  user.password = hashedNewPassword
+  await user.save()
+
+  res.status(StatusCodes.OK).json({ success: true, data: getUserForResponse(user) })
+})
