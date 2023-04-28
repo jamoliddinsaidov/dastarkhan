@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { registerUrl, loginUrl, logoutUrl } from '../../api/auth'
+import { registerUrl, loginUrl, logoutUrl, changePasswordUrl } from '../../api/auth'
 import {
   likePostUrl,
   getLoggedInUserInforUrl,
@@ -77,6 +77,13 @@ interface RecommendFoodProps {
   userId: string
   userName: string
   recommendedUserId: string
+}
+
+interface ChangePasswordProps {
+  userId: string
+  oldPassword: string
+  newPassword: string
+  confirmPassword: string
 }
 
 export const registerUser = createAsyncThunk(
@@ -242,6 +249,17 @@ export const updateUserInfo = createAsyncThunk(
   async (updatedUserInfo: UserRequestBody, { rejectWithValue }) => {
     try {
       return await axios.put(updateUserInfoUrl.href, updatedUserInfo)
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
+  }
+)
+
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async (changePasswordProps: ChangePasswordProps, { rejectWithValue }) => {
+    try {
+      return await axios.put(changePasswordUrl.href, changePasswordProps)
     } catch (error: any) {
       return rejectWithValue(error.response.data.message)
     }

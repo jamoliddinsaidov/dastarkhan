@@ -169,5 +169,11 @@
   "rated": "Rated",
   "rated_your_review": "rated ({{rating}}) your review of",
   "email_sent": "✔ Your email has been sent!",
-  "reset_password_dialog": "The instructions on how to reset your password has been sent to your email ({{email}}). Please check your email as soon as you can."
+  "reset_password_dialog": "The instructions on how to reset your password has been sent to your email ({{email}}). Please check your email as soon as you can.",
+  "change_password": "Change Password",
+  "old_password": "Old Password",
+  "new_password": "New Password",
+  "confirm_password": "Confirm Password",
+  "password_dont_match": "Passwords don't match",
+  "update_password": "Update password"
 }

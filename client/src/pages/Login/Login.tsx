@@ -10,6 +10,7 @@ import { loginUser } from '../../store/user/userServices'
 import { getUser } from '../../store/user/userSelectors'
 import { useEffect } from 'react'
 import { Toaster } from '../../components/Toaster/Toaster'
+import { emailRegex } from '../../utils/constants'
 
 export const Login = () => {
   const { classes } = useLoginStyles()
@@ -25,7 +26,7 @@ export const Login = () => {
     },
 
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : t('invalid_email')),
+      email: (val) => (emailRegex.test(val) ? null : t('invalid_email')),
       password: (val) => (val.length <= 6 ? t('invalid_password') : null),
     },
   })

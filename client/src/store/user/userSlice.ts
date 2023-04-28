@@ -25,6 +25,7 @@ import {
   recommendFood,
   deleteProfile,
   updateUserInfo,
+  changePassword,
 } from './userServices'
 
 const initialState = {
@@ -309,10 +310,29 @@ const userSlice = createSlice({
     builder.addCase(updateUserInfo.fulfilled, (state, action: any) => {
       state.loading = false
       state.success = true
+      setIsUserLoggedInToLocalStorage(action.payload?.data?.data.email)
       state.user = action.payload?.data?.data
       state.error = ''
     })
     builder.addCase(updateUserInfo.rejected, (state, action) => {
+      state.loading = false
+      state.success = false
+      state.error = action.payload as string
+    })
+
+    // changePassword
+    builder.addCase(changePassword.pending, (state) => {
+      state.loading = true
+      state.success = false
+      state.error = ''
+    })
+    builder.addCase(changePassword.fulfilled, (state, action: any) => {
+      state.loading = false
+      state.success = true
+      state.user = action.payload?.data?.data
+      state.error = ''
+    })
+    builder.addCase(changePassword.rejected, (state, action) => {
       state.loading = false
       state.success = false
       state.error = action.payload as string

@@ -2,14 +2,15 @@ import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 import { DateInput, DateValue } from '@mantine/dates'
-import { Flex, Group, Radio, TextInput, Title, Text, Button, Divider, Badge } from '@mantine/core'
+import { Flex, Group, Radio, TextInput, Title, Text, Button, Divider, Badge, PasswordInput } from '@mantine/core'
 import { useSubPagesStyles } from './SubPages.style'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { getUser } from '../../../store/user/userSelectors'
-import { getUserBadgesInfo } from '../../../utils'
+import { cleanUpChangePasswordValues, getUserBadgesInfo } from '../../../utils'
 import { DeleteModal } from '../../../components'
-import { updateUserInfo } from '../../../store/user/userServices'
+import { changePassword, updateUserInfo } from '../../../store/user/userServices'
 import { Toaster } from '../../../components/Toaster/Toaster'
+import { emailRegex } from '../../../utils/constants'
 
 export const Settings = () => {
   const { t } = useTranslation()
@@ -29,7 +30,29 @@ export const Settings = () => {
 
     validate: {
       name: (val) => (val.length >= 3 ? null : t('name_error_message')),
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : t('invalid_email')),
+      email: (val) => (emailRegex.test(val) ? null : t('invalid_email')),
+    },
+  })
+
+  const passwordForm = useForm({
+    initialValues: {
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    },
+
+    validate: {
+      oldPassword: (val) => (val.length <= 6 ? t('invalid_password') : null),
+      newPassword: (val) => (val.length <= 6 ? t('invalid_password') : null),
+      confirmPassword: (val) => {
+        if (val.length <= 6) {
+          return t('invalid_password')
+        }
+
+        if (val !== passwordForm.values.newPassword) {
+          return t('password_dont_match')
+        }
+      },
     },
   })
 
@@ -39,10 +62,17 @@ export const Settings = () => {
     }
   }
 
+  const onUpdatePasswordClick = () => {
+    if (passwordForm.isTouched()) {
+      dispatch(changePassword({ userId: user._id, ...passwordForm.values }))
+      cleanUpChangePasswordValues(passwordForm)
+    }
+  }
+
   return (
     <Flex direction='column' className={classes.relativePosition}>
       <Title className={classes.titleh2}>{t('settings')}</Title>
-      <form className={classes.customDiv}>
+      <form className={classes.customDiv} onSubmit={form.onSubmit(onUpdateClick)}>
         <Title className={classes.titleh3}>{t('profile')}</Title>
         <Divider />
         <Group py={16}>
@@ -68,7 +98,6 @@ export const Settings = () => {
           required
           value={form.values.dateOfBirth}
           onChange={(event: DateValue) => form.setFieldValue('dateOfBirth', event ? event : new Date())}
-          error={form.errors?.dateOfBirth}
           label={t('date_of_birth')}
           placeholder={t('date_of_birth')!}
           maxDate={dayjs(new Date()).subtract(16, 'year').toDate()}
@@ -102,8 +131,51 @@ export const Settings = () => {
           error={form.errors?.email}
           mb={16}
         />
-        <Button radius='sm' mt={8} loading={loading} onClick={onUpdateClick}>
+        <Button radius='sm' mt={8} loading={loading} type='submit'>
           {t('update')}
+        </Button>
+      </form>
+      <form className={classes.customDiv} onSubmit={passwordForm.onSubmit(onUpdatePasswordClick)}>
+        <Title className={classes.titleh3}>{t('change_password')}</Title>
+        <Divider />
+        <PasswordInput
+          label={t('old_password')}
+          placeholder={t('old_password')!}
+          mt='md'
+          size='md'
+          name='old_password'
+          radius='md'
+          value={passwordForm.values.oldPassword}
+          onChange={(event) => passwordForm.setFieldValue('oldPassword', event.currentTarget.value)}
+          error={passwordForm.errors?.oldPassword}
+          required
+        />
+        <PasswordInput
+          label={t('new_password')}
+          placeholder={t('new_password')!}
+          mt='md'
+          size='md'
+          name='new_password'
+          radius='md'
+          value={passwordForm.values.newPassword}
+          onChange={(event) => passwordForm.setFieldValue('newPassword', event.currentTarget.value)}
+          error={passwordForm.errors?.newPassword}
+          required
+        />
+        <PasswordInput
+          label={t('confirm_password')}
+          placeholder={t('confirm_password')!}
+          mt='md'
+          size='md'
+          name='confirm_password'
+          radius='md'
+          value={passwordForm.values.confirmPassword}
+          onChange={(event) => passwordForm.setFieldValue('confirmPassword', event.currentTarget.value)}
+          error={passwordForm.errors?.confirmPassword}
+          required
+        />
+        <Button radius='sm' mt={20} loading={loading} type='submit'>
+          {t('update_password')}
         </Button>
       </form>
       <div className={classes.customDiv}>

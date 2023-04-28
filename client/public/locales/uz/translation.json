@@ -168,5 +168,11 @@
   "rated": "Baholangan",
   "rated_your_review": "sizning sharhingizni baholadi ({{rating}})",
   "email_sent": "✔ Sizning pochtangiz yuborildi!",
-  "reset_password_dialog": "Parolni qanday tiklash bo'yicha ko'rsatmalar elektron pochtangizga ({{email}}) yuborildi. Iltimos, iloji boricha tezroq elektron pochtangizni tekshiring."
+  "reset_password_dialog": "Parolni qanday tiklash bo'yicha ko'rsatmalar elektron pochtangizga ({{email}}) yuborildi. Iltimos, iloji boricha tezroq elektron pochtangizni tekshiring.",
+  "change_password": "Parolni o'zgartirish",
+  "old_password": "Eski parol",
+  "new_password": "Yangi parol",
+  "confirm_password": "Parolni tasdiqlang",
+  "password_dont_match": "Parollar mos emas",
+  "update_password": "Parolni yangilash"
 }

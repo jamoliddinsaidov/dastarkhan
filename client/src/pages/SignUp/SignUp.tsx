@@ -25,6 +25,7 @@ import { getUser } from '../../store/user/userSelectors'
 import { changeUserSuccesStatus } from '../../store/user/userSlice'
 import { Toaster } from '../../components/Toaster/Toaster'
 import { cleanUpSignUpValues } from '../../utils'
+import { emailRegex } from '../../utils/constants'
 
 export const SignUp = () => {
   const { classes } = useSignUpStyles()
@@ -46,7 +47,7 @@ export const SignUp = () => {
     validate: {
       name: (val) => (val.length >= 3 ? null : t('name_error_message')),
       dateOfBirth: (val) => (val === maxAgeDate ? t('dob_error_message') : null),
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : t('invalid_email')),
+      email: (val) => (emailRegex.test(val) ? null : t('invalid_email')),
       password: (val) => (val.length <= 6 ? t('invalid_password') : null),
     },
   })
